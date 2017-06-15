@@ -8,12 +8,12 @@ package User;
  */
 public class Account {
 	
-	private String username;
-	private String password;
-	private String firstname;
-	private String lastname;
-	private String email;
-	private int type;
+	private final String username;
+	private final String password;
+	private final String firstname;
+	private final String lastname;
+	private final String email;
+	private final int type;
 	
 	
 	/**
