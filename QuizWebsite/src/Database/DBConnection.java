@@ -4,10 +4,20 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * @author levani
+ *
+ * DBConnection class makes connection to the database
+ */
 public class DBConnection {
 	
 	private static Connection connection;
 	
+	/**
+	 * Creates connection to the database
+	 * Otherwise throws exceptions
+	 * 
+	 */
 	static {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -22,10 +32,18 @@ public class DBConnection {
 		}
 	}
 	
+	/**
+	 * @return connection
+	 * 
+	 */
 	public static Connection getConnection() {
 		return connection;
 	}
 	
+	
+	/**
+	 * Closes connection
+	 */
 	public static void close() {
 		try {
 			connection.close();
