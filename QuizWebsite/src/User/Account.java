@@ -7,12 +7,14 @@ package User;
  *	Account class, stores information about user account;
  */
 public class Account {
+	
 	private String username;
 	private String password;
 	private String firstname;
 	private String lastname;
 	private String email;
 	private int type;
+	
 	
 	/**
 	 * Account constructor
@@ -33,6 +35,7 @@ public class Account {
 		this.type = type;
 	}
 
+	
 	/**
 	 * Returns account user name
 	 * 
@@ -42,6 +45,7 @@ public class Account {
 		return username;
 	}
 
+	
 	/**
 	 * Returns account password
 	 * 
@@ -51,6 +55,7 @@ public class Account {
 		return password;
 	}
 
+	
 	/**
 	 * Returns user first name
 	 * 
@@ -60,6 +65,7 @@ public class Account {
 		return firstname;
 	}
 
+	
 	/**
 	 * Returns user last name
 	 * 
@@ -69,6 +75,7 @@ public class Account {
 		return lastname;
 	}
 
+	
 	/**
 	 * Returns account email
 	 * 
@@ -78,6 +85,7 @@ public class Account {
 		return email;
 	}
 
+	
 	/**
 	 * Returns account type
 	 * 
@@ -85,5 +93,22 @@ public class Account {
 	 */
 	public int getType() {
 		return type;
+	}
+	
+	
+	/**
+	 * Returns String representation of an account
+	 */
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Username:  ").append(username).append("\n");
+		sb.append("Password:  ").append(password).append("\n");
+		sb.append("Firstname:  ").append(firstname).append("\n");
+		sb.append("Lastname:  ").append(lastname).append("\n");
+		sb.append("Email:  ").append(email).append("\n");
+		sb.append("Type:  ").append(type).append("\n");
+		
+		return sb.toString();	
 	}
 }
