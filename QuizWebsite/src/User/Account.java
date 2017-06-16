@@ -97,6 +97,28 @@ public class Account {
 	
 	
 	/**
+	 * Compares to accounts and returns true if these accounts are similar
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null) return false;
+		
+		Account curAcc = (Account)obj;
+		
+		String curUsername = curAcc.getUserName();
+		String curPassword = curAcc.getPassword();
+		String curFirstname = curAcc.getFirstName();
+		String curLastname = curAcc.getLastName();
+		String curEmail = curAcc.getEmail();
+		int curType = curAcc.getType();
+		
+
+		return (username.equals(curUsername) && password.equals(curPassword) && firstname.equals(curFirstname) &&
+				lastname.equals(curLastname) && email.equals(curEmail) && type == curType);
+	}
+	
+	
+	/**
 	 * Returns String representation of an account
 	 */
 	@Override
