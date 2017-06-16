@@ -34,4 +34,7 @@ public class DBInfo {
 	public static final int USER_EMAIL = 6;
 	public static final int USER_TYPE_ID = 7;
 	
+	/*USER_TYPE columns*/
+	public static final int USER_TYPE_USER = 1;
+	public static final int USER_TYPE_ADMIN = 2;
 }
