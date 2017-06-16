@@ -9,11 +9,10 @@ import java.util.ArrayList;
 import Database.DBConnection;
 import Database.DBInfo;
 
-
 /**
  * @author levani
  *
- * Controller Account Manager Class
+ *         Controller Account Manager Class
  *
  */
 public class AccountManager {
@@ -24,10 +23,8 @@ public class AccountManager {
 	private Account account;
 	private ArrayList<Account> accountsList;
 
-	
 	/**
-	 * Public constructor for Account Manager
-	 * Initializes starting variables
+	 * Public constructor for Account Manager Initializes starting variables
 	 * 
 	 * @throws SQLException
 	 */
@@ -37,11 +34,10 @@ public class AccountManager {
 		account = null;
 		accountsList = new ArrayList<>();
 	}
-	
-	
+
 	/**
-	 * Adds passed account's information into the database
-	 * Calls addAccount method with parsed parameters
+	 * Adds passed account's information into the database Calls addAccount
+	 * method with parsed parameters
 	 * 
 	 * @param account
 	 * @throws SQLException
@@ -57,7 +53,6 @@ public class AccountManager {
 		addAccount(username, password, firstname, lastname, email, type);
 	}
 
-	
 	/**
 	 * 
 	 * Adds passed account's information into the database
@@ -72,8 +67,8 @@ public class AccountManager {
 	 */
 	public void addAccount(String username, String password, String firstname, String lastname, String email, int type)
 			throws SQLException {
-		if(!containsAccount(username)) {
-			
+		if (!containsAccount(username)) {
+
 			StringBuilder sb = new StringBuilder();
 			sb.append("INSERT INTO ").append(DBInfo.USERS);
 			sb.append(" (USERNAME, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, TYPE_ID) VALUES ( '");
@@ -86,7 +81,7 @@ public class AccountManager {
 
 			String query = sb.toString();
 			statement.executeUpdate(query);
-			
+
 			Account acc = new Account(username, password, firstname, lastname, email, type);
 			accountsList.add(acc);
 		}
@@ -94,22 +89,44 @@ public class AccountManager {
 
 	
 	/**
+	 * Method takes two user names, the first one must be admin's name and 
+	 * the second one must be ordinary. Only in this case account will be deleted from
+	 * the database
+	 * 
+	 * @param username1
+	 * @param username2
+	 * @throws SQLException
+	 */
+	public void deleteAccount(String username1, String username2) throws SQLException {
+		Account acc1 = getAccount(username1);
+		Account acc2 = getAccount(username2);
+
+		if (containsAccount(username1) && containsAccount(username2)) {
+			if (acc1.getType() == DBInfo.USER_TYPE_ADMIN && acc2.getType() == DBInfo.USER_TYPE_USER) {
+				String query = "DELETE FROM " + DBInfo.USERS + " WHERE USERNAME = \"" + username2 + "\";";
+				statement.executeUpdate(query);
+
+				accountsList.remove(acc2);
+			}
+		}
+	}
+
+	/**
 	 * Returns true if account is in the database
 	 * 
 	 * @param username
 	 * @return boolean
 	 * @throws SQLException
 	 */
-	boolean containsAccount(String username) throws SQLException {
+	public boolean containsAccount(String username) throws SQLException {
 		String query = "SELECT * FROM " + DBInfo.USERS + " WHERE USERNAME = \"" + username + "\";";
 		resultset = statement.executeQuery(query);
-		
-		if(resultset.next()) return true;
+
+		if (resultset.next())
+			return true;
 		return false;
 	}
 
-	
-	
 	/**
 	 * Returns Account which belongs to the passed user name
 	 * 
@@ -126,8 +143,6 @@ public class AccountManager {
 		return account;
 	}
 
-	
-	
 	/**
 	 * Returns Array List of Accounts which are in the database
 	 * 
@@ -146,11 +161,9 @@ public class AccountManager {
 		}
 		return accountsList;
 	}
-	
-	
-	
+
 	/**
-	 * Reads information from passed result set and makes a new account; 
+	 * Reads information from passed result set and makes a new account;
 	 * 
 	 * @param result
 	 * @return account
@@ -163,9 +176,9 @@ public class AccountManager {
 		String lastname = result.getString(DBInfo.USER_LASTNAME);
 		String email = result.getString(DBInfo.USER_EMAIL);
 		int type = result.getInt(DBInfo.USER_TYPE_ID);
-		
+
 		Account acc = new Account(username, password, firstname, lastname, email, type);
-		
+
 		return acc;
 	}
 }
