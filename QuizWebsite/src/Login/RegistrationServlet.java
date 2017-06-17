@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import User.Account;
 import User.AccountManager;
 import WebSite.WebSiteInfo;
 
@@ -35,23 +36,18 @@ public class RegistrationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    PrintWriter out = response.getWriter();
+	    
 	    // getting parameters from user
 	    String username  = request.getParameter("username");
         String password  = request.getParameter("password");
         String firstname = request.getParameter("firstname");
         String lastname  = request.getParameter("lastname");
         String email     = request.getParameter("email");
-        
-        PrintWriter out = response.getWriter();
-        
-        // get Account Manager from servletContext
-        AccountManager am = (AccountManager)this.getServletContext().getAttribute(WebSiteInfo.ACCOUNT_MANAGER_ATTR);
-        
-        // If am is null initialize it
-        // TODO adding into account manager
-        
+   
         //DEBUG
         if(WebSiteInfo.DEBUG_MODE){
+            out.println("given Parameters:");
             out.println("username:"  + username);
             out.println("password:"  + password);
             out.println("firstname:" + firstname);
@@ -59,6 +55,35 @@ public class RegistrationServlet extends HttpServlet {
             out.println("firstname:" + firstname);
             out.println("email:"     + email);
         }
+        
+      
+        // get Account Manager from servletContext
+        AccountManager am = (AccountManager)this.getServletContext().getAttribute(WebSiteInfo.ACCOUNT_MANAGER_ATTR);
+        
+        // If am is null initialize it
+        while(am == null){
+            am = new AccountManager();
+        }
+        
+        // if account with given username already exists 
+        if(am.containsAccount(username)){
+            if(WebSiteInfo.DEBUG_MODE){
+                out.println("\n-------------------------------------");
+                out.println(username + "already exists");
+            }
+            return ;
+        }
+        
+        // TODO adding into account manager
+        Account acc = new Account(username, password, lastname, firstname,email, 1);
+        am.addAccount(acc);
+        if(WebSiteInfo.DEBUG_MODE){
+            out.println("\n-------------------------------------");
+            out.println("Account was Created:\n" + acc);
+        }
+        
+        
+        
 	}
 
 	/**

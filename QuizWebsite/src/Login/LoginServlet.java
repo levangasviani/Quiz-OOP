@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import User.Account;
 import User.AccountManager;
 import WebSite.*;
 
@@ -30,23 +31,47 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// getting parameters from request
+	    PrintWriter out  = response.getWriter();
+	    
+	    // getting parameters from request
 	    String username  = request.getParameter("username");
 		String password  = request.getParameter("password");
-		PrintWriter out  = response.getWriter();
 		
+		// Debug
+        if(WebSiteInfo.DEBUG_MODE){
+            out.println("given parameters:");
+            out.println("username:" + username);
+            out.println("password:" + password);
+        }
+        
 		// get Account Manager from servletContext
 		AccountManager am = (AccountManager)this.getServletContext().getAttribute(WebSiteInfo.ACCOUNT_MANAGER_ATTR);
 		
 		// If am is null initialize it
-		
-		// TODO show profile page
-		
-		// Debug
-		if(WebSiteInfo.DEBUG_MODE){
-    		out.println("username:" + username);
-    		out.println("password:" + password);
+		while(am == null){
+		    am = new AccountManager();
 		}
+		
+		if(!am.containsAccount(username)){
+		    // Debug
+	        if(WebSiteInfo.DEBUG_MODE){
+	            out.println("\n-------------------------------------");
+	            out.println("username:" + username + " is not in database");
+	        }
+		    return;
+		}
+		
+		Account acc = am.getAccount(username);
+		if(!acc.getPassword().equals(password)){
+		    out.println("\n-------------------------------------");
+            out.println("wrong password!");
+            return ;
+		}
+		// TODO show profile page
+		out.println("\n-------------------------------------");
+		out.println("you profile:");
+		out.println(acc);
+		
 	}
 
 	/**
