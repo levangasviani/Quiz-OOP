@@ -106,7 +106,7 @@ public class AccountManager {
 	 */
 	public void deleteAccount(String username1, String username2) {
 		try {
-			Account acc1 = acc1 = getAccount(username1);
+			Account acc1 = getAccount(username1);
 			Account acc2 = getAccount(username2);
 
 			if (containsAccount(username1) && containsAccount(username2)) {
