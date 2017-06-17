@@ -15,7 +15,12 @@ import WebSite.*;
 
 /**
  * Servlet implementation class LoginServlet
+ * LoginServlet class is responsible for:
+ *  -> if login and password was given correctly dispatch to profile page
+ *  -> if given login is not in database show message
+ *  -> if password was incorrect show message
  */
+
 @WebServlet("/" + WebSiteInfo.LOGIN_SERVLET)
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
