@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Database.DBInfo;
 import User.Account;
 import User.AccountManager;
 import WebSite.WebSiteInfo;
@@ -75,7 +76,7 @@ public class RegistrationServlet extends HttpServlet {
         }
         
         // TODO adding into account manager
-        Account acc = new Account(username, password, lastname, firstname,email, 1);
+        Account acc = new Account(username, password, lastname, firstname,email, DBInfo.USER_TYPE_USER);
         am.addAccount(acc);
         if(WebSiteInfo.DEBUG_MODE){
             out.println("\n-------------------------------------");
