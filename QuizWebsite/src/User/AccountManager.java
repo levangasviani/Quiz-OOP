@@ -28,9 +28,13 @@ public class AccountManager {
 	 * 
 	 * @throws SQLException
 	 */
-	public AccountManager() throws SQLException {
+	public AccountManager() {
 		connection = DBConnection.getConnection();
-		statement = connection.createStatement();
+		try {
+			statement = connection.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		account = null;
 		accountsList = new ArrayList<>();
 	}
@@ -42,7 +46,7 @@ public class AccountManager {
 	 * @param account
 	 * @throws SQLException
 	 */
-	public void addAccount(Account account) throws SQLException {
+	public void addAccount(Account account) {
 		String username = account.getUserName();
 		String password = account.getPassword();
 		String firstname = account.getFirstName();
@@ -65,25 +69,28 @@ public class AccountManager {
 	 * @param type
 	 * @throws SQLException
 	 */
-	public void addAccount(String username, String password, String firstname, String lastname, String email, int type)
-			throws SQLException {
-		if (!containsAccount(username)) {
+	public void addAccount(String username, String password, String firstname, String lastname, String email, int type) {
+		try {
+			if (!containsAccount(username)) {
 
-			StringBuilder sb = new StringBuilder();
-			sb.append("INSERT INTO ").append(DBInfo.USERS);
-			sb.append(" (USERNAME, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, TYPE_ID) VALUES ( '");
-			sb.append(username).append("', '");
-			sb.append(password).append("', '");
-			sb.append(firstname).append("', '");
-			sb.append(lastname).append("', '");
-			sb.append(email).append("', '");
-			sb.append(type).append("');");
+				StringBuilder sb = new StringBuilder();
+				sb.append("INSERT INTO ").append(DBInfo.USERS);
+				sb.append(" (USERNAME, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, TYPE_ID) VALUES ( '");
+				sb.append(username).append("', '");
+				sb.append(password).append("', '");
+				sb.append(firstname).append("', '");
+				sb.append(lastname).append("', '");
+				sb.append(email).append("', '");
+				sb.append(type).append("');");
 
-			String query = sb.toString();
-			statement.executeUpdate(query);
+				String query = sb.toString();
+				statement.executeUpdate(query);
 
-			Account acc = new Account(username, password, firstname, lastname, email, type);
-			accountsList.add(acc);
+				Account acc = new Account(username, password, firstname, lastname, email, type);
+				accountsList.add(acc);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -97,17 +104,21 @@ public class AccountManager {
 	 * @param username2
 	 * @throws SQLException
 	 */
-	public void deleteAccount(String username1, String username2) throws SQLException {
-		Account acc1 = getAccount(username1);
-		Account acc2 = getAccount(username2);
+	public void deleteAccount(String username1, String username2) {
+		try {
+			Account acc1 = acc1 = getAccount(username1);
+			Account acc2 = getAccount(username2);
 
-		if (containsAccount(username1) && containsAccount(username2)) {
-			if (acc1.getType() == DBInfo.USER_TYPE_ADMIN && acc2.getType() == DBInfo.USER_TYPE_USER) {
-				String query = "DELETE FROM " + DBInfo.USERS + " WHERE USERNAME = \"" + username2 + "\";";
-				statement.executeUpdate(query);
+			if (containsAccount(username1) && containsAccount(username2)) {
+				if (acc1.getType() == DBInfo.USER_TYPE_ADMIN && acc2.getType() == DBInfo.USER_TYPE_USER) {
+					String query = "DELETE FROM " + DBInfo.USERS + " WHERE USERNAME = \"" + username2 + "\";";
+					statement.executeUpdate(query);
 
-				accountsList.remove(acc2);
+					accountsList.remove(acc2);
+				}
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -118,13 +129,18 @@ public class AccountManager {
 	 * @return boolean
 	 * @throws SQLException
 	 */
-	public boolean containsAccount(String username) throws SQLException {
+	public boolean containsAccount(String username) {
 		String query = "SELECT * FROM " + DBInfo.USERS + " WHERE USERNAME = \"" + username + "\";";
-		resultset = statement.executeQuery(query);
+		try {
+			resultset = statement.executeQuery(query);
 
-		if (resultset.next())
-			return true;
+			if (resultset.next())
+				return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return false;
+
 	}
 
 	/**
@@ -134,7 +150,7 @@ public class AccountManager {
 	 * @return account
 	 * @throws SQLException
 	 */
-	public Account getAccount(String username) throws SQLException {
+	public Account getAccount(String username) {
 
 		if (containsAccount(username)) {
 			account = getAccountFromResultset(resultset);
@@ -149,14 +165,17 @@ public class AccountManager {
 	 * @return ArrayList<Accounts>
 	 * @throws SQLException
 	 */
-	public ArrayList<Account> getAccountsList() throws SQLException {
+	public ArrayList<Account> getAccountsList() {
 		if (accountsList.isEmpty()) {
 			String query = "SELECT * FROM " + DBInfo.USERS + ";";
-			resultset = statement.executeQuery(query);
-
-			while (resultset.next()) {
-				account = getAccountFromResultset(resultset);
-				accountsList.add(account);
+			try {
+				resultset = statement.executeQuery(query);
+				while (resultset.next()) {
+					account = getAccountFromResultset(resultset);
+					accountsList.add(account);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 		}
 		return accountsList;
@@ -169,15 +188,21 @@ public class AccountManager {
 	 * @return account
 	 * @throws SQLException
 	 */
-	private Account getAccountFromResultset(ResultSet result) throws SQLException {
-		String username = result.getString(DBInfo.USER_USERNAME);
-		String password = result.getString(DBInfo.USER_PASSWORD);
-		String firstname = result.getString(DBInfo.USER_FIRSTNAME);
-		String lastname = result.getString(DBInfo.USER_LASTNAME);
-		String email = result.getString(DBInfo.USER_EMAIL);
-		int type = result.getInt(DBInfo.USER_TYPE_ID);
-
-		Account acc = new Account(username, password, firstname, lastname, email, type);
+	private Account getAccountFromResultset(ResultSet result) {
+		Account acc = null;
+		
+		try {
+			String username = result.getString(DBInfo.USER_USERNAME);
+			String password = result.getString(DBInfo.USER_PASSWORD);
+			String firstname = result.getString(DBInfo.USER_FIRSTNAME);
+			String lastname = result.getString(DBInfo.USER_LASTNAME);
+			String email = result.getString(DBInfo.USER_EMAIL);
+			int type = result.getInt(DBInfo.USER_TYPE_ID);
+			
+			acc = new Account(username, password, firstname, lastname, email, type);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		return acc;
 	}
