@@ -25,8 +25,10 @@ public class DBInfo {
 	public static final String QUIZ_NAMES = "QUIZ_NAMES";
 	public static final String USERS = "USERS";
 	public static final String USER_TYPES = "USER_TYPES";
+	public static final String MESSAGES = "MESSAGES";
 
 	/* USERS columns */
+	public static final int USER_ID = 1;
 	public static final int USER_USERNAME = 2;
 	public static final int USER_PASSWORD = 3;
 	public static final int USER_FIRSTNAME = 4;
@@ -55,5 +57,10 @@ public class DBInfo {
 	/* QUIZ_NAMES columns */
 	public static final int QUIZ_NAMES_ID = 1;
 	public static final int QUIZ_NAMES_QUIZ_NAME = 2;
+
+	/* MESSAGES columns */
+	public static final int MESSAGES_MESSAGE = 1;
+	public static final int MESSAGES_SENDER = 2;
+	public static final int MESSAGES_RECEIVER = 3;
 
 }
