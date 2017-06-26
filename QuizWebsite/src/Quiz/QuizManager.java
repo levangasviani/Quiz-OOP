@@ -1,6 +1,7 @@
 package Quiz;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,97 +14,88 @@ import Database.DBInfo;
 /**
  * @author levanAmateur(lkara15)
  *
- * Controller Quiz Manager Class
+ *         Controller Quiz Manager Class
  *
  */
 public class QuizManager {
-	
+
 	private Connection con;
-	private Statement stm;
-	
-	
+
 	/**
 	 * Constructor
 	 */
-	public QuizManager(){
+	public QuizManager() {
 		con = DBConnection.getConnection();
-		try {
-			stm = con.createStatement();		
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
-	
+
 	/**
-	 * Returns true if database contains a quiz with
-	 * a given name.
+	 * Returns true if database contains a quiz with a given name.
 	 * 
-	 * @param quizName - name of a quiz
+	 * @param quizName
+	 *            - name of a quiz
 	 * 
 	 * @return boolean
 	 */
 	public boolean containsQuiz(String quizName) {
-		String query = "select * from " + DBInfo.QUIZ_NAMES + " where name = \"" + quizName + "\";";
+		String query = "SELECT * FROM " + DBInfo.QUIZ_NAMES + " WHERE NAME = ?;";
 		try {
-			ResultSet rs = stm.executeQuery(query);
-			if(rs.next()) return true;
+			PreparedStatement preparedStatement = con.prepareStatement(query);
+			preparedStatement.setString(1, quizName);
+			ResultSet rs = preparedStatement.executeQuery();
+			if (rs.next())
+				return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}	
+		}
 		return false;
 	}
 
 	/**
-	 * Adds quiz into a database if such quiz does
-	 * nor exists in a database.
+	 * Adds quiz into a database if such quiz does nor exists in a database.
 	 * 
 	 * @param quiz
 	 */
 	public void addQuiz(Quiz quiz) {
 		String quizName = quiz.getName();
-		if(containsQuiz(quizName)) {
+		if (containsQuiz(quizName)) {
 			return;
 		}
-		StringBuilder sb = new StringBuilder();
-		sb.append("insert into ").append(DBInfo.QUIZ_NAMES);
-		sb.append(" (NAME) values ('");
-		sb.append(quizName).append("');");
-		
-		String query = sb.toString();
+		String query = "INSERT INTO " + DBInfo.QUIZ_NAMES + " (NAME) VALUES (?)";
 		try {
-			stm.executeUpdate(query);
+			PreparedStatement preparedStatement = con.prepareStatement(query);
+			preparedStatement.setString(1, quizName);
+			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
-	 * Returns a quiz from a database
-	 * with a given name, if it exists.
+	 * Returns a quiz from a database with a given name, if it exists.
 	 * 
 	 * @param QuizName
 	 * 
 	 * @return Quiz
 	 */
 	public Quiz getQuiz(String quizName) {
-		if(containsQuiz(quizName)) {
+		if (containsQuiz(quizName)) {
 			Quiz q = new Quiz(quizName);
 			return q;
-		} 
+		}
 		return null;
 	}
-	
+
 	/**
 	 * Returns all quizes from database
 	 * 
 	 * @return ArrayListn<Quiz>
 	 */
-	public ArrayList<Quiz>  getAllQuizes() {
+	public ArrayList<Quiz> getAllQuizes() {
 		ArrayList<Quiz> result = new ArrayList<Quiz>();
-		String query = "select * from " + DBInfo.QUIZ_NAMES + ";";
-		ResultSet rs;
+		String query = "SELECT * FROM " + DBInfo.QUIZ_NAMES + ";";
 		try {
-			rs = stm.executeQuery(query);
+			Statement statement = con.createStatement();
+			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
 				String quizName = rs.getString(DBInfo.QUIZ_NAMES_QUIZ_NAME);
 				Quiz quiz = new Quiz(quizName);
@@ -114,22 +106,25 @@ public class QuizManager {
 		}
 		return result;
 	}
-	
+
 	/**
-	 * Returns ID of a given quiz if it exists.
-	 * if such quiz does not exist returns -1.
+	 * Returns ID of a given quiz if it exists. if such quiz does not exist
+	 * returns -1.
 	 * 
 	 * @param quiz
 	 * 
 	 * @return int
 	 */
 	public int getQuizID(Quiz quiz) {
-		if(containsQuiz(quiz.getName())) {
-			String query = "select * from " + DBInfo.QUIZ_NAMES + " where NAME = \"" + quiz.getName() + "\";";
+		if (containsQuiz(quiz.getName())) {
+			String query = "SELECT * FROM " + DBInfo.QUIZ_NAMES + " WHERE NAME = ?;";
 			try {
-				ResultSet rs = stm.executeQuery(query);
+				PreparedStatement preparedStatement = con.prepareStatement(query);
+				preparedStatement.setString(1, quiz.getName());
+				ResultSet rs = preparedStatement.executeQuery();
 				int result = -1;
-				if(rs.next()) result = rs.getInt(DBInfo.QUIZ_NAMES_ID);
+				if (rs.next())
+					result = rs.getInt(DBInfo.QUIZ_NAMES_ID);
 				return result;
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -137,7 +132,7 @@ public class QuizManager {
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * Returns Arraylist of a given quiz questions.
 	 * 
@@ -145,11 +140,7 @@ public class QuizManager {
 	 */
 	public ArrayList<Question> getQuestions(Quiz quiz) {
 		ArrayList<Question> result = new ArrayList<Question>();
-		StringBuilder sb = new StringBuilder();
-		sb.append("select * from ").append(DBInfo.QUESTIONS);
-		sb.append(" where QUIZ_ID = \"").append(getQuizID(quiz)).append("\";");
-			
-		String query = sb.toString();
+		String query = "SELECT * FROM " + DBInfo.QUESTIONS + " WHERE QUIZ_ID = ?";
 		QuestionManager qM = null;
 		try {
 			qM = new QuestionManager();
@@ -158,8 +149,10 @@ public class QuizManager {
 			e1.printStackTrace();
 		}
 		try {
-			ResultSet rs = stm.executeQuery(query);
-			while(rs.next()) {
+			PreparedStatement preparedStatement = con.prepareStatement(query);
+			preparedStatement.setInt(1, getQuizID(quiz));
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
 				int questionID = rs.getInt(DBInfo.QUESTION_ID);
 				Question question = qM.getQuestion(questionID);
 				result.add(question);
@@ -169,7 +162,7 @@ public class QuizManager {
 		}
 		return result;
 	}
-	
+
 	public static void main(String[] args) {
 		QuizManager qm = new QuizManager();
 		Quiz q1 = new Quiz("levan1");
@@ -178,21 +171,20 @@ public class QuizManager {
 		qm.addQuiz(q1);
 		qm.addQuiz(q11);
 		qm.addQuiz(q2);
-		if(qm.containsQuiz(q1.getName())) {
+		if (qm.containsQuiz(q1.getName())) {
 			System.out.println("Yes");
 		}
 		Quiz q4 = qm.getQuiz(q1.getName());
 		System.out.println(q4.getName());
 		ArrayList<Quiz> arr = qm.getAllQuizes();
 		System.out.println(arr.size());
-		for(int i = 0; i < arr.size(); i++) {
+		for (int i = 0; i < arr.size(); i++) {
 			System.out.println(arr.get(i).getName());
 		}
-		
-		
+
 		Quiz qz = new Quiz("shota1");
 		qm.addQuiz(qz);
-		if(qm.containsQuiz("shota1")) {	
+		if (qm.containsQuiz("shota1")) {
 			QuestionManager q = null;
 			try {
 				q = new QuestionManager();
@@ -212,20 +204,12 @@ public class QuizManager {
 			m.put("c", "TRUE");
 			String order = "FALSE";
 			Question qst1 = new Question(questionText, score, checkType, time, quizId, typeId, m, order);
-			try {
-				q.addQuestion(qst1);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			q.addQuestion(qst1);
 			ArrayList<Question> arr1 = qm.getQuestions(qz);
 			System.out.println(arr1.size());
-			for(int i = 0; i < arr1.size(); i++) {
+			for (int i = 0; i < arr1.size(); i++) {
 				System.out.println(arr1.get(i).toString());
 			}
 		}
 	}
 }
-
-
-
