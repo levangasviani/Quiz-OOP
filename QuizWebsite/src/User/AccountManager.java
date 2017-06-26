@@ -1,6 +1,7 @@
 package User;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -67,42 +68,34 @@ public class AccountManager {
 	 * @param lastname
 	 * @param email
 	 * @param type
-	 * @throws SQLException
 	 */
-	public void addAccount(String username, String password, String firstname, String lastname, String email, int type) {
+	public void addAccount(String username, String password, String firstname, String lastname, String email,
+			int type) {
 		try {
 			if (!containsAccount(username)) {
-
-				StringBuilder sb = new StringBuilder();
-				sb.append("INSERT INTO ").append(DBInfo.USERS);
-				sb.append(" (USERNAME, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, TYPE_ID) VALUES ( '");
-				sb.append(username).append("', '");
-				sb.append(password).append("', '");
-				sb.append(firstname).append("', '");
-				sb.append(lastname).append("', '");
-				sb.append(email).append("', '");
-				sb.append(type).append("');");
-
-				String query = sb.toString();
-				statement.executeUpdate(query);
-
-				Account acc = new Account(username, password, firstname, lastname, email, type);
-				accountsList.add(acc);
+				String query = "INSERT INTO " + DBInfo.USERS
+						+ " (USERNAME, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, TYPE_ID) VALUES (?, ?, ?, ?, ?, ?)";
+				PreparedStatement preparedStatement = connection.prepareStatement(query);
+				preparedStatement.setString(1, username);
+				preparedStatement.setString(2, password);
+				preparedStatement.setString(3, firstname);
+				preparedStatement.setString(4, lastname);
+				preparedStatement.setString(5, email);
+				preparedStatement.setInt(6, type);
+				preparedStatement.executeUpdate();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	
 	/**
-	 * Method takes two user names, the first one must be admin's name and 
-	 * the second one must be ordinary. Only in this case account will be deleted from
-	 * the database
+	 * Method takes two user names, the first one must be admin's name and the
+	 * second one must be ordinary. Only in this case account will be deleted
+	 * from the database
 	 * 
 	 * @param username1
 	 * @param username2
-	 * @throws SQLException
 	 */
 	public void deleteAccount(String username1, String username2) {
 		try {
@@ -111,10 +104,10 @@ public class AccountManager {
 
 			if (containsAccount(username1) && containsAccount(username2)) {
 				if (acc1.getType() == DBInfo.USER_TYPE_ADMIN && acc2.getType() == DBInfo.USER_TYPE_USER) {
-					String query = "DELETE FROM " + DBInfo.USERS + " WHERE USERNAME = \"" + username2 + "\";";
-					statement.executeUpdate(query);
-
-					accountsList.remove(acc2);
+					String query = "DELETE FROM " + DBInfo.USERS + " WHERE USERNAME = ?;";
+					PreparedStatement preparedStatement = connection.prepareStatement(query);
+					preparedStatement.setString(1, username2);
+					preparedStatement.executeUpdate();
 				}
 			}
 		} catch (SQLException e) {
@@ -127,12 +120,13 @@ public class AccountManager {
 	 * 
 	 * @param username
 	 * @return boolean
-	 * @throws SQLException
 	 */
 	public boolean containsAccount(String username) {
-		String query = "SELECT * FROM " + DBInfo.USERS + " WHERE USERNAME = \"" + username + "\";";
+		String query = "SELECT * FROM " + DBInfo.USERS + " WHERE USERNAME = ?;";
 		try {
-			resultset = statement.executeQuery(query);
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, username);
+			ResultSet resultset = preparedStatement.executeQuery();
 
 			if (resultset.next())
 				return true;
@@ -148,15 +142,21 @@ public class AccountManager {
 	 * 
 	 * @param username
 	 * @return account
-	 * @throws SQLException
 	 */
 	public Account getAccount(String username) {
-
-		if (containsAccount(username)) {
-			account = getAccountFromResultset(resultset);
+		String query = "SELECT * FROM " + DBInfo.USERS + " WHERE USERNAME = ?;";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, username);
+			ResultSet resultset = preparedStatement.executeQuery();
+			resultset.next();
+			return getAccountFromResultset(resultset);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
-		return account;
+		return null;
 	}
 
 	/**
@@ -166,19 +166,19 @@ public class AccountManager {
 	 * @throws SQLException
 	 */
 	public ArrayList<Account> getAccountsList() {
-		if (accountsList.isEmpty()) {
-			String query = "SELECT * FROM " + DBInfo.USERS + ";";
-			try {
-				resultset = statement.executeQuery(query);
-				while (resultset.next()) {
-					account = getAccountFromResultset(resultset);
-					accountsList.add(account);
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+		ArrayList<Account> result = new ArrayList<Account>();
+		String query = "SELECT * FROM " + DBInfo.USERS + ";";
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet resultset = statement.executeQuery(query);
+			while (resultset.next()) {
+				Account account = getAccountFromResultset(resultset);
+				result.add(account);
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return accountsList;
+		return result;
 	}
 
 	/**
@@ -190,7 +190,7 @@ public class AccountManager {
 	 */
 	private Account getAccountFromResultset(ResultSet result) {
 		Account acc = null;
-		
+
 		try {
 			String username = result.getString(DBInfo.USER_USERNAME);
 			String password = result.getString(DBInfo.USER_PASSWORD);
@@ -198,7 +198,7 @@ public class AccountManager {
 			String lastname = result.getString(DBInfo.USER_LASTNAME);
 			String email = result.getString(DBInfo.USER_EMAIL);
 			int type = result.getInt(DBInfo.USER_TYPE_ID);
-			
+
 			acc = new Account(username, password, firstname, lastname, email, type);
 		} catch (SQLException e) {
 			e.printStackTrace();
