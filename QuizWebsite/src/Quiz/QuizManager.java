@@ -27,7 +27,7 @@ public class QuizManager {
 	public QuizManager() {
 		con = DBConnection.getConnection();
 	}
-
+	
 	/**
 	 * Returns true if database contains a quiz with a given name.
 	 * 
@@ -42,8 +42,7 @@ public class QuizManager {
 			PreparedStatement preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, quizName);
 			ResultSet rs = preparedStatement.executeQuery();
-			if (rs.next())
-				return true;
+			if (rs.next()) return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -60,10 +59,28 @@ public class QuizManager {
 		if (containsQuiz(quizName)) {
 			return;
 		}
-		String query = "INSERT INTO " + DBInfo.QUIZZES + " (NAME) VALUES (?)";
+		String query = "INSERT INTO " + DBInfo.QUIZZES + " (NAME, DESCRIPtioN, RANDOM, ONE_PAGE, PRACTICE_MODE, IMMEDIATE_GRADE, FREQUENCY) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, quizName);
+			preparedStatement.setString(2, quiz.getDescription());
+			if(quiz.isRandom()) {
+				preparedStatement.setString(3, "TRUE");	
+			} else preparedStatement.setString(3, "FALSE");
+			
+			if(quiz.isOnePage()) {
+				preparedStatement.setString(4, "TRUE");	
+			} else preparedStatement.setString(4, "FALSE");
+			
+			if(quiz.isRandom()) {
+				preparedStatement.setString(5, "TRUE");	
+			} else preparedStatement.setString(5, "FALSE");
+			
+			if(quiz.immediateCorrection()) {
+				preparedStatement.setString(6, "TRUE");	
+			} else preparedStatement.setString(6, "FALSE");
+			
+			preparedStatement.setInt(7, 0);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -78,10 +95,32 @@ public class QuizManager {
 	 * @return Quiz
 	 */
 	public Quiz getQuiz(String quizName) {
-		if (containsQuiz(quizName)) {
-			Quiz q = new Quiz(quizName);
-			return q;
+		String query = "SELECT * FROM " + DBInfo.QUIZZES + " WHERE NAME = ?;";
+		try {
+			PreparedStatement preparedStatement = con.prepareStatement(query);
+			preparedStatement.setString(1, quizName);
+			ResultSet rs = preparedStatement.executeQuery();
+			if(rs.next()) {
+				String description = rs.getString(DBInfo.QUIZZES_DESCRIPTION);	
+				String random = rs.getString(DBInfo.QUIZZES_RANDOM);
+				boolean isRandom = false;
+				if(random.equals("TRUE")) isRandom = true;
+				String onePage = rs.getString(DBInfo.QUIZZES_ONE_PAGE);
+				boolean isOnePage = false;
+				if(onePage.equals("TRUE")) isRandom = true;
+				String practiceMode = rs.getString(DBInfo.QUIZZES_PRACTICE_MODE);
+				boolean canPracticeMode = false;
+				if(practiceMode.equals("TRUE")) isRandom = true;
+				String immediateGrade = rs.getString(DBInfo.QUIZZES_IMMEDIATE_GRADE);
+				boolean immediateCorrection = false;
+				if(immediateGrade.equals("TRUE")) isRandom = true;
+				Quiz quiz = new Quiz(quizName, description, isRandom, isOnePage, canPracticeMode, immediateCorrection);
+				return quiz;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		
 		return null;
 	}
 
@@ -98,7 +137,20 @@ public class QuizManager {
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
 				String quizName = rs.getString(DBInfo.QUIZZES_NAME);
-				Quiz quiz = new Quiz(quizName);
+				String description = rs.getString(DBInfo.QUIZZES_DESCRIPTION);	
+				String random = rs.getString(DBInfo.QUIZZES_RANDOM);
+				boolean isRandom = false;
+				if(random.equals("TRUE")) isRandom = true;
+				String onePage = rs.getString(DBInfo.QUIZZES_ONE_PAGE);
+				boolean isOnePage = false;
+				if(onePage.equals("TRUE")) isRandom = true;
+				String practiceMode = rs.getString(DBInfo.QUIZZES_PRACTICE_MODE);
+				boolean canPracticeMode = false;
+				if(practiceMode.equals("TRUE")) isRandom = true;
+				String immediateGrade = rs.getString(DBInfo.QUIZZES_IMMEDIATE_GRADE);
+				boolean immediateCorrection = false;
+				if(immediateGrade.equals("TRUE")) isRandom = true;
+				Quiz quiz = new Quiz(quizName, description, isRandom, isOnePage, canPracticeMode, immediateCorrection);
 				result.add(quiz);
 			}
 		} catch (SQLException e) {
@@ -165,15 +217,15 @@ public class QuizManager {
 
 	public static void main(String[] args) {
 		QuizManager qm = new QuizManager();
-		Quiz q1 = new Quiz("levan1");
-		Quiz q11 = new Quiz("levan1");
-		Quiz q2 = new Quiz("levan2");
+		Quiz q1 = new Quiz("levan1", "abc", false, false, true, false);
+		Quiz q11 = new Quiz("levan1", "123", false, false, false, false);
+		Quiz q2 = new Quiz("levan2", "qwe", true, false, true, false);
 		qm.addQuiz(q1);
 		qm.addQuiz(q11);
 		qm.addQuiz(q2);
 		if (qm.containsQuiz(q1.getName())) {
 			System.out.println("Yes");
-		}
+		} else System.out.println("Noooooooooooooooo");
 		Quiz q4 = qm.getQuiz(q1.getName());
 		System.out.println(q4.getName());
 		ArrayList<Quiz> arr = qm.getAllQuizes();
@@ -182,14 +234,13 @@ public class QuizManager {
 			System.out.println(arr.get(i).getName());
 		}
 
-		Quiz qz = new Quiz("shota1");
+		Quiz qz = new Quiz("shota1", "456", false, false, false, true);
 		qm.addQuiz(qz);
 		if (qm.containsQuiz("shota1")) {
 			QuestionManager q = null;
 			try {
 				q = new QuestionManager();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			String questionText = "bla1";
@@ -213,3 +264,4 @@ public class QuizManager {
 		}
 	}
 }
+

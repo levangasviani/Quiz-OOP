@@ -118,7 +118,7 @@ public class QuestionManager {
 	 */
 	private void addAnswers(HashMap<String, String> answers, int questionId, String order) {
 		String insertIntoAnswers = "INSERT INTO " + DBInfo.ANSWERS
-				+ " (ANSWER, `T/F`, `ORDER`, QUESTION_ID) VALUES (?, ?, ?, ?)";
+				+ " (ANSWER, `TF`, `ORDER`, QUESTION_ID) VALUES (?, ?, ?, ?)";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(insertIntoAnswers);
 			for (String key : answers.keySet()) {

@@ -48,8 +48,23 @@ public class SearchManager {
 			preparedStatement.setString(1, searchValue);
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
-				String quizName = rs.getString(DBInfo.QUIZZES_NAME);
-				Quiz quiz = new Quiz(quizName);
+				//
+				String quizName = rs.getString(DBInfo.QUIZZES_NAME);	
+				String description = rs.getString(DBInfo.QUIZZES_DESCRIPTION);	
+				String random = rs.getString(DBInfo.QUIZZES_RANDOM);
+				boolean isRandom = false;
+				if(random.equals("TRUE")) isRandom = true;
+				String onePage = rs.getString(DBInfo.QUIZZES_ONE_PAGE);
+				boolean isOnePage = false;
+				if(onePage.equals("TRUE")) isRandom = true;
+				String practiceMode = rs.getString(DBInfo.QUIZZES_PRACTICE_MODE);
+				boolean canPracticeMode = false;
+				if(practiceMode.equals("TRUE")) isRandom = true;
+				String immediateGrade = rs.getString(DBInfo.QUIZZES_IMMEDIATE_GRADE);
+				boolean immediateCorrection = false;
+				if(immediateGrade.equals("TRUE")) isRandom = true;
+				Quiz quiz = new Quiz(quizName, description, isRandom, isOnePage, canPracticeMode, immediateCorrection);
+				
 				quizzes.add(quiz);
 			}
 		} catch (SQLException e) {
@@ -180,7 +195,7 @@ public class SearchManager {
 	public static void main(String[] args) {
 		SearchManager sm = new SearchManager();
 		QuizManager qm = new QuizManager();
-		Quiz q1 = new Quiz("karanadze1");
+		Quiz q1 = new Quiz("karanadze1", "abc" , true, true, false, false);
 		qm.addQuiz(q1);
 		ArrayList<Quiz> qs = sm.getQuizzes(q1.getName());
 		for (int i = 0; i < qs.size(); i++) {
@@ -188,12 +203,10 @@ public class SearchManager {
 		}
 
 		AccountManager am = new AccountManager();
-		/*
-		 * am.addAccount("user0", "1234", "name0", "lname0", "mail0", 2);
-		 * am.addAccount("user1", "1234", "name1", "lname1", "mail0", 2);
-		 * am.addAccount("user2", "1234", "name1", "lname1", "mail0", 2);
-		 * am.addAccount("user3", "1234", "name3", "lname1", "mail0", 2);
-		 */
+		am.addAccount("user0", "1234", "name0", "lname0", "mail0", 2);
+		am.addAccount("user1", "1234", "name1", "lname1", "mail0", 2);
+		am.addAccount("user2", "1234", "name1", "lname1", "mail0", 2);
+		am.addAccount("user3", "1234", "name3", "lname1", "mail0", 2);
 		ArrayList<Account> arr1 = new ArrayList<Account>(sm.getAccounts("user0"));
 		ArrayList<Account> arr2 = new ArrayList<Account>(sm.getAccounts("name1"));
 		ArrayList<Account> arr3 = new ArrayList<Account>(sm.getAccounts("lname"));
