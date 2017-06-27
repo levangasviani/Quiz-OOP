@@ -4,8 +4,6 @@ import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import Message.MessageManager;
-
 /**
  * Application Lifecycle Listener implementation class SessionListener
  *
@@ -25,7 +23,6 @@ public class SessionListener implements HttpSessionListener {
 	 */
 	public void sessionCreated(HttpSessionEvent arg0) {
 		// TODO Auto-generated method stub
-		arg0.getSession().setAttribute("messageManager", new MessageManager());
 	}
 
 	/**

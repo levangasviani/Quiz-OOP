@@ -13,54 +13,100 @@ public class DBInfo {
 	public static final String MYSQL_DATABASE_SERVER = "localhost:3306/" + MYSQL_DATABASE_NAME
 			+ "?autoReconnect=true&useSSL=false";
 
-	/* Database table names */
-	public static final String ACHIEVEMENTS = "ACHIEVEMENTS";
+	// Database table names
 	public static final String ACHIEVEMENT_TYPES = "ACHIEVEMENT_TYPES";
+	public static final String ACHIEVEMENTS = "ACHIEVEMENTS";
 	public static final String ANSWERS = "ANSWERS";
-	public static final String COMPLETED_QUIZES = "COMPLETED_QUIZES";
-	public static final String CREATED_QUIZES = "CREATED_QUIZES";
+	public static final String COMPLETED_QUIZZES = "COMPLETED_QUIZES";
+	public static final String CREATED_QUIZZES = "CREATED_QUIZES";
 	public static final String FRIENDS = "FRIENDS";
-	public static final String QUESTIONS = "QUESTIONS";
 	public static final String QUESTION_TYPES = "QUESTION_TYPES";
-	public static final String QUIZ_NAMES = "QUIZ_NAMES";
-	public static final String USERS = "USERS";
+	public static final String QUESTIONS = "QUESTIONS";
+	public static final String QUIZZES = "QUIZZES";
 	public static final String USER_TYPES = "USER_TYPES";
-	public static final String MESSAGES = "MESSAGES";
+	public static final String USERS = "USERS";
 
-	/* USERS columns */
-	public static final int USER_ID = 1;
-	public static final int USER_USERNAME = 2;
-	public static final int USER_PASSWORD = 3;
-	public static final int USER_FIRSTNAME = 4;
-	public static final int USER_LASTNAME = 5;
-	public static final int USER_EMAIL = 6;
-	public static final int USER_TYPE_ID = 7;
+	// ACHIEVEMENT_TYPES columns
+	public static final int ACHIEVEMENT_TYPES_ID = 1;
+	public static final int ACHIEVEMENT_TYPES_NAME = 2;
 
-	/* USER_TYPE columns */
+	// ACHEIEVENTS columns
+	public static final int ACHIEVEMENTS_ID = 1;
+	public static final int ACHIEVEMENTS_USER_ID = 2;
+	public static final int ACHEIVEMENTS_TYPE_ID = 3;
+
+	// ANSWERS columns
+	public static final int ANSWERS_ID = 1;
+	public static final int ANSWERS_ANSWER = 2;
+	public static final int ANSWERS_TF = 3;
+	public static final int ANSWERS_ORDER = 4;
+	public static final int ANSWERS_QUESTION_ID = 5;
+
+	// COMPLETED_QUIZZES columns
+	public static final int COMPLETED_QUIZZES_ID = 1;
+	public static final int COMPLETED_QUIZZES_USER_ID = 2;
+	public static final int COMPLETED_QUIZZES_QUIZ_ID = 3;
+	public static final int COMPLETED_QUIZZES_SCORE = 4;
+	public static final int COMPLETED_QUIZZES_SPENT_TIME = 5;
+
+	// CREATED_QUIZZES columns
+	public static final int CREATED_QUIZZES_ID = 1;
+	public static final int CREATED_QUIZZES_USER_ID = 2;
+	public static final int CREATED_QUIZZES_QUIZ_ID = 3;
+
+	// FRIENDS columns
+	public static final int FRIENDS_ID = 1;
+	public static final int FRIENDS_USER_ONE = 2;
+	public static final int FRIENDS_USER_TWO = 3;
+
+	// QUESTION_TYPES columns
+	public static final int QUESTION_TYPES_ID = 1;
+	public static final int QUESTION_TYPES_NAME = 2;
+
+	// QUESTIONS columns
+	public static final int QUESTIONS_ID = 1;
+	public static final int QUESTIONS_QUESTION = 2;
+	public static final int QUESTIONS_SCORE = 3;
+	public static final int QUESTIONS_CHECK_TYPE = 4;
+	public static final int QUESTIONS_TIME = 5;
+	public static final int QUESTIONS_QUIZ_ID = 6;
+	public static final int QUESTIONS_TYPE_ID = 7;
+
+	// QUIZZES columns
+	public static final int QUIZZES_ID = 1;
+	public static final int QUIZZES_USER_ID = 2;
+	public static final int QUIZZES_NAME = 3;
+	public static final int QUIZZES_DESCRIPTION = 4;
+	public static final int QUIZZES_RANDOM = 5;
+	public static final int QUIZZES_ONE_PAGE = 6;
+	public static final int QUIZZES_PRACTICE_MODE = 7;
+	public static final int QUIZZES_IMMEDIATE_GRADE = 8;
+	public static final int QUIZZES_FREQUENCY = 9;
+
+	// USER_TYPES columns
+	public static final int USER_TYPES_ID = 1;
+	public static final int USER_TYPES_NAME = 2;
+
+	// USERS columns
+	public static final int USERS_ID = 1;
+	public static final int USERS_USERNAME = 2;
+	public static final int USERS_PASSWORD = 3;
+	public static final int USERS_FIRSTNAME = 4;
+	public static final int USERS_LASTNAME = 5;
+	public static final int USERS_EMAIL = 6;
+	public static final int USERS_TYPE_ID = 7;
+
+	// QUESTION_TYPES types
+	public static final int QUESTION_TYPE_QUESTION_RESPONSE = 1;
+	public static final int QUESTION_TYPE_FILL_IN_THE_BLANK = 2;
+	public static final int QUESTION_TYPE_MULTIPLE_CHOICE = 3;
+	public static final int QUESTION_TYPE_PICTURE_RESPONSE = 4;
+	public static final int QUESTION_TYPE_MULTI_ANSWER = 5;
+	public static final int QUESTION_TYPE_MULTIPLE_CHOICE_WITH_MULTIPLE_ANSWERS = 6;
+	public static final int QUESTION_TYPE_MATCHING = 7;
+
+	// USER_TYPES types
 	public static final int USER_TYPE_USER = 1;
 	public static final int USER_TYPE_ADMIN = 2;
-
-	/* QUESTIONS columns */
-	public static final int QUESTION_ID = 1;
-	public static final int QUESTION = 2;
-	public static final int SCORE = 3;
-	public static final int CHECK_TYPE = 4;
-	public static final int TIME = 5;
-	public static final int QUIZ_ID = 6;
-	public static final int TYPE_ID = 7;
-
-	/* ANSWERS columns */
-	public static final int ANSWER = 2;
-	public static final int TF = 3;
-	public static final int ORDER = 4;
-
-	/* QUIZ_NAMES columns */
-	public static final int QUIZ_NAMES_ID = 1;
-	public static final int QUIZ_NAMES_QUIZ_NAME = 2;
-
-	/* MESSAGES columns */
-	public static final int MESSAGES_MESSAGE = 1;
-	public static final int MESSAGES_SENDER = 2;
-	public static final int MESSAGES_RECEIVER = 3;
 
 }

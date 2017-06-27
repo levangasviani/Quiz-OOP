@@ -37,7 +37,7 @@ public class QuizManager {
 	 * @return boolean
 	 */
 	public boolean containsQuiz(String quizName) {
-		String query = "SELECT * FROM " + DBInfo.QUIZ_NAMES + " WHERE NAME = ?;";
+		String query = "SELECT * FROM " + DBInfo.QUIZZES + " WHERE NAME = ?;";
 		try {
 			PreparedStatement preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, quizName);
@@ -60,7 +60,7 @@ public class QuizManager {
 		if (containsQuiz(quizName)) {
 			return;
 		}
-		String query = "INSERT INTO " + DBInfo.QUIZ_NAMES + " (NAME) VALUES (?)";
+		String query = "INSERT INTO " + DBInfo.QUIZZES + " (NAME) VALUES (?)";
 		try {
 			PreparedStatement preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, quizName);
@@ -92,12 +92,12 @@ public class QuizManager {
 	 */
 	public ArrayList<Quiz> getAllQuizes() {
 		ArrayList<Quiz> result = new ArrayList<Quiz>();
-		String query = "SELECT * FROM " + DBInfo.QUIZ_NAMES + ";";
+		String query = "SELECT * FROM " + DBInfo.QUIZZES + ";";
 		try {
 			Statement statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
-				String quizName = rs.getString(DBInfo.QUIZ_NAMES_QUIZ_NAME);
+				String quizName = rs.getString(DBInfo.QUIZZES_NAME);
 				Quiz quiz = new Quiz(quizName);
 				result.add(quiz);
 			}
@@ -117,14 +117,14 @@ public class QuizManager {
 	 */
 	public int getQuizID(Quiz quiz) {
 		if (containsQuiz(quiz.getName())) {
-			String query = "SELECT * FROM " + DBInfo.QUIZ_NAMES + " WHERE NAME = ?;";
+			String query = "SELECT * FROM " + DBInfo.QUIZZES + " WHERE NAME = ?;";
 			try {
 				PreparedStatement preparedStatement = con.prepareStatement(query);
 				preparedStatement.setString(1, quiz.getName());
 				ResultSet rs = preparedStatement.executeQuery();
 				int result = -1;
 				if (rs.next())
-					result = rs.getInt(DBInfo.QUIZ_NAMES_ID);
+					result = rs.getInt(DBInfo.QUIZZES_ID);
 				return result;
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -153,7 +153,7 @@ public class QuizManager {
 			preparedStatement.setInt(1, getQuizID(quiz));
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
-				int questionID = rs.getInt(DBInfo.QUESTION_ID);
+				int questionID = rs.getInt(DBInfo.QUESTIONS_ID);
 				Question question = qM.getQuestion(questionID);
 				result.add(question);
 			}

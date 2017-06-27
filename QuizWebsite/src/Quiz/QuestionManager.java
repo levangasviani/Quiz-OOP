@@ -97,7 +97,7 @@ public class QuestionManager {
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			resultSet.next();
-			return resultSet.getInt(DBInfo.QUESTION_ID);
+			return resultSet.getInt(DBInfo.QUESTIONS_ID);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -148,12 +148,12 @@ public class QuestionManager {
 			preparedStatement.setInt(1, questionId);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			resultSet.next();
-			String questionText = resultSet.getString(DBInfo.QUESTION);
-			int score = resultSet.getInt(DBInfo.SCORE);
-			String checkType = resultSet.getString(DBInfo.CHECK_TYPE);
-			int time = resultSet.getInt(DBInfo.TIME);
-			int quizId = resultSet.getInt(DBInfo.QUIZ_ID);
-			int typeId = resultSet.getInt(DBInfo.TYPE_ID);
+			String questionText = resultSet.getString(DBInfo.QUESTIONS_QUESTION);
+			int score = resultSet.getInt(DBInfo.QUESTIONS_SCORE);
+			String checkType = resultSet.getString(DBInfo.QUESTIONS_CHECK_TYPE);
+			int time = resultSet.getInt(DBInfo.QUESTIONS_TIME);
+			int quizId = resultSet.getInt(DBInfo.QUESTIONS_QUIZ_ID);
+			int typeId = resultSet.getInt(DBInfo.QUESTIONS_TYPE_ID);
 			HashMap<String, String> answers = new HashMap<String, String>();
 			String order = getAnswersInformation(answers, questionId);
 			return new Question(questionText, score, checkType, time, quizId, typeId, answers, order);
@@ -183,10 +183,10 @@ public class QuestionManager {
 			preparedStatement.setInt(1, questionId);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				String answer = resultSet.getString(DBInfo.ANSWER);
-				String correctness = resultSet.getString(DBInfo.TF);
+				String answer = resultSet.getString(DBInfo.ANSWERS_ANSWER);
+				String correctness = resultSet.getString(DBInfo.ANSWERS_TF);
 				answers.put(answer, correctness);
-				result = resultSet.getString(DBInfo.ORDER);
+				result = resultSet.getString(DBInfo.ANSWERS_ORDER);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

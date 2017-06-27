@@ -192,12 +192,12 @@ public class AccountManager {
 		Account acc = null;
 
 		try {
-			String username = result.getString(DBInfo.USER_USERNAME);
-			String password = result.getString(DBInfo.USER_PASSWORD);
-			String firstname = result.getString(DBInfo.USER_FIRSTNAME);
-			String lastname = result.getString(DBInfo.USER_LASTNAME);
-			String email = result.getString(DBInfo.USER_EMAIL);
-			int type = result.getInt(DBInfo.USER_TYPE_ID);
+			String username = result.getString(DBInfo.USERS_USERNAME);
+			String password = result.getString(DBInfo.USERS_PASSWORD);
+			String firstname = result.getString(DBInfo.USERS_FIRSTNAME);
+			String lastname = result.getString(DBInfo.USERS_LASTNAME);
+			String email = result.getString(DBInfo.USERS_EMAIL);
+			int type = result.getInt(DBInfo.USERS_TYPE_ID);
 
 			acc = new Account(username, password, firstname, lastname, email, type);
 		} catch (SQLException e) {
