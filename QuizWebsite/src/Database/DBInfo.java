@@ -74,14 +74,13 @@ public class DBInfo {
 
 	// QUIZZES columns
 	public static final int QUIZZES_ID = 1;
-	public static final int QUIZZES_USER_ID = 2;
-	public static final int QUIZZES_NAME = 3;
-	public static final int QUIZZES_DESCRIPTION = 4;
-	public static final int QUIZZES_RANDOM = 5;
-	public static final int QUIZZES_ONE_PAGE = 6;
-	public static final int QUIZZES_PRACTICE_MODE = 7;
-	public static final int QUIZZES_IMMEDIATE_GRADE = 8;
-	public static final int QUIZZES_FREQUENCY = 9;
+	public static final int QUIZZES_NAME = 2;
+	public static final int QUIZZES_DESCRIPTION = 3;
+	public static final int QUIZZES_RANDOM = 4;
+	public static final int QUIZZES_ONE_PAGE = 5;
+	public static final int QUIZZES_PRACTICE_MODE = 6;
+	public static final int QUIZZES_IMMEDIATE_GRADE = 7;
+	public static final int QUIZZES_FREQUENCY = 8;
 
 	// USER_TYPES columns
 	public static final int USER_TYPES_ID = 1;

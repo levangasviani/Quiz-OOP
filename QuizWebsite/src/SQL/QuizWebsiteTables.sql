@@ -68,7 +68,6 @@ CREATE TABLE `QuizWebsiteDatabase`.`FRIENDS` (
 
 CREATE TABLE `QuizWebsiteDatabase`.`QUIZZES` (
     `ID` INT NOT NULL AUTO_INCREMENT,
-    `USER_ID` INT NOT NULL,
     `NAME` VARCHAR(45) NOT NULL,
     `DESCRIPTION` VARCHAR(100),
     `RANDOM` ENUM('TRUE', 'FALSE') NOT NULL,
@@ -76,18 +75,14 @@ CREATE TABLE `QuizWebsiteDatabase`.`QUIZZES` (
     `PRACTICE_MODE` ENUM('TRUE', 'FALSE') NOT NULL,
     `IMMEDIATE_GRADE` ENUM('TRUE', 'FALSE') NOT NULL,
     `FREQUENCY` INT NOT NULL,
-    PRIMARY KEY (`ID`),
-    INDEX `fk_QUIZZES_1_idx` (`USER_ID` ASC),
-    CONSTRAINT `fk_QUIZZES_TO_USERS` FOREIGN KEY (`USER_ID`)
-		REFERENCES `QuizWebsiteDatabase`.`USERS` (`ID`)
-        ON DELETE NO ACTION ON UPDATE NO ACTION
+    PRIMARY KEY (`ID`)
 );
 
 
 
 
 /**
-	მომხმარებლის მიერ გაკეთებული ქვიზების ცხრილი
+	მომხმარებლის მიერ შევსებული ქვიზების ცხრილი
 */
 
 CREATE TABLE `QuizWebsiteDatabase`.`COMPLETED_QUIZES` (
@@ -105,6 +100,33 @@ CREATE TABLE `QuizWebsiteDatabase`.`COMPLETED_QUIZES` (
         REFERENCES `QuizWebsiteDatabase`.`QUIZZES` (`ID`)
         ON DELETE NO ACTION ON UPDATE NO ACTION
 );
+
+
+
+/**
+	მომხმარებლის მიერ გაკეთებული ქვიზებსი ცხრილი
+*/
+
+
+CREATE TABLE `quizwebsitedatabase`.`CREATED_QUIZZES` (
+  `ID` INT NOT NULL,
+  `USER_ID` INT NOT NULL,
+  `QUIZ_ID` INT NOT NULL,
+  PRIMARY KEY (`ID`),
+  INDEX `fk_CREATED_TO_USERS_idx` (`USER_ID` ASC),
+  INDEX `fk_CREATED_TO_QUIZZES_idx` (`QUIZ_ID` ASC),
+  CONSTRAINT `fk_CREATED_TO_USERS`
+    FOREIGN KEY (`USER_ID`)
+    REFERENCES `quizwebsitedatabase`.`users` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_CREATED_TO_QUIZZES`
+    FOREIGN KEY (`QUIZ_ID`)
+    REFERENCES `quizwebsitedatabase`.`quizzes` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+
 
 
 
