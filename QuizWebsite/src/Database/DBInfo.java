@@ -8,7 +8,7 @@ package Database;
 public class DBInfo {
 
 	public static final String MYSQL_USERNAME = "root";
-	public static final String MYSQL_PASSWORD = "soad123";
+	public static final String MYSQL_PASSWORD = "";
 	public static final String MYSQL_DATABASE_NAME = "QuizWebsiteDatabase";
 	public static final String MYSQL_DATABASE_SERVER = "localhost:3306/" + MYSQL_DATABASE_NAME
 			+ "?autoReconnect=true&useSSL=false";
@@ -20,6 +20,9 @@ public class DBInfo {
 	public static final String COMPLETED_QUIZZES = "COMPLETED_QUIZES";
 	public static final String CREATED_QUIZZES = "CREATED_QUIZES";
 	public static final String FRIENDS = "FRIENDS";
+	public static final String NOTIFICATION_COUNT = "NOTIFICATION_COUNT";
+	public static final String NOTIFICATION_TYPES = "NOTIFICATION_TYPES";
+	public static final String NOTIFICATIONS = "NOTIFICATIONS";
 	public static final String QUESTION_TYPES = "QUESTION_TYPES";
 	public static final String QUESTIONS = "QUESTIONS";
 	public static final String QUIZZES = "QUIZZES";
@@ -59,6 +62,24 @@ public class DBInfo {
 	public static final int FRIENDS_USER_ONE = 2;
 	public static final int FRIENDS_USER_TWO = 3;
 
+	// NOTIFICATION_COUNT columns
+	public static final int NOTIFICATION_COUNT_ID = 1;
+	public static final int NOTIFICATION_COUNT_USER_ID = 2;
+	public static final int NOTIFICATION_COUNT_COUNT = 3;
+
+	// NOTIFICATION_TYPES columns
+	public static final int NOTIFICATION_TYPES_ID = 1;
+	public static final int NOTIFICATION_TYPES_NAME = 2;
+
+	// NOTIFICATIONS columns
+	public static final int NOTIFICATIONS_ID = 1;
+	public static final int NOTIFICATIONS_SENDER_ID = 2;
+	public static final int NOTIFICATIONS_RECEIVER_ID = 3;
+	public static final int NOTIFICATIONS_MESSAGE = 4;
+	public static final int NOTIFICATIONS_QUIZ_ID = 5;
+	public static final int NOTIFICATIONS_QUESTION_ID = 6;
+	public static final int NOTIFICATIONS_TYPE_ID = 7;
+
 	// QUESTION_TYPES columns
 	public static final int QUESTION_TYPES_ID = 1;
 	public static final int QUESTION_TYPES_NAME = 2;
@@ -94,6 +115,12 @@ public class DBInfo {
 	public static final int USERS_LASTNAME = 5;
 	public static final int USERS_EMAIL = 6;
 	public static final int USERS_TYPE_ID = 7;
+
+	// NOTIFICATION_TYPES types
+	public static final int NOTIFICATION_TYPE_CHALLENGE_REQUEST = 1;
+	public static final int NOTIFICATION_TYPE_FRIEND_REQUEST = 2;
+	public static final int NOTIFICATION_TYPE_GRADE_REQUEST = 3;
+	public static final int NOTIFICATION_TYPE_MESSAGE = 4;
 
 	// QUESTION_TYPES types
 	public static final int QUESTION_TYPE_QUESTION_RESPONSE = 1;
