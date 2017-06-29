@@ -3,6 +3,7 @@ package Login;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -83,8 +84,8 @@ public class RegistrationServlet extends HttpServlet {
             out.println("Account was Created:\n" + acc);
         }
         
-        
-        
+        RequestDispatcher rd=request.getRequestDispatcher("homepage.html");
+		rd.forward(request, response);
 	}
 
 	/**
