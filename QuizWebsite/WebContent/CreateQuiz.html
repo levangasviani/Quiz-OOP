@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Create A Quiz</title>
+</head>
+ <link rel="stylesheet" type="text/css" href="css/CreateQuiz.css">
+<h1>Create Quiz</h1>
+<body>
+	
+	<div class="navigation" id="navigationID">
+  		<a href="homepage.html">Home</a>
+  		<a href="profile.html">Profile</a>
+  		<a href="achievements.html">Achievements</a>
+  		<a href="messages.html">Messages</a>
+  		<a href="createQuiz.html">Create Quiz</a>
+	</div>
+
+	<div class = quizCreation id = quizCreationID>
+		<form action = "- Add questions in quiz -">
+			Name of a quiz: <br>
+			<input type = "text" name = "quizName" > <br>
+			Description: <br>
+			<textarea rows = "6" cols = "50"></textarea> <br>
+			
+			<input type = "radio" name = "orderType" value = "One Page" checked = "checked">One Page
+			<input type = "radio" name = "orderType" value = "Multiple Pages">Multiple Pages <br>
+			
+			Practice Mode: <input type = "radio" name = "practiceMode" value = "off" checked = "checked"> Off
+			<input type = "radio" name = "practiceMode" value = "on"> On <br>
+			
+			Order of questions: <input type = "radio" name = "orderOfQuestions" value = "defaultOrder" checked = "checked">default 
+			<input type = "radio" name = "orderOfQuestions" value = "randomOrder">random <br>
+			
+			Check type: <input type = "radio" name = "checkType" value = "allTogether" checked = "checked">All together
+			<input type = "radio" name = "checkType" value = "immediate">immediate <br>
+			
+			<button type="submit" value="submit">Start</button>
+		</form>
+	</div>
+</body>
+</html>
