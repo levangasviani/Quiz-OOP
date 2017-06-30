@@ -108,7 +108,7 @@ CREATE TABLE `QuizWebsiteDatabase`.`COMPLETED_QUIZES` (
 */
 
 
-CREATE TABLE `quizwebsitedatabase`.`CREATED_QUIZZES` (
+CREATE TABLE `QuizWebsiteDatabase`.`CREATED_QUIZZES` (
   `ID` INT NOT NULL,
   `USER_ID` INT NOT NULL,
   `QUIZ_ID` INT NOT NULL,
@@ -117,12 +117,12 @@ CREATE TABLE `quizwebsitedatabase`.`CREATED_QUIZZES` (
   INDEX `fk_CREATED_TO_QUIZZES_idx` (`QUIZ_ID` ASC),
   CONSTRAINT `fk_CREATED_TO_USERS`
     FOREIGN KEY (`USER_ID`)
-    REFERENCES `quizwebsitedatabase`.`users` (`ID`)
+    REFERENCES `QuizWebsiteDatabase`.`USERS` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_CREATED_TO_QUIZZES`
     FOREIGN KEY (`QUIZ_ID`)
-    REFERENCES `quizwebsitedatabase`.`quizzes` (`ID`)
+    REFERENCES `QuizWebsiteDatabase`.`QUIZZES` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
