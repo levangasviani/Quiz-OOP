@@ -47,6 +47,10 @@ public class NotificationManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		if (hasNotification(receiver))
+			increaseNotificationCount(receiver);
+		else
+			addNotificationCount(receiver);
 	}
 
 	public ArrayList<Notification> getNotifications(String username) {
@@ -71,6 +75,7 @@ public class NotificationManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		deleteNotifications(getUserId(username));
 		return result;
 	}
 
@@ -104,6 +109,46 @@ public class NotificationManager {
 		return 0;
 	}
 
+	private boolean hasNotification(int id) {
+		String sql = "SELECT * FROM " + DBInfo.NOTIFICATION_COUNT + " WHERE USER_ID = ?";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (resultSet.next())
+				return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	private void increaseNotificationCount(int id) {
+		String sql = "UPDATE " + DBInfo.NOTIFICATION_COUNT + " SET COUNT = COUNT + 1 WHERE USER_ID = ?";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, id);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	private void addNotificationCount(int id) {
+		String sql = "INSERT INTO " + DBInfo.NOTIFICATION_COUNT + " (USER_ID, COUNT) VALUES (?, 0)";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, id);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	private String getUserUsername(int id) {
 		String sql = "SELECT USERNAME FROM " + DBInfo.USERS + " WHERE ID = ?";
 		try {
@@ -132,5 +177,30 @@ public class NotificationManager {
 			e.printStackTrace();
 		}
 		return "";
+	}
+
+	private void deleteNotifications(int id) {
+		String sql = "DELETE FROM " + DBInfo.NOTIFICATIONS + " WHERE USER_ID = ?";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, id);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		deleteNotificationCount(id);
+	}
+
+	private void deleteNotificationCount(int id) {
+		String sql = "DELETE FROM " + DBInfo.NOTIFICATION_COUNT + " WHERE USER_ID = ?";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, id);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
