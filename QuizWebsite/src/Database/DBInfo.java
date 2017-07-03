@@ -8,7 +8,7 @@ package Database;
 public class DBInfo {
 
 	public static final String MYSQL_USERNAME = "root";
-	public static final String MYSQL_PASSWORD = "";
+	public static final String MYSQL_PASSWORD = "sius25";
 	public static final String MYSQL_DATABASE_NAME = "QuizWebsiteDatabase";
 	public static final String MYSQL_DATABASE_SERVER = "localhost:3306/" + MYSQL_DATABASE_NAME
 			+ "?autoReconnect=true&useSSL=false";
@@ -29,6 +29,14 @@ public class DBInfo {
 	public static final String USER_TYPES = "USER_TYPES";
 	public static final String USERS = "USERS";
 
+	// Question check type constants
+	public static final String CHECK_TYPE_USER = "USER";
+	public static final String CHECK_TYPE_COMPUTER = "COMPUTER";
+	
+	// Database table enumeration constants as strings
+	public static final String TRUE = "TRUE";
+	public static final String FALSE = "FALSE";
+	
 	// ACHIEVEMENT_TYPES columns
 	public static final int ACHIEVEMENT_TYPES_ID = 1;
 	public static final int ACHIEVEMENT_TYPES_NAME = 2;

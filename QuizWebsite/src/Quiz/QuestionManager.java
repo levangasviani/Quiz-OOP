@@ -22,7 +22,7 @@ public class QuestionManager {
 	 * 
 	 * @throws SQLException
 	 */
-	public QuestionManager() throws SQLException {
+	public QuestionManager() {
 		connection = DBConnection.getConnection();
 	}
 
@@ -81,7 +81,6 @@ public class QuestionManager {
 			int id = getQuestionId();
 			addAnswers(answers, id, order);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -99,7 +98,6 @@ public class QuestionManager {
 			resultSet.next();
 			return resultSet.getInt(DBInfo.QUESTIONS_ID);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return 0;
@@ -129,7 +127,6 @@ public class QuestionManager {
 				preparedStatement.executeUpdate();
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -148,6 +145,7 @@ public class QuestionManager {
 			preparedStatement.setInt(1, questionId);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			resultSet.next();
+
 			String questionText = resultSet.getString(DBInfo.QUESTIONS_QUESTION);
 			int score = resultSet.getInt(DBInfo.QUESTIONS_SCORE);
 			String checkType = resultSet.getString(DBInfo.QUESTIONS_CHECK_TYPE);
@@ -156,9 +154,9 @@ public class QuestionManager {
 			int typeId = resultSet.getInt(DBInfo.QUESTIONS_TYPE_ID);
 			HashMap<String, String> answers = new HashMap<String, String>();
 			String order = getAnswersInformation(answers, questionId);
+
 			return new Question(questionText, score, checkType, time, quizId, typeId, answers, order);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -189,7 +187,6 @@ public class QuestionManager {
 				result = resultSet.getString(DBInfo.ANSWERS_ORDER);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
