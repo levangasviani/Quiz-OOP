@@ -19,10 +19,6 @@ import Database.DBInfo;
 public class AccountManager {
 
 	private Connection connection;
-	private Statement statement;
-	private ResultSet resultset;
-	private Account account;
-	private ArrayList<Account> accountsList;
 
 	/**
 	 * Public constructor for Account Manager Initializes starting variables
@@ -31,13 +27,6 @@ public class AccountManager {
 	 */
 	public AccountManager() {
 		connection = DBConnection.getConnection();
-		try {
-			statement = connection.createStatement();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		account = null;
-		accountsList = new ArrayList<>();
 	}
 
 	/**
@@ -152,7 +141,6 @@ public class AccountManager {
 			resultset.next();
 			return getAccountFromResultset(resultset);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
