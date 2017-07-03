@@ -49,43 +49,69 @@ public class QuizManager {
 	}
 
 	/**
-	 * Adds quiz into a database if such quiz does nor exists in a database.
+	 * Adds quiz into a database, parses information
+	 * from passed quiz object and calls another addQuiz
 	 * 
 	 * @param quiz
 	 */
 	public void addQuiz(Quiz quiz) {
 		String quizName = quiz.getName();
-		if (containsQuiz(quizName)) {
-			return;
-		}
-		String query = "INSERT INTO " + DBInfo.QUIZZES + " (NAME, DESCRIPtioN, RANDOM, ONE_PAGE, PRACTICE_MODE, IMMEDIATE_GRADE, FREQUENCY) VALUES (?, ?, ?, ?, ?, ?, ?)";
-		try {
-			PreparedStatement preparedStatement = con.prepareStatement(query);
-			preparedStatement.setString(1, quizName);
-			preparedStatement.setString(2, quiz.getDescription());
-			if(quiz.isRandom()) {
-				preparedStatement.setString(3, "TRUE");	
-			} else preparedStatement.setString(3, "FALSE");
-			
-			if(quiz.isOnePage()) {
-				preparedStatement.setString(4, "TRUE");	
-			} else preparedStatement.setString(4, "FALSE");
-			
-			if(quiz.isRandom()) {
-				preparedStatement.setString(5, "TRUE");	
-			} else preparedStatement.setString(5, "FALSE");
-			
-			if(quiz.immediateCorrection()) {
-				preparedStatement.setString(6, "TRUE");	
-			} else preparedStatement.setString(6, "FALSE");
-			
-			preparedStatement.setInt(7, 0);
-			preparedStatement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		String description = quiz.getDescription();
+		boolean isRandom = quiz.isRandom();
+		boolean isOnePage = quiz.isOnePage();
+		boolean canPracticeMode = quiz.canPracticeMode();
+		boolean immediateCorrection = quiz.immediateCorrection();
+		
+		addQuiz(quizName, description, isRandom, isOnePage, canPracticeMode, immediateCorrection);
 	}
 
+	
+	/**
+	 * Adds Quiz into the database according to the
+	 * passed parameters
+	 * 
+	 * @param quizName
+	 * @param description
+	 * @param isRandom
+	 * @param isOnePage
+	 * @param canPracticeMode
+	 * @param immediateCorrection
+	 */
+	public void addQuiz(String quizName, String description, boolean isRandom, boolean isOnePage,
+			boolean canPracticeMode, boolean immediateCorrection) {
+		
+		if(!containsQuiz(quizName)){
+			String query = "INSERT INTO " + DBInfo.QUIZZES + " (NAME, DESCRIPtioN, RANDOM, ONE_PAGE, PRACTICE_MODE, IMMEDIATE_GRADE, FREQUENCY) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			
+			try {
+				PreparedStatement preparedStatement = con.prepareStatement(query);
+				preparedStatement.setString(1, quizName);
+				preparedStatement.setString(2, description);
+				if(isRandom) {
+					preparedStatement.setString(3, "TRUE");	
+				} else preparedStatement.setString(3, "FALSE");
+				
+				if(isOnePage) {
+					preparedStatement.setString(4, "TRUE");	
+				} else preparedStatement.setString(4, "FALSE");
+				
+				if(canPracticeMode) {
+					preparedStatement.setString(5, "TRUE");	
+				} else preparedStatement.setString(5, "FALSE");
+				
+				if(immediateCorrection) {
+					preparedStatement.setString(6, "TRUE");	
+				} else preparedStatement.setString(6, "FALSE");
+				
+				preparedStatement.setInt(7, 0);
+				preparedStatement.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
 	/**
 	 * Returns a quiz from a database with a given name, if it exists.
 	 * 
@@ -208,6 +234,8 @@ public class QuizManager {
 		}
 		return result;
 	}
+	
+	
 	
 }
 
