@@ -17,7 +17,7 @@ public class QuizApp {
 		
 		quizMan = new QuizManager();
 
-		Quiz firstQuiz = new Quiz("FirstQuiz", "Quiz For Testing", false, true, true, false);
+		Quiz firstQuiz = new Quiz("FirstQuiz", "Quiz For Testing", false, true);
 		quizMan.addQuiz(firstQuiz);
 		
 		addQuestionResponse(firstQuiz);
