@@ -58,11 +58,9 @@ public class QuizManager {
 		String quizName = quiz.getName();
 		String description = quiz.getDescription();
 		boolean isRandom = quiz.isRandom();
-		boolean isOnePage = quiz.isOnePage();
 		boolean canPracticeMode = quiz.canPracticeMode();
-		boolean immediateCorrection = quiz.immediateCorrection();
 		
-		addQuiz(quizName, description, isRandom, isOnePage, canPracticeMode, immediateCorrection);
+		addQuiz(quizName, description, isRandom, canPracticeMode);
 	}
 
 	
@@ -73,15 +71,12 @@ public class QuizManager {
 	 * @param quizName
 	 * @param description
 	 * @param isRandom
-	 * @param isOnePage
 	 * @param canPracticeMode
-	 * @param immediateCorrection
 	 */
-	public void addQuiz(String quizName, String description, boolean isRandom, boolean isOnePage,
-			boolean canPracticeMode, boolean immediateCorrection) {
+	public void addQuiz(String quizName, String description, boolean isRandom, boolean canPracticeMode) {
 		
 		if(!containsQuiz(quizName)){
-			String query = "INSERT INTO " + DBInfo.QUIZZES + " (NAME, DESCRIPtioN, RANDOM, ONE_PAGE, PRACTICE_MODE, IMMEDIATE_GRADE, FREQUENCY) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			String query = "INSERT INTO " + DBInfo.QUIZZES + " (NAME, DESCRIPtioN, RANDOM, PRACTICE_MODE, FREQUENCY) VALUES (?, ?, ?, ?, ?)";
 			
 			try {
 				PreparedStatement preparedStatement = con.prepareStatement(query);
@@ -90,20 +85,12 @@ public class QuizManager {
 				if(isRandom) {
 					preparedStatement.setString(3, "TRUE");	
 				} else preparedStatement.setString(3, "FALSE");
-				
-				if(isOnePage) {
+								
+				if(canPracticeMode) {
 					preparedStatement.setString(4, "TRUE");	
 				} else preparedStatement.setString(4, "FALSE");
-				
-				if(canPracticeMode) {
-					preparedStatement.setString(5, "TRUE");	
-				} else preparedStatement.setString(5, "FALSE");
-				
-				if(immediateCorrection) {
-					preparedStatement.setString(6, "TRUE");	
-				} else preparedStatement.setString(6, "FALSE");
-				
-				preparedStatement.setInt(7, 0);
+							
+				preparedStatement.setInt(5, 0);
 				preparedStatement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -130,16 +117,10 @@ public class QuizManager {
 				String random = rs.getString(DBInfo.QUIZZES_RANDOM);
 				boolean isRandom = false;
 				if(random.equals("TRUE")) isRandom = true;
-				String onePage = rs.getString(DBInfo.QUIZZES_ONE_PAGE);
-				boolean isOnePage = false;
-				if(onePage.equals("TRUE")) isRandom = true;
 				String practiceMode = rs.getString(DBInfo.QUIZZES_PRACTICE_MODE);
 				boolean canPracticeMode = false;
-				if(practiceMode.equals("TRUE")) isRandom = true;
-				String immediateGrade = rs.getString(DBInfo.QUIZZES_IMMEDIATE_GRADE);
-				boolean immediateCorrection = false;
-				if(immediateGrade.equals("TRUE")) isRandom = true;
-				Quiz quiz = new Quiz(quizName, description, isRandom, isOnePage, canPracticeMode, immediateCorrection);
+				if(practiceMode.equals("TRUE")) isRandom = true;	
+				Quiz quiz = new Quiz(quizName, description, isRandom, canPracticeMode);
 				return quiz;
 			}
 		} catch (SQLException e) {
@@ -166,16 +147,10 @@ public class QuizManager {
 				String random = rs.getString(DBInfo.QUIZZES_RANDOM);
 				boolean isRandom = false;
 				if(random.equals("TRUE")) isRandom = true;
-				String onePage = rs.getString(DBInfo.QUIZZES_ONE_PAGE);
-				boolean isOnePage = false;
-				if(onePage.equals("TRUE")) isRandom = true;
 				String practiceMode = rs.getString(DBInfo.QUIZZES_PRACTICE_MODE);
 				boolean canPracticeMode = false;
 				if(practiceMode.equals("TRUE")) isRandom = true;
-				String immediateGrade = rs.getString(DBInfo.QUIZZES_IMMEDIATE_GRADE);
-				boolean immediateCorrection = false;
-				if(immediateGrade.equals("TRUE")) isRandom = true;
-				Quiz quiz = new Quiz(quizName, description, isRandom, isOnePage, canPracticeMode, immediateCorrection);
+				Quiz quiz = new Quiz(quizName, description, isRandom, canPracticeMode);
 				result.add(quiz);
 			}
 		} catch (SQLException e) {
