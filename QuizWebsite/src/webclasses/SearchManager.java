@@ -54,16 +54,10 @@ public class SearchManager {
 				String random = rs.getString(DBInfo.QUIZZES_RANDOM);
 				boolean isRandom = false;
 				if(random.equals("TRUE")) isRandom = true;
-				String onePage = rs.getString(DBInfo.QUIZZES_ONE_PAGE);
-				boolean isOnePage = false;
-				if(onePage.equals("TRUE")) isRandom = true;
 				String practiceMode = rs.getString(DBInfo.QUIZZES_PRACTICE_MODE);
 				boolean canPracticeMode = false;
 				if(practiceMode.equals("TRUE")) isRandom = true;
-				String immediateGrade = rs.getString(DBInfo.QUIZZES_IMMEDIATE_GRADE);
-				boolean immediateCorrection = false;
-				if(immediateGrade.equals("TRUE")) isRandom = true;
-				Quiz quiz = new Quiz(quizName, description, isRandom, isOnePage, canPracticeMode, immediateCorrection);
+				Quiz quiz = new Quiz(quizName, description, isRandom, canPracticeMode);
 				
 				quizzes.add(quiz);
 			}
@@ -195,7 +189,7 @@ public class SearchManager {
 	public static void main(String[] args) {
 		SearchManager sm = new SearchManager();
 		QuizManager qm = new QuizManager();
-		Quiz q1 = new Quiz("karanadze1", "abc" , true, true, false, false);
+		Quiz q1 = new Quiz("karanadze1", "abc" , true, false);
 		qm.addQuiz(q1);
 		ArrayList<Quiz> qs = sm.getQuizzes(q1.getName());
 		for (int i = 0; i < qs.size(); i++) {
