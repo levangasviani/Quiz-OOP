@@ -10,24 +10,34 @@ public class Quiz {
 	
 	private String quizName;
 	private String description;
-	private boolean isRandom;
-	private boolean isOnePage;
-	private boolean canPracticeMode;
-	private boolean immediateCorrection;
-	
+	private boolean random;
+	private boolean practiceMode;
+
 	/**
 	 * Constructor
 	 * 
 	 * @param quizName
+	 * @param description
+	 * @param isRandom
+	 * @param canPracticeMode
 	 */
-	public Quiz(String quizName, String description, boolean isRandom, boolean isOnePage,
-		boolean canPracticeMode, boolean immediateCorrection) {
+	public Quiz(String quizName, String description, boolean random, boolean practiceMode) {
 		this.quizName = quizName;
 		this.description = description;
-		this.isRandom = isRandom;
-		this.isOnePage = isOnePage;
-		this.canPracticeMode = canPracticeMode;
-		this.immediateCorrection = immediateCorrection;
+		this.random = random;
+		this.practiceMode = practiceMode;
+	}
+	
+	/**
+	 * Copy Constructor
+	 * 
+	 * @param quiz
+	 */
+	public Quiz(Quiz quiz) {
+		this.quizName = quiz.getName();
+		this.description = quiz.getDescription();
+		this.random = quiz.isRandom();
+		this.practiceMode = quiz.canPracticeMode();
 	}
 	
 	/**
@@ -54,17 +64,9 @@ public class Quiz {
 	 * @return boolean isRandom;
 	 */
 	public boolean isRandom() {
-		return isRandom;
+		return random;
 	}
 	
-	/**
-	 * Returns true if Quiz questions should be on one page.
-	 * 
-	 * @return boolean isOnePage;
-	 */
-	public boolean isOnePage() {
-		return isOnePage;
-	}
 	
 	/**
 	 * Returns true if user can
@@ -73,17 +75,30 @@ public class Quiz {
 	 * @return boolean canPracticeMode;
 	 */
 	public boolean canPracticeMode() {
-		return canPracticeMode;
+		return practiceMode;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Quiz quiz = (Quiz) obj;
+		if(this.quizName.equals(quiz.getName()) &&
+				this.description.equals(quiz.getDescription()) &&
+				this.random == quiz.isRandom() &&
+				this.practiceMode == quiz.canPracticeMode()) return true;
+		return false;
 	}
 	
 	/**
-	 * Returns true if quiz questions should
-	 * be corrected immeadiately.
-	 * 
-	 * @return boolean immediateCorrection;
+	 * toString()
 	 */
-	public boolean immediateCorrection() {
-		return immediateCorrection;
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Quiz:  ").append(quizName).append("\n");
+		sb.append("Description:  ").append(description).append("\n");
+		sb.append("Random Order:  ").append(random).append("\n");
+		sb.append("Parctice mode:  ").append(practiceMode).append("\n");
+		return sb.toString();
 	}
 
 }
