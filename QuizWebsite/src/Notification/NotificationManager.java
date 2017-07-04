@@ -9,16 +9,14 @@ import java.util.ArrayList;
 import Database.DBConnection;
 import Database.DBInfo;
 
-
 /**
- * Public class that manages transferring information
- * between database and program about notifications
+ * Public class that manages transferring information between database and
+ * program about notifications
  *
  */
 public class NotificationManager {
 	private Connection connection;
 
-	
 	/**
 	 * Public constructor for notification manager
 	 */
@@ -26,21 +24,19 @@ public class NotificationManager {
 		connection = DBConnection.getConnection();
 	}
 
-	
 	/**
 	 * Adds notification into the database
 	 * 
 	 * @param notification
 	 */
 	public void addNotification(Notification notification) {
-		
-		int sender = getUserId(notification.getSender()); 		   // id of sender
-		int receiver = getUserId(notification.getReceiver()); 	  // id of receiver
-		int typeId = notification.getType();					 // notification type
-		String column = ""; 									// which column must be changed, depending on type
-		int id = 0; 										   // if its challenge or grade, id of target
-		
-		
+
+		int sender = getUserId(notification.getSender()); // id of sender
+		int receiver = getUserId(notification.getReceiver()); // id of receiver
+		int typeId = notification.getType(); // notification type
+		String column = ""; // which column must be changed, depending on type
+		int id = 0; // if its challenge or grade, id of target
+
 		if (typeId == DBInfo.NOTIFICATION_TYPE_CHALLENGE_REQUEST) {
 			column = ", QUIZ_ID";
 			id = getQuizId(notification.getContent());
@@ -52,7 +48,7 @@ public class NotificationManager {
 		}
 		String sql = "INSERT INTO " + DBInfo.NOTIFICATIONS + " (SENDER_ID, RECEIVER_ID" + column
 				+ ", TYPE_ID) VALUES (?, ?, ?, ?)";
-		
+
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, sender);
@@ -66,19 +62,16 @@ public class NotificationManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		if (hasNotification(receiver)) {
-			increaseNotificationCount(receiver); 
+			increaseNotificationCount(receiver);
 		} else {
-			addNotificationCount(receiver); 
+			addNotificationCount(receiver);
 		}
 	}
 
-	
 	/**
-	 * Reads notifications from database that according to
-	 * the passed user name
+	 * Reads notifications from database that according to the passed user name
 	 * 
 	 * @param username
 	 * @return ArryList of Notifications
@@ -86,12 +79,12 @@ public class NotificationManager {
 	public ArrayList<Notification> getNotifications(String username) {
 		ArrayList<Notification> result = new ArrayList<Notification>();
 		String sql = "SELECT * FROM " + DBInfo.NOTIFICATIONS + " WHERE RECEIVER_ID = ?";
-		
+
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, getUserId(username));
 			ResultSet resultSet = preparedStatement.executeQuery();
-			
+
 			while (resultSet.next()) {
 				String content = "";
 				if (resultSet.getString(DBInfo.NOTIFICATIONS_MESSAGE) != null)
@@ -106,12 +99,32 @@ public class NotificationManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		deleteNotifications(getUserId(username));
 		return result;
 	}
 
-	
+	/**
+	 * Returns how many notifications user has.
+	 * 
+	 * @param username
+	 * @return
+	 */
+	public int getNotificationCount(String username) {
+		String sql = "SELECT COUNT FROM " + DBInfo.NOTIFICATION_COUNT + " WHERE USER_ID = ?";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, getUserId(username));
+			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			return resultSet.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
 	/**
 	 * Gets the id of passed user name
 	 * 
@@ -132,9 +145,8 @@ public class NotificationManager {
 		return 0;
 	}
 
-	
 	/**
-	 * Returns the id of passed Quiz 
+	 * Returns the id of passed Quiz
 	 * 
 	 * @param quizName
 	 * @return ID of quiz
@@ -150,11 +162,10 @@ public class NotificationManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return 0;
 	}
 
-	
 	/**
 	 * Checks if user on passed id has at least one notification
 	 * 
@@ -175,7 +186,6 @@ public class NotificationManager {
 		return false;
 	}
 
-	
 	/**
 	 * Increases the number of notifications for passed id user
 	 * 
@@ -194,13 +204,12 @@ public class NotificationManager {
 	}
 
 	/**
-	 * If there is no notification for passed id in the database
-	 * adds one 
+	 * If there is no notification for passed id in the database adds one
 	 * 
 	 * @param id
 	 */
 	private void addNotificationCount(int id) {
-		String sql = "INSERT INTO " + DBInfo.NOTIFICATION_COUNT + " (USER_ID, COUNT) VALUES (?, 0)";
+		String sql = "INSERT INTO " + DBInfo.NOTIFICATION_COUNT + " (USER_ID, COUNT) VALUES (?, 1)";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, id);
@@ -210,7 +219,6 @@ public class NotificationManager {
 		}
 	}
 
-	
 	/**
 	 * Gets user name for passed id
 	 * 
@@ -231,7 +239,6 @@ public class NotificationManager {
 		return "";
 	}
 
-	
 	/**
 	 * Gets quiz name for passed id
 	 * 
@@ -258,7 +265,7 @@ public class NotificationManager {
 	 * @param id
 	 */
 	private void deleteNotifications(int id) {
-		String sql = "DELETE FROM " + DBInfo.NOTIFICATIONS + " WHERE USER_ID = ?";
+		String sql = "DELETE FROM " + DBInfo.NOTIFICATIONS + " WHERE RECEIVER_ID = ?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, id);
@@ -269,7 +276,6 @@ public class NotificationManager {
 		deleteNotificationCount(id);
 	}
 
-	
 	/**
 	 * deletes notification count from database for passed id
 	 * 
