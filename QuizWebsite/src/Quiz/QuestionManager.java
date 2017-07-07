@@ -15,8 +15,10 @@ import Database.DBInfo;
  *
  */
 public class QuestionManager {
+	
 	private Connection connection;
 
+	
 	/**
 	 * constructs QuestionManager Object by connecting to the database
 	 * 
@@ -26,6 +28,7 @@ public class QuestionManager {
 		connection = DBConnection.getConnection();
 	}
 
+	
 	/**
 	 * adds a new question in the database using a Question Object
 	 * 
@@ -45,6 +48,7 @@ public class QuestionManager {
 		q.setId(getQuestionId());
 		addAnswers(answers, q.getId(), order);
 	}
+
 
 	/**
 	 * adds a new Question Object in the database using parameters of a Question
@@ -78,11 +82,53 @@ public class QuestionManager {
 			preparedStatement.setInt(6, typeId);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/**
+	 * Deletes Question and Question answers from the database
+	 * 
+	 * @param questionId
+	 */
+	public void deleteQuestion(int questionId) {
+		Question q = getQuestion(questionId);
+		
+		if(q != null) {
+			deleteAnswers(questionId);
+			String query = "DELETE FROM " + DBInfo.QUESTIONS + " WHERE ID = ?;";
+			try {
+				PreparedStatement preparedStatement = connection.prepareStatement(query);
+				preparedStatement.setInt(1, questionId);
+				preparedStatement.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	
+	/**
+	 * Deletes answers of the passed question
+	 * 
+	 * @param questionId
+	 */
+	private void deleteAnswers(int questionId) {
+		String query = "DELETE FROM " + DBInfo.ANSWERS + " WHERE QUESTION_ID = ?;";
+		PreparedStatement preparedStatement;
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, questionId);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
+	
 	/**
 	 * returns a question id
 	 * 
@@ -96,12 +142,12 @@ public class QuestionManager {
 			resultSet.next();
 			return resultSet.getInt(DBInfo.QUESTIONS_ID);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return 0;
 	}
 
+	
 	/**
 	 * adds possible answers in the database
 	 * 
@@ -126,11 +172,11 @@ public class QuestionManager {
 				preparedStatement.executeUpdate();
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	
 	/**
 	 * returns a question object
 	 * 
@@ -171,13 +217,14 @@ public class QuestionManager {
 			}else{
 				q=new Graded_Question(questionText, answers, quizId, order, checkType, time, score);
 			}
+			q.setId(questionId);
 			return q;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
+
 
 	/**
 	 * gets the information about the answers of the question with a given
@@ -204,7 +251,6 @@ public class QuestionManager {
 				result = resultSet.getString(DBInfo.ANSWERS_ORDER);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
