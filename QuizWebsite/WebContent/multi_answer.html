@@ -1,0 +1,22 @@
+
+	<input type="hidden" value="5" name="type">
+    <input type="hidden" value="FALSE" name="answerOrder">
+    <input type="hidden" value="COMPUTER" name="checkType">
+	<p><strong>Enter question statement</strong></p>
+	<textarea rows="4" cols="50" name="questionText">
+      Question
+	</textarea>
+	 <p>set time (seconds)</p>
+    <input type="number" name="time">
+    <p><strong>Enter correct answers</strong></p>
+   	  <div id="answers">
+      <br><input type="text" class="possible-answers" name="possible-answers"><br>
+      </div>
+     <input type="radio" name="order" id="ordered">ordered
+     <input type="radio" name="order" id="unordered">unordered
+     <br><input type="button" onclick="addField()" value="add New Answer Field"><br>
+   <br><input type="button" value="submit" onclick="multi_answer_submit()"><br>
+    
+   
+    
+    

@@ -1,0 +1,22 @@
+
+	<input type="hidden" value="7" name="type">
+    <input type="hidden" value="FALSE" name="answerOrder">
+    <input type="hidden" value="COMPUTER" name="checkType">
+	<p><strong>Enter question statement</strong></p>
+	<textarea rows="4" cols="50" name="questionText">
+      Question
+	</textarea>
+    <p>set time (seconds)</p>
+    <input type="number" name="time">
+    <p><strong>Set Matching</strong></p>
+   
+    <div id="answers">
+      <br><input type="text"  name="possible-answers"> <input type="text" name="possible-answers"><br>
+      <br><input type="text" name="possible-answers"> <input type="text" name="possible-answers"><br>
+   	  <br><input type="text"  name="possible-answers"> <input type="text" name="possible-answers"><br>
+     <br><input type="text"  name="possible-answers"> <input type="text" name="possible-answers"><br>
+     </div>
+    <button onclick="addPair()">addPair</button>
+    <br><input type="button" value="submit" onclick="matching_submit()"><br>
+    
+    
