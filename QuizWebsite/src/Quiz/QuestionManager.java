@@ -34,14 +34,16 @@ public class QuestionManager {
 	 */
 	public void addQuestion(Question q) {
 		String questionText = q.getQuestionText();
-		int score = q.getScore();
+		int score = q.getMaxScore();
 		String checkType = q.getCheckType();
 		int time = q.getTime();
 		int quizId = q.getQuizId();
 		int typeId = q.getTypeId();
 		HashMap<String, String> answers = q.getAnswers();
 		String order = q.getAnswerOrder();
-		addQuestion(questionText, score, checkType, time, quizId, typeId, answers, order);
+		addQuestion(questionText, score, checkType, time, quizId, typeId);
+		q.setId(getQuestionId());
+		addAnswers(answers, q.getId(), order);
 	}
 
 	/**
@@ -62,11 +64,8 @@ public class QuestionManager {
 	 *            - what kind of question it is
 	 * @param answers
 	 *            - answers of the question
-	 * @param order
-	 *            - determines whether answer should be ordered or unordered
 	 */
-	public void addQuestion(String questionText, int score, String checkType, int time, int quizId, int typeId,
-			HashMap<String, String> answers, String order) {
+	public void addQuestion(String questionText, int score, String checkType, int time, int quizId, int typeId) {
 		String query = "INSERT INTO " + DBInfo.QUESTIONS
 				+ " (QUESTION, SCORE, CHECK_TYPE, TIME, QUIZ_ID, TYPE_ID) VALUES (?, ?, ?, ?, ?, ?)";
 		try {
@@ -78,9 +77,8 @@ public class QuestionManager {
 			preparedStatement.setInt(5, quizId);
 			preparedStatement.setInt(6, typeId);
 			preparedStatement.executeUpdate();
-			int id = getQuestionId();
-			addAnswers(answers, id, order);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -98,6 +96,7 @@ public class QuestionManager {
 			resultSet.next();
 			return resultSet.getInt(DBInfo.QUESTIONS_ID);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return 0;
@@ -127,6 +126,7 @@ public class QuestionManager {
 				preparedStatement.executeUpdate();
 			}
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -145,7 +145,6 @@ public class QuestionManager {
 			preparedStatement.setInt(1, questionId);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			resultSet.next();
-
 			String questionText = resultSet.getString(DBInfo.QUESTIONS_QUESTION);
 			int score = resultSet.getInt(DBInfo.QUESTIONS_SCORE);
 			String checkType = resultSet.getString(DBInfo.QUESTIONS_CHECK_TYPE);
@@ -154,9 +153,27 @@ public class QuestionManager {
 			int typeId = resultSet.getInt(DBInfo.QUESTIONS_TYPE_ID);
 			HashMap<String, String> answers = new HashMap<String, String>();
 			String order = getAnswersInformation(answers, questionId);
-
-			return new Question(questionText, score, checkType, time, quizId, typeId, answers, order);
+			Question q;
+			if(typeId==DBInfo.QUESTION_TYPE_QUESTION_RESPONSE){
+				q=new Question_Response(questionText, answers, quizId, order, checkType, time, score);
+			}else if(typeId==DBInfo.QUESTION_TYPE_FILL_IN_THE_BLANK){
+				q=new Fill_In_The_Blank(questionText, answers, quizId, order, checkType, time, score);
+			}else if(typeId==DBInfo.QUESTION_TYPE_MULTIPLE_CHOICE){
+				q=new Multiple_Choice(questionText, answers, quizId, order, checkType, time, score);
+			}else if(typeId==DBInfo.QUESTION_TYPE_PICTURE_RESPONSE){
+				q=new Picture_Response(questionText, answers, quizId, order, checkType, time, score);
+			}else if(typeId==DBInfo.QUESTION_TYPE_MULTI_ANSWER){
+				q=new Multi_Answer(questionText, answers, quizId, order, checkType, time, score);
+			}else if(typeId==DBInfo.QUESTION_TYPE_MULTIPLE_CHOICE_WITH_MULTIPLE_ANSWERS){
+				q=new Multiple_Choice_Multiple_Answer(questionText, answers, quizId, order, checkType, time, score);
+			}else if(typeId==DBInfo.QUESTION_TYPE_MATCHING){
+				q=new Matching(questionText, answers, quizId, order, checkType, time, score);
+			}else{
+				q=new Graded_Question(questionText, answers, quizId, order, checkType, time, score);
+			}
+			return q;
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -187,6 +204,7 @@ public class QuestionManager {
 				result = resultSet.getString(DBInfo.ANSWERS_ORDER);
 			}
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
