@@ -4,6 +4,8 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import Quiz.QuestionManager;
+import Quiz.QuizManager;
 import User.AccountManager;
 import WebSite.WebSiteInfo;
 
@@ -34,6 +36,7 @@ public class ContextListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent arg0) {
 		// TODO Auto-generated method stub
 		arg0.getServletContext().setAttribute(WebSiteInfo.ACCOUNT_MANAGER_ATTR, new AccountManager());
+		arg0.getServletContext().setAttribute(WebSiteInfo.QUESTION_MANAGER_ATTR, new QuestionManager());
+		arg0.getServletContext().setAttribute(WebSiteInfo.QUIZ_MANAGER_ATTR, new QuizManager());
 	}
-
 }
