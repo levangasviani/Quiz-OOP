@@ -32,8 +32,14 @@ public class QuizApp {
 		for(Question q : questions) {
 			System.out.println(q.toString());
 		}
+		
+		//quizMan.deleteQuiz(firstQuiz.getName());
+		
+		
 	}
 	
+
+	// QuestionResponse
 	private static void addQuestionResponse(Quiz quiz) {
 		QuestionManager questMan = new QuestionManager();
 		
@@ -42,7 +48,6 @@ public class QuizApp {
 		String checkType = DBInfo.CHECK_TYPE_COMPUTER;
 		int time = 0;
 		int quizId = quizMan.getQuizID(quiz);
-		int typeId = DBInfo.QUESTION_TYPE_QUESTION_RESPONSE;
 		HashMap<String, String> answers = new HashMap<String, String>();
 		answers.put("Tbilisi", TRUE);
 		String order = FALSE;
@@ -52,6 +57,7 @@ public class QuizApp {
 	}
 	
 	
+	// MultipleChoice
 	private static void addMultipleChoice(Quiz quiz) {
 		QuestionManager questMan = new QuestionManager();
 		
@@ -60,7 +66,6 @@ public class QuizApp {
 		String checkType = DBInfo.CHECK_TYPE_COMPUTER;
 		int time = 0;
 		int quizId = quizMan.getQuizID(quiz);
-		int typeId = DBInfo.QUESTION_TYPE_MULTIPLE_CHOICE;
 		HashMap<String, String> answers = new HashMap<String, String>();
 		answers.put("Tbilisi", TRUE);
 		answers.put("Kutaisi", FALSE);
@@ -72,6 +77,8 @@ public class QuizApp {
 		questMan.addQuestion(multipleChoice);
 	}
 	
+	
+	// FillInTheBlank
 	private static void addFillInTheBlank(Quiz quiz) {
 		QuestionManager questMan = new QuestionManager();
 		
@@ -80,7 +87,6 @@ public class QuizApp {
 		String checkType = DBInfo.CHECK_TYPE_COMPUTER;
 		int time = 0;
 		int quizId = quizMan.getQuizID(quiz);
-		int typeId = DBInfo.QUESTION_TYPE_FILL_IN_THE_BLANK;
 		HashMap<String, String> answers = new HashMap<String, String>();
 		answers.put("Tbilisi", TRUE);
 		String order = FALSE;
@@ -89,7 +95,7 @@ public class QuizApp {
 		questMan.addQuestion(fillInTheBlank);
 	}
 	
-	
+	// PictureResponse
 	private static void addPictureResponse(Quiz quiz) {
 		QuestionManager questMan = new QuestionManager();
 		
@@ -98,7 +104,6 @@ public class QuizApp {
 		String checkType = DBInfo.CHECK_TYPE_COMPUTER;
 		int time = 0;
 		int quizId = quizMan.getQuizID(quiz);
-		int typeId = DBInfo.QUESTION_TYPE_PICTURE_RESPONSE;
 		HashMap<String, String> answers = new HashMap<String, String>();
 		answers.put("Tbilisi", TRUE);
 		String order = FALSE;
@@ -107,6 +112,8 @@ public class QuizApp {
 		questMan.addQuestion(pictureResponse);
 	}
 	
+	
+	// MultiAnswer
 	private static void addMultiAnswer(Quiz quiz) {
 		QuestionManager questMan = new QuestionManager();
 		
@@ -115,7 +122,6 @@ public class QuizApp {
 		String checkType = DBInfo.CHECK_TYPE_COMPUTER;
 		int time = 0;
 		int quizId = quizMan.getQuizID(quiz);
-		int typeId = DBInfo.QUESTION_TYPE_MULTI_ANSWER;
 		HashMap<String, String> answers = new HashMap<String, String>();
 		answers.put("Tbilisi, Kutaisi, Batumi, Rustavi", TRUE);
 		String order = FALSE;
@@ -124,6 +130,8 @@ public class QuizApp {
 		questMan.addQuestion(multiAnswer);
 	}
 	
+	
+	// MultipleChoiceMultipleAnswer
 	private static void addMultipleChoiceMultipleAnswer(Quiz quiz) {
 		QuestionManager questMan = new QuestionManager();
 		
@@ -132,7 +140,6 @@ public class QuizApp {
 		String checkType = DBInfo.CHECK_TYPE_COMPUTER;
 		int time = 0;
 		int quizId = quizMan.getQuizID(quiz);
-		int typeId = DBInfo.QUESTION_TYPE_MULTIPLE_CHOICE_WITH_MULTIPLE_ANSWERS;
 		HashMap<String, String> answers = new HashMap<String, String>();
 		answers.put("Tbilisi", FALSE);
 		answers.put("Kutaisi", FALSE);
@@ -145,6 +152,7 @@ public class QuizApp {
 	}
 	
 	
+	// Matching
 	private static void addMatching(Quiz quiz) {
 		QuestionManager questMan = new QuestionManager();
 		
@@ -153,7 +161,6 @@ public class QuizApp {
 		String checkType = DBInfo.CHECK_TYPE_COMPUTER;
 		int time = 0;
 		int quizId = quizMan.getQuizID(quiz);
-		int typeId = DBInfo.QUESTION_TYPE_MATCHING;
 		HashMap<String, String> answers = new HashMap<String, String>();
 		answers.put("Telavi_Kakheti", TRUE);
 		answers.put("Kutaisi_Imereti", TRUE);
