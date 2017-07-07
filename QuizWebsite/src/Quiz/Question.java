@@ -3,6 +3,12 @@ package Quiz;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
+/**
+ * 
+ * Public class that stores information about Question object
+ *
+ */
 public abstract class Question {
 	
 	
@@ -16,6 +22,17 @@ public abstract class Question {
 	private int id;
 	
 	
+	/**
+	 *Public constructor for Question object 
+	 * 
+	 * @param questionText
+	 * @param answers
+	 * @param quizId
+	 * @param answerOrder
+	 * @param checkType
+	 * @param time
+	 * @param maxScore
+	 */
 	public Question(String questionText, HashMap<String, String> answers, int quizId, String answerOrder, String checkType, int time, int maxScore){
 		this.questionText=questionText;
 		this.answers=answers;
@@ -27,15 +44,29 @@ public abstract class Question {
 	}
 	
 	
+	/**
+	 * Sets id for Question
+	 * @param id
+	 */
 	public void setId(int id){
 		this.id=id;
 	}
 	
+	
+	/**
+	 * Returns Question id
+	 * @return
+	 */
 	public int getId(){
 		return id;
 	}
 	
 	
+	/**
+	 * Returns max score for the question
+	 * 
+	 * @return max score
+	 */
 	public int getMaxScore(){
 		return maxScore;
 	}
