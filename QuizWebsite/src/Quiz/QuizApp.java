@@ -47,7 +47,7 @@ public class QuizApp {
 		answers.put("Tbilisi", TRUE);
 		String order = FALSE;
 		
-		Question questionResponse = new Question(questionText, score, checkType, time, quizId, typeId, answers, order);
+		Question questionResponse = new Question_Response(questionText,  answers,  quizId,  order,  checkType,  time,  score);
 		questMan.addQuestion(questionResponse);
 	}
 	
@@ -68,7 +68,7 @@ public class QuizApp {
 		answers.put("Rustavi", FALSE);
 		String order = FALSE;
 		
-		Question multipleChoice = new Question(questionText, score, checkType, time, quizId, typeId, answers, order);
+		Question multipleChoice = new Multiple_Choice(questionText,  answers,  quizId,  order,  checkType,  time,  score);
 		questMan.addQuestion(multipleChoice);
 	}
 	
@@ -85,7 +85,7 @@ public class QuizApp {
 		answers.put("Tbilisi", TRUE);
 		String order = FALSE;
 		
-		Question fillInTheBlank = new Question(questionText, score, checkType, time, quizId, typeId, answers, order);
+		Question fillInTheBlank = new Fill_In_The_Blank(questionText,  answers,  quizId,  order,  checkType,  time,  score);
 		questMan.addQuestion(fillInTheBlank);
 	}
 	
@@ -103,7 +103,7 @@ public class QuizApp {
 		answers.put("Tbilisi", TRUE);
 		String order = FALSE;
 		
-		Question pictureResponse = new Question(questionText, score, checkType, time, quizId, typeId, answers, order);
+		Question pictureResponse = new Picture_Response(questionText,  answers,  quizId,  order,  checkType,  time,  score);
 		questMan.addQuestion(pictureResponse);
 	}
 	
@@ -120,7 +120,7 @@ public class QuizApp {
 		answers.put("Tbilisi, Kutaisi, Batumi, Rustavi", TRUE);
 		String order = FALSE;
 		
-		Question multiAnswer = new Question(questionText, score, checkType, time, quizId, typeId, answers, order);
+		Question multiAnswer = new Multi_Answer(questionText,  answers,  quizId,  order,  checkType,  time,  score);
 		questMan.addQuestion(multiAnswer);
 	}
 	
@@ -140,7 +140,7 @@ public class QuizApp {
 		answers.put("Foti", TRUE);
 		String order = FALSE;
 		
-		Question multipleChoiceMultipleAnwers = new Question(questionText, score, checkType, time, quizId, typeId, answers, order);
+		Question multipleChoiceMultipleAnwers = new Multiple_Choice_Multiple_Answer(questionText,  answers,  quizId,  order,  checkType,  time,  score);
 		questMan.addQuestion(multipleChoiceMultipleAnwers);
 	}
 	
@@ -161,7 +161,7 @@ public class QuizApp {
 		answers.put("Foti_Samegrelo", TRUE);
 		String order = FALSE;
 		
-		Question matching = new Question(questionText, score, checkType, time, quizId, typeId, answers, order);
+		Question matching = new Matching(questionText,  answers,  quizId,  order,  checkType,  time,  score);
 		questMan.addQuestion(matching);
 	}
 }
