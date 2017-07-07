@@ -17,14 +17,12 @@
 	</div>
 
 	<div class = quizCreation id = quizCreationID>
-		<form action = "- Add questions in quiz -">
+		<form action = "AddQuestions.jsp">
 			Name of a quiz: <br>
 			<input type = "text" name = "quizName" > <br>
 			Description: <br>
-			<textarea rows = "6" cols = "50"></textarea> <br>
+			<textarea rows = "6" cols = "50" name="description"></textarea> <br>
 			
-			<input type = "radio" name = "orderType" value = "One Page" checked = "checked">One Page
-			<input type = "radio" name = "orderType" value = "Multiple Pages">Multiple Pages <br>
 			
 			Practice Mode: <input type = "radio" name = "practiceMode" value = "off" checked = "checked"> Off
 			<input type = "radio" name = "practiceMode" value = "on"> On <br>
@@ -32,8 +30,6 @@
 			Order of questions: <input type = "radio" name = "orderOfQuestions" value = "defaultOrder" checked = "checked">default 
 			<input type = "radio" name = "orderOfQuestions" value = "randomOrder">random <br>
 			
-			Check type: <input type = "radio" name = "checkType" value = "allTogether" checked = "checked">All together
-			<input type = "radio" name = "checkType" value = "immediate">immediate <br>
 			
 			<button type="submit" value="submit">Start</button>
 		</form>
