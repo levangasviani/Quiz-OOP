@@ -13,4 +13,6 @@ public  class WebSiteInfo {
 	public static final String  LOGIN_SERVLET 		  = "LoginServlet";
 	public static final String  ACCOUNT_MANAGER_ATTR  = "AccountManager";
 	public static final boolean DEBUG_MODE            = true; 
+	public static final String QUIZ_MANAGER_ATTR	  ="QuizManager";
+	public static final String QUESTION_MANAGER_ATTR  ="QuestionManager";
 }
