@@ -18,14 +18,16 @@ import Database.DBInfo;
  */
 public class QuizManager {
 
-	private Connection con;
+	private Connection connection;
 
+	
 	/**
 	 * Constructor
 	 */
 	public QuizManager() {
-		con = DBConnection.getConnection();
+		connection = DBConnection.getConnection();
 	}
+	
 	
 	/**
 	 * Returns true if database contains a quiz with a given name.
@@ -38,7 +40,7 @@ public class QuizManager {
 	public boolean containsQuiz(String quizName) {
 		String query = "SELECT * FROM " + DBInfo.QUIZZES + " WHERE NAME = ?;";
 		try {
-			PreparedStatement preparedStatement = con.prepareStatement(query);
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, quizName);
 			ResultSet rs = preparedStatement.executeQuery();
 			if (rs.next()) return true;
@@ -48,6 +50,8 @@ public class QuizManager {
 		return false;
 	}
 
+	
+	
 	/**
 	 * Adds quiz into a database, parses information
 	 * from passed quiz object and calls another addQuiz
@@ -64,6 +68,7 @@ public class QuizManager {
 	}
 
 	
+	
 	/**
 	 * Adds Quiz into the database according to the
 	 * passed parameters
@@ -79,7 +84,7 @@ public class QuizManager {
 			String query = "INSERT INTO " + DBInfo.QUIZZES + " (NAME, DESCRIPtioN, RANDOM, PRACTICE_MODE, FREQUENCY) VALUES (?, ?, ?, ?, ?)";
 			
 			try {
-				PreparedStatement preparedStatement = con.prepareStatement(query);
+				PreparedStatement preparedStatement = connection.prepareStatement(query);
 				preparedStatement.setString(1, quizName);
 				preparedStatement.setString(2, description);
 				if(isRandom) {
@@ -99,6 +104,38 @@ public class QuizManager {
 	}
 	
 	
+	
+	/**
+	 * Deletes quiz and questions for this quiz from the database
+	 * 
+	 * @param quizName
+	 */
+	public void deleteQuiz(String quizName) {
+		if(containsQuiz(quizName)) {
+			QuestionManager qm = new QuestionManager();
+			
+			Quiz quiz = getQuiz(quizName);
+			ArrayList<Question> quizQuestions = getQuestions(quiz);
+			
+			for(Question q : quizQuestions) {
+				System.out.println(q.getId());
+				qm.deleteQuestion(q.getId());
+			}
+			
+			String query = "DELETE FROM " + DBInfo.QUIZZES + " WHERE NAME = ?;";
+			try {
+				PreparedStatement preparedStatement = connection.prepareStatement(query);
+				preparedStatement.setString(1, quizName);
+				preparedStatement.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	
 	/**
 	 * Returns a quiz from a database with a given name, if it exists.
 	 * 
@@ -109,7 +146,7 @@ public class QuizManager {
 	public Quiz getQuiz(String quizName) {
 		String query = "SELECT * FROM " + DBInfo.QUIZZES + " WHERE NAME = ?;";
 		try {
-			PreparedStatement preparedStatement = con.prepareStatement(query);
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, quizName);
 			ResultSet rs = preparedStatement.executeQuery();
 			if(rs.next()) {
@@ -130,6 +167,7 @@ public class QuizManager {
 		return null;
 	}
 
+	
 	/**
 	 * Returns all quizes from database
 	 * 
@@ -139,7 +177,7 @@ public class QuizManager {
 		ArrayList<Quiz> result = new ArrayList<Quiz>();
 		String query = "SELECT * FROM " + DBInfo.QUIZZES + ";";
 		try {
-			Statement statement = con.createStatement();
+			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
 				String quizName = rs.getString(DBInfo.QUIZZES_NAME);
@@ -159,6 +197,7 @@ public class QuizManager {
 		return result;
 	}
 
+
 	/**
 	 * Returns ID of a given quiz if it exists. if such quiz does not exist
 	 * returns -1.
@@ -171,7 +210,7 @@ public class QuizManager {
 		if (containsQuiz(quiz.getName())) {
 			String query = "SELECT * FROM " + DBInfo.QUIZZES + " WHERE NAME = ?;";
 			try {
-				PreparedStatement preparedStatement = con.prepareStatement(query);
+				PreparedStatement preparedStatement = connection.prepareStatement(query);
 				preparedStatement.setString(1, quiz.getName());
 				ResultSet rs = preparedStatement.executeQuery();
 				int result = -1;
@@ -185,6 +224,7 @@ public class QuizManager {
 		return -1;
 	}
 
+	
 	/**
 	 * Returns Arraylist of a given quiz questions.
 	 * 
@@ -196,7 +236,7 @@ public class QuizManager {
 		String query = "SELECT * FROM " + DBInfo.QUESTIONS + " WHERE QUIZ_ID = ?";
 		QuestionManager qM = new QuestionManager();
 		try {
-			PreparedStatement preparedStatement = con.prepareStatement(query);
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, getQuizID(quiz));
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
