@@ -1,41 +1,50 @@
 package Quiz;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Question {
-
-	private final String questionText;
-	private final int score;
-	private final String checkType;
-	private final int time;
-	private final int quizId;
-	private final int typeId;
-	private final HashMap<String, String> answers;
-	private final String order;
+public abstract class Question {
 	
-	/**
-	 * constructs a Question Object based on the parameters
-	 * @param questionText - the statement of the question
-	 * @param score - the maximal score for this question
-	 * @param checkType - checking type
-	 * @param time - time restriction on the question
-	 * @param quizId - the id of the quiz to which this question belongs to
-	 * @param typeId - what kind of question it is
-	 * @param answers - answers of the question
-	 * @param order - determines whether answer should be ordered or unordered
-	 */
-	public Question(String questionText, int score, String checkType, int time, int quizId, int typeId,
-			HashMap<String, String> answers, String order) {
-		this.questionText = questionText;
-		this.score = score;
-		this.checkType = checkType;
-		this.time = time;
-		this.quizId = quizId;
-		this.typeId = typeId;
-		this.answers = answers;
-		this.order = order;
+	
+	private final String questionText;
+	private final HashMap<String, String> answers;
+	private final int quizId;
+	private int time;
+	private String checkType;
+	private String answerOrder;
+	private int maxScore;
+	private int id;
+	
+	
+	public Question(String questionText, HashMap<String, String> answers, int quizId, String answerOrder, String checkType, int time, int maxScore){
+		this.questionText=questionText;
+		this.answers=answers;
+		this.quizId=quizId;
+		this.answerOrder=answerOrder;
+		this.checkType=checkType;
+		this.time=time;
+		this.maxScore=maxScore;
 	}
-
+	
+	
+	public void setId(int id){
+		this.id=id;
+	}
+	
+	public int getId(){
+		return id;
+	}
+	
+	
+	public int getMaxScore(){
+		return maxScore;
+	}
+	
+	
+	
+	
+	public abstract int getPoints(ArrayList<String> chosenAnswers);
+	
 	/**
 	 * returns a question statement
 	 * @return - question statement
@@ -43,6 +52,7 @@ public class Question {
 	public String getQuestionText() {
 		return questionText;
 	}
+	
 
 	/**
 	 *
@@ -52,13 +62,7 @@ public class Question {
 		return time;
 	}
 
-	/**
-	 *
-	 * @return - maximal score for this question
-	 */
-	public int getScore() {
-		return score;
-	}
+
 
 	/**
 	 * 
@@ -81,9 +85,7 @@ public class Question {
 	 * 
 	 * @return - the type id of this question
 	 */
-	public int getTypeId() {
-		return typeId;
-	}
+	public abstract int getTypeId();
 
 	/**
 	 * 
@@ -103,26 +105,9 @@ public class Question {
 	 * @return - information whether the correct should be ordered or not
 	 */
 	public String getAnswerOrder() {
-		return order;
+		return answerOrder;
 	}
+	
+}
 
 	
-	 /**
-	 * toSring() method which shows all the instances of this object as a string
-	 */
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("QUESTION:  ").append(questionText).append("\n");
-		sb.append("SCORE:  ").append(score).append("\n");
-		sb.append("CHECK_TYPE:  ").append(checkType).append("\n");
-		sb.append("TIME:  ").append(time).append("\n");
-		sb.append("QUIZ_ID:  ").append(quizId).append("\n");
-		sb.append("TYPE_ID:  ").append(typeId).append("\n");
-		sb.append("ANSWERS: ").append("\n");
-		for (String key : answers.keySet()) {
-			sb.append(key).append(" ").append(answers.get(key)).append("\n");
-		}
-		return sb.toString();
-	}
-
-}
