@@ -8,7 +8,7 @@ package Database;
 public class DBInfo {
 
 	public static final String MYSQL_USERNAME = "root";
-	public static final String MYSQL_PASSWORD = "";
+	public static final String MYSQL_PASSWORD = "iniesta5";
 	public static final String MYSQL_DATABASE_NAME = "QuizWebsiteDatabase";
 	public static final String MYSQL_DATABASE_SERVER = "localhost:3306/" + MYSQL_DATABASE_NAME
 			+ "?autoReconnect=true&useSSL=false";
@@ -123,6 +123,7 @@ public class DBInfo {
 	public static final int USERS_LASTNAME = 5;
 	public static final int USERS_EMAIL = 6;
 	public static final int USERS_TYPE_ID = 7;
+	public static final int USERS_SALT = 8;
 
 	// NOTIFICATION_TYPES types
 	public static final int NOTIFICATION_TYPE_CHALLENGE_REQUEST = 1;
