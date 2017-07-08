@@ -69,7 +69,7 @@ public class LoginServlet extends HttpServlet {
 		}
 
 		Account acc = am.getAccount(username);
-		if (!acc.getPassword().equals(password)) {
+		if (!acc.getPassword().equals(Cracker.StringToHash(password, am.getSalt(username)))) {
 			out.println("\n-------------------------------------");
 			out.println("wrong password!");
 			return;

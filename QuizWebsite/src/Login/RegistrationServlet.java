@@ -84,6 +84,7 @@ public class RegistrationServlet extends HttpServlet {
 			out.println("\n-------------------------------------");
 			out.println("Account was Created:\n" + acc);
 		}
+		
 		request.getSession().setAttribute("username", username);
 		RequestDispatcher rd = request.getRequestDispatcher("homepage.jsp");
 		rd.forward(request, response);
