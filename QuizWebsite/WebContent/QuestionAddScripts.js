@@ -159,16 +159,22 @@ function fill_blank_checkAnswer(){
 		}
         
         function addObject(possible){
+        	var texts=document.getElementsByName("questionText");
+        	var txt=texts[0].value;
+        	var i;
+        	for(i=1; i<texts.length; i++){
+        		txt+=":"+texts[i].value;
+        	}
         	var object={
              	type : document.getElementsByName("type")[0].value,
-                questionText : document.getElementsByName("questionText")[0].value,
+                questionText : txt,
                 answer : JSON.stringify(possible),
                 answerOrder: document.getElementsByName("answerOrder")[0].value,
                 checkType: document.getElementsByName("checkType")[0].value,
                 time: document.getElementsByName("time")[0].value,
             };
            var str=JSON.stringify(object);  
-           var form=document.forms("questions");
+           var form=document.forms["questions"];
            var input=document.createElement('input');
            input.name="question";
            input.type="hidden";
