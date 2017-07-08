@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="Notification.NotificationManager"%>
+<%
+	NotificationManager manager = (NotificationManager) request.getServletContext()
+			.getAttribute("notificationManager");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -80,8 +85,8 @@
 	<div class="navigation-bar">
 		<a id="bar-item">Home</a> <a id="bar-item">Profile</a> <a
 			id="bar-item">Achievements</a> <a id="bar-item"
-			href="notifications.jsp">Notifications</a> <a id="bar-item">Create
-			Quiz</a>
+			href="notifications.jsp">Notifications <%=manager.getNotificationCount((String) request.getSession().getAttribute("username"))%></a>
+		<a id="bar-item">Create Quiz</a>
 	</div>
 	<div class="sections">
 		<div id="generalInfo">

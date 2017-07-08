@@ -116,8 +116,8 @@ public class NotificationManager {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, getUserId(username));
 			ResultSet resultSet = preparedStatement.executeQuery();
-			resultSet.next();
-			return resultSet.getInt(1);
+			if (resultSet.next())
+				return resultSet.getInt(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
