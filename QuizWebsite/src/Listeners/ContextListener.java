@@ -4,6 +4,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import Notification.NotificationManager;
 import Quiz.QuestionManager;
 import Quiz.QuizManager;
 import User.AccountManager;
@@ -38,5 +39,6 @@ public class ContextListener implements ServletContextListener {
 		arg0.getServletContext().setAttribute(WebSiteInfo.ACCOUNT_MANAGER_ATTR, new AccountManager());
 		arg0.getServletContext().setAttribute(WebSiteInfo.QUESTION_MANAGER_ATTR, new QuestionManager());
 		arg0.getServletContext().setAttribute(WebSiteInfo.QUIZ_MANAGER_ATTR, new QuizManager());
+		arg0.getServletContext().setAttribute("notificationManager", new NotificationManager());
 	}
 }

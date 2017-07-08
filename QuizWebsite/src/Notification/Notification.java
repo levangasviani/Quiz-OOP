@@ -6,7 +6,6 @@ public class Notification {
 	private String content; // message or quiz name or question id(as String)
 	private int type;
 
-	
 	/**
 	 * Public constructor stores information for notifications
 	 * 
@@ -22,7 +21,6 @@ public class Notification {
 		this.type = type;
 	}
 
-	
 	/**
 	 * Returns sender user name
 	 * 
@@ -32,7 +30,6 @@ public class Notification {
 		return sender;
 	}
 
-	
 	/**
 	 * Returns receiver user name
 	 * 
@@ -42,7 +39,6 @@ public class Notification {
 		return receiver;
 	}
 
-	
 	/**
 	 * Returns notification content
 	 * 
@@ -52,7 +48,6 @@ public class Notification {
 		return content;
 	}
 
-	
 	/**
 	 * Returns type
 	 * 
@@ -65,6 +60,6 @@ public class Notification {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "" + sender + " " + receiver + " " + content + " " + type;
+		return sender + ": " + content;
 	}
 }

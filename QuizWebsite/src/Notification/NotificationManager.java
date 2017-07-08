@@ -100,7 +100,7 @@ public class NotificationManager {
 			e.printStackTrace();
 		}
 
-		deleteNotifications(getUserId(username));
+		deleteNotificationCount(getUserId(username));
 		return result;
 	}
 
