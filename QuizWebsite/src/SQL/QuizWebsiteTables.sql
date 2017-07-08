@@ -221,12 +221,22 @@ CREATE TABLE `QuizWebsiteDatabase`.`ACHIEVEMENTS` (
 );
 
 
-CREATE TABLE `quizwebsitedatabase`.`notification_types` (
+
+/**
+	შეტყობინების ტიპების ცხრილი
+*/
+
+CREATE TABLE `QuizWebsiteDatabase`.`NOTIFICATION_TYPES` (
   `ID` INT NOT NULL,
   `NAME` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`ID`));
 
-CREATE TABLE `quizwebsitedatabase`.`notifications` (
+  
+/**
+	შეტყობინებების ცხრილი
+*/
+  
+CREATE TABLE `QuizWebsiteDatabase`.`NOTIFICATIONS` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `SENDER_ID` INT NOT NULL,
   `RECEIVER_ID` INT NOT NULL,
@@ -242,31 +252,36 @@ CREATE TABLE `quizwebsitedatabase`.`notifications` (
   INDEX `fk_NOTIFICATIONS_TO_NOTIFICATION_TYPES_idx` (`TYPE_ID` ASC),
   CONSTRAINT `fk_NOTIFICATIONS_TO_USERS1`
     FOREIGN KEY (`SENDER_ID`)
-    REFERENCES `quizwebsitedatabase`.`users` (`ID`)
+    REFERENCES `QuizWebsiteDatabase`.`USERS` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_NOTIFICATIONS_TO_USERS2`
     FOREIGN KEY (`RECEIVER_ID`)
-    REFERENCES `quizwebsitedatabase`.`users` (`ID`)
+    REFERENCES `QuizWebsiteDatabase`.`USERS` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_NOTIFICATIONS_TO_QUIZZES`
     FOREIGN KEY (`QUIZ_ID`)
-    REFERENCES `quizwebsitedatabase`.`quizzes` (`ID`)
+    REFERENCES `QuizWebsiteDatabase`.`QUIZZES` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_NOTIFICATIONS_TO_QUESTIONS`
     FOREIGN KEY (`QUESTION_ID`)
-    REFERENCES `quizwebsitedatabase`.`questions` (`ID`)
+    REFERENCES `QuizWebsiteDatabase`.`QUESTIONS` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_NOTIFICATIONS_TO_NOTIFICATION_TYPES`
     FOREIGN KEY (`TYPE_ID`)
-    REFERENCES `quizwebsitedatabase`.`notification_types` (`ID`)
+    REFERENCES `QuizWebsiteDatabase`.`NOTIFICATION_TYPES` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
-CREATE TABLE `quizwebsitedatabase`.`notification_count` (
+    
+/**
+	შეტყობინებების რაოდენობის ცხრილი
+*/    
+    
+CREATE TABLE `QuizWebsiteDatabase`.`NOTIFICATION_COUNT` (
   `ID` INT NOT NULL,
   `USER_ID` INT NOT NULL,
   `COUNT` INT NULL,
@@ -274,6 +289,6 @@ CREATE TABLE `quizwebsitedatabase`.`notification_count` (
   INDEX `fk_NITIFICATION_COUNT_TO_USERS_idx` (`USER_ID` ASC),
   CONSTRAINT `fk_NITIFICATION_COUNT_TO_USERS`
     FOREIGN KEY (`USER_ID`)
-    REFERENCES `quizwebsitedatabase`.`users` (`ID`)
+    REFERENCES `QuizWebsiteDatabase`.`USERS` (`ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);

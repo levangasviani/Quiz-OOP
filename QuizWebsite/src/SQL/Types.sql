@@ -16,7 +16,7 @@ INSERT INTO `ACHIEVEMENT_TYPES`(`ID`, `NAME`) VALUES (4, 'Quiz Machine');
 INSERT INTO `ACHIEVEMENT_TYPES`(`ID`, `NAME`) VALUES (5, 'I am the Greatest');
 INSERT INTO `ACHIEVEMENT_TYPES`(`ID`, `NAME`) VALUES (6, 'Practice Makes Perfect');
 
-INSERT INTO `quizwebsitedatabase`.`notification_types` (`ID`, `NAME`) VALUES ('1', 'CHALLENGE_REQUEST');
-INSERT INTO `quizwebsitedatabase`.`notification_types` (`ID`, `NAME`) VALUES ('2', 'FRIEND_REQUEST');
-INSERT INTO `quizwebsitedatabase`.`notification_types` (`ID`, `NAME`) VALUES ('3', 'GRADE_REQUEST');
-INSERT INTO `quizwebsitedatabase`.`notification_types` (`ID`, `NAME`) VALUES ('4', 'MESSAGE');
+INSERT INTO `QuizWebsiteDatabase`.`NOTIFICATION_TYPES` (`ID`, `NAME`) VALUES ('1', 'CHALLENGE_REQUEST');
+INSERT INTO `QuizWebsiteDatabase`.`NOTIFICATION_TYPES` (`ID`, `NAME`) VALUES ('2', 'FRIEND_REQUEST');
+INSERT INTO `QuizWebsiteDatabase`.`NOTIFICATION_TYPES` (`ID`, `NAME`) VALUES ('3', 'GRADE_REQUEST');
+INSERT INTO `QuizWebsiteDatabase`.`NOTIFICATION_TYPES` (`ID`, `NAME`) VALUES ('4', 'MESSAGE');
