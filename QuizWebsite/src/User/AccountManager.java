@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import Database.DBConnection;
 import Database.DBInfo;
+import Login.Cracker;
 
 /**
  * @author levani
@@ -43,7 +44,6 @@ public class AccountManager {
 		String lastname = account.getLastName();
 		String email = account.getEmail();
 		int type = account.getType();
-
 		addAccount(username, password, firstname, lastname, email, type);
 	}
 
@@ -63,14 +63,16 @@ public class AccountManager {
 		try {
 			if (!containsAccount(username)) {
 				String query = "INSERT INTO " + DBInfo.USERS
-						+ " (USERNAME, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, TYPE_ID) VALUES (?, ?, ?, ?, ?, ?)";
+						+ " (USERNAME, PASSWORD, FIRSTNAME, LASTNAME, EMAIL, TYPE_ID, SALT) VALUES (?, ?, ?, ?, ?, ?, ?)";
+				byte[] salt=Cracker.getSalt();
 				PreparedStatement preparedStatement = connection.prepareStatement(query);
 				preparedStatement.setString(1, username);
-				preparedStatement.setString(2, password);
+				preparedStatement.setString(2, Cracker.StringToHash(password, salt));
 				preparedStatement.setString(3, firstname);
 				preparedStatement.setString(4, lastname);
 				preparedStatement.setString(5, email);
 				preparedStatement.setInt(6, type);
+				preparedStatement.setString(7, Cracker.hexToString(salt));
 				preparedStatement.executeUpdate();
 			}
 		} catch (SQLException e) {
@@ -102,6 +104,28 @@ public class AccountManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * returns salt array
+	 * @param username - username of the user
+	 * @return - array of bytes
+	 */
+	public byte[] getSalt(String username){
+		String query="SELECT * FROM "+DBInfo.USERS+ " WHERE USERNAME = ?;";
+		try {
+			PreparedStatement preparedStatement=connection.prepareStatement(query);
+			preparedStatement.setString(1, username);
+			ResultSet rs=preparedStatement.executeQuery();
+			rs.next();
+			String salt=rs.getString(DBInfo.USERS_SALT);
+			byte[] saltArray=Cracker.hexToArray(salt);
+			return saltArray;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
