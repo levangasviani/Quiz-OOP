@@ -78,7 +78,7 @@ public class RegistrationServlet extends HttpServlet {
 		}
 
 		// TODO adding into account manager
-		Account acc = new Account(username, password, lastname, firstname, email, DBInfo.USER_TYPE_USER);
+		Account acc = new Account(username, password, firstname, lastname, email, DBInfo.USER_TYPE_USER);
 		am.addAccount(acc);
 		if (WebSiteInfo.DEBUG_MODE) {
 			out.println("\n-------------------------------------");
