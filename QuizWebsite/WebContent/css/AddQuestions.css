@@ -1,0 +1,109 @@
+li{
+		display: inline-block;
+}
+h1 {
+    text-align: center;
+    color: green;
+}
+
+
+#navigationID{
+   text-align: center;
+}
+
+.navigation {
+	background-color: green;
+    overflow: hidden;
+	padding: 12px 20px;
+    margin: 8px 0;
+    list-style:none;
+    margin:0;
+    padding:0;
+    text-align:center;
+    
+}
+
+.navigation a {
+	float: left;
+	display: block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+#logout {
+	float: right;
+}
+
+#searchID {
+	float: right;
+    margin: 8px 8px;
+}
+
+#title{
+	margin: auto;
+	margin-top: 2%;
+	background-color: #e3e2e1;
+	width: 60%;
+	text-align: center;
+}
+
+
+#summaryID {	
+	width: 20%;
+	text-aliogn: center;
+	float: center;
+	margin: auto;
+	background-color: #e3e2e1;
+}
+
+
+#questionsID {
+	background-color: #959595;
+    overflow: hidden;
+	padding: 12px 20px;
+    margin: 8px 0;
+    list-style:none;
+    margin:0;
+    padding:0;
+    width: 50%;
+    text-align:center;
+    background-color: #e3e2e1;
+    olumn-count: 3;
+}
+
+#questionsID a {
+	float: center;
+	display: block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+input [type = button], slecet {
+	float: center;
+	text-align: center;
+    width: 15%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 8px;
+    cursor: pointer;
+}
+
+
+#finishID {
+	float: center;
+	text-align: center;
+    width: 15%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 8px;
+    cursor: pointer;
+}
+
