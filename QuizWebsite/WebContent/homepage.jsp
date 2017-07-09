@@ -104,7 +104,9 @@
 			<div id="generalSections">
 				recently created quizzes
 				<ul>
-					<li></li>
+					<li>
+						<a href="StartQuizServlet?quizName=FirstQuiz">First Quiz</a>
+					</li>
 					<li></li>
 					<li></li>
 					<li></li>
