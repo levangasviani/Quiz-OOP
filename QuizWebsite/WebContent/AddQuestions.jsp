@@ -6,29 +6,47 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<style>
-	li{
-		display: inline-block;
-	}
-</style>
-
-
 </head>
+
+<link rel="stylesheet" type="text/css" href="css/MainDesign.css">
+<link rel="stylesheet" type="text/css" href="css/AddQuestions.css">
+
+<h1>Create a Quiz</h1>
 <body>
-	<div id="summary" style="width: 200px; height: 100px; border: 1px solid black">
-    	<p style="text-align: center"><strong>Summary</strong></p>
-        Questions Created: <p id="numOfQuestions">0</p>
+	
+	
+  <div class="navigation" id = "navigationID">
+    <a id="home" href = "homepage.jsp" >Home</a>
+    <a id="profile">Profile</a>
+    <a id="achievements" href = Achievements.jsp>Achievements</a>
+    <a id="messages">Messages</a>
+    <a id="creatQuiz" href = "CreateQuiz.jsp">Create Quiz</a>
+    <a id="logout" href = "index.html">Logout</a>
+     <div class = "search" id = searchID>
+  	<form action = "SearchPage.jsp">
+		<input type = "text" name = "search" placeholder = "enter value here...">
+		<button type="submit" value="searchValue">search</button>
+	</form>
+  	</div>
+  </div>
+
+
+	<div id="summaryID">
+		<div id = "title">
+			Questions Created:
+		</div>
+         <p id="numOfQuestions"></p>
     </div>
-	<ul style="text-align: center">
-   <li><button onclick="process('question_response')">question response</button></li>
-   <li><br><button onclick="process('fill_blank')">Fill_in_The_Blank</button></li>
-   <li><button onclick="process('graded')">Graded_Question</button></li>
-   <li><button onclick="process('matching')">matching</button></li>
-   <li><button onclick="process('multi_answer')">multiple_answer</button></li>
-   <li><button onclick="process('multiple_choice')">multiple_choice</button></li>
-   <li><button onclick="process('picture_response')">picture_response</button></li>
-   <li><button onclick="process('multiple_choice_multiple_answer')">multiple_choice_multiple_answer</button></li>
-   </ul>
+    <div id = questionsID>
+		<a><button onclick="process('question_response')">question response</button></a>
+		<a><br><button onclick="process('fill_blank')">Fill_in_The_Blank</button></a>
+		<a><button onclick="process('graded')">Graded_Question</button></a>
+		<a><button onclick="process('matching')">matching</button></a>
+		<a><button onclick="process('multi_answer')">multiple_answer</button></a>
+		<a><button onclick="process('multiple_choice')">multiple_choice</button></a>
+		<a><button onclick="process('picture_response')">picture_response</button></a>
+		<a><button onclick="process('multiple_choice_multiple_answer')">multiple_choice_multiple_answer</button></a>
+   </div>
    <div id="div1">
    </div>
    <form action="QuestionCreateServlet" method="get" name="questions">
@@ -36,11 +54,8 @@
    		<input type="hidden" name="quizDescription" value=<%=request.getParameter("description")%> >
    		<input type="hidden" name="orderOfQuestions" value=<%=request.getParameter("orderOfQuestions") %> >
    		<input type="hidden" name="practiceMode" value=<%=request.getParameter("practiceMode") %>>
-   		<input type="submit" value="Finish" style="font-size: 24px; margin: 10px 10px 10px 10px">
+   		<input id = finishID type="submit" value="Finish" style="font-size: 24px; margin: 10px 10px 10px 10px">
    </form>
-   
-   <a href="CreateQuiz.html">Go Back</a>
-   
    
  <script type="text/javascript">
 	function process(file){
