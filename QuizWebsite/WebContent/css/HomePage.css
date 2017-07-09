@@ -1,0 +1,84 @@
+h1 {
+    text-align: center;
+    color: green;
+}
+
+h2	 {
+    text-align: right;
+    color: #400040;
+}
+.user {
+	font-size: 30px;
+	float: right;
+}
+
+.navigation {
+	background-color: green;
+	overflow: hidden;
+	padding: 12px 20px;
+	margin: 8px 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+.navigation a {
+	float: left;
+	display: block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+#logout {
+	float: right;
+}
+
+
+#searchID {
+	float: right;
+    margin: 8px 8px;
+}
+
+#generalInfo {
+	font-family: arial;
+	font-weight: bold;
+	font-size: 20px;
+	text-align: center;
+	margin: 1%;
+	width: 20%;
+	float: left;
+	background-color: #e3e2e1;
+}
+
+
+
+
+#myInfo {
+	font-family: arial;
+	font-weight: bold;
+	font-size: 20px;
+	text-align: center;
+	margin: 1%;
+	width: 20%;
+	float: right;
+	background-color: #e3e2e1;
+}
+
+#announcements {
+	background-color: #e3e2e1;
+	width: 56%;
+	margin: auto;
+	text-align: center;
+}
+
+#announcement-title {
+	font-weight: bold;
+	font-size: 30px;
+}
+
+
+
