@@ -3,12 +3,8 @@ h1 {
     color: green;
 }
 
-body {
-	background-color: powderblue;	
-}
-
 #navigationID{
-      text-align: center;
+   text-align: center;
 }
 
 .navigation {
@@ -24,20 +20,29 @@ body {
 }
 
 .navigation a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
+	float: left;
+	display: block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+#logout {
+	float: right;
+}
+
+#searchID {
+	float: right;
+    margin: 8px 8px;
 }
 
 #quizCreationID {
     text-align: center;   
 }
 
-input[type=text], select {
+#mainForm1 {
     width: 30%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -47,7 +52,7 @@ input[type=text], select {
     box-sizing: border-box;
 }
 
-textarea, select {
+#mainForm2 {
     width: 40%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -66,13 +71,11 @@ input[type="radio"] {
   margin-bottom: 1%;
 }
 
-button[type=submit] {
+#start {
     width: 15%;
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
-    border: none;
-    border-radius: 4px;
     cursor: pointer;
 }
