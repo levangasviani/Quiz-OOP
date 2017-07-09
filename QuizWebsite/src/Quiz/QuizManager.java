@@ -233,7 +233,7 @@ public class QuizManager {
 	 */
 	public ArrayList<Question> getQuestions(Quiz quiz) {
 		ArrayList<Question> result = new ArrayList<Question>();
-		String query = "SELECT * FROM " + DBInfo.QUESTIONS + " WHERE QUIZ_ID = ?";
+		String query = "SELECT * FROM " + DBInfo.QUESTIONS + " WHERE QUIZ_ID = ? ORDER BY ID";
 		QuestionManager qM = new QuestionManager();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -243,6 +243,7 @@ public class QuizManager {
 				int questionID = rs.getInt(DBInfo.QUESTIONS_ID);
 				Question question = qM.getQuestion(questionID);
 				result.add(question);
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
