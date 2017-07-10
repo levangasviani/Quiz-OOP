@@ -97,8 +97,8 @@ public class NotificationManager {
 					content = getQuizName(resultSet.getInt(DBInfo.NOTIFICATIONS_QUIZ_ID));
 				else if (resultSet.getInt(DBInfo.NOTIFICATIONS_QUESTION_ID) > 0)
 					content += resultSet.getInt(DBInfo.NOTIFICATIONS_QUESTION_ID);
-				result.add(new Notification(getUserUsername(resultSet.getInt(2)), getUserUsername(resultSet.getInt(3)),
-						content, resultSet.getInt(7)));
+				result.add(new Notification(getUserUsername(resultSet.getInt(DBInfo.NOTIFICATIONS_SENDER_ID)), getUserUsername(resultSet.getInt(DBInfo.NOTIFICATIONS_RECEIVER_ID)),
+						content, resultSet.getInt(DBInfo.NOTIFICATIONS_TYPE_ID)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
