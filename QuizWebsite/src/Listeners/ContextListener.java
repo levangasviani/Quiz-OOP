@@ -9,6 +9,7 @@ import Quiz.QuestionManager;
 import Quiz.QuizManager;
 import User.AccountManager;
 import WebSite.WebSiteInfo;
+import friend.FriendManager;
 
 /**
  * Application Lifecycle Listener implementation class ContextListener
@@ -40,5 +41,6 @@ public class ContextListener implements ServletContextListener {
 		arg0.getServletContext().setAttribute(WebSiteInfo.QUESTION_MANAGER_ATTR, new QuestionManager());
 		arg0.getServletContext().setAttribute(WebSiteInfo.QUIZ_MANAGER_ATTR, new QuizManager());
 		arg0.getServletContext().setAttribute("notificationManager", new NotificationManager());
+		arg0.getServletContext().setAttribute("friendManager", new FriendManager());
 	}
 }

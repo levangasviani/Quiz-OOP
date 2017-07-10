@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,11 +36,24 @@ public class NotificationServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String sender = request.getParameter("sender");
 		String receiver = request.getParameter("receiver");
-		String message = request.getParameter("message");
 		int type = Integer.parseInt(request.getParameter("type"));
+		String message = request.getParameter("message");
 		NotificationManager manager = (NotificationManager) getServletContext().getAttribute("notificationManager");
 		manager.addNotification(new Notification(sender, receiver, message, type));
-		response.sendRedirect("notifications.jsp");
+		if (type == 1) {
+
+		} else if (type == 2) {
+			request.setAttribute("sender", sender);
+			request.setAttribute("receiver", receiver);
+			request.setAttribute("type", type);
+			request.setAttribute("message", message);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("FriendServlet");
+			dispatcher.forward(request, response);
+		} else if (type == 3) {
+
+		} else if (type == 4) {
+			response.sendRedirect("notifications.jsp");
+		}
 	}
 
 	/**

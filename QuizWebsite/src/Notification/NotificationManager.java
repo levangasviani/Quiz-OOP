@@ -40,6 +40,8 @@ public class NotificationManager {
 		if (typeId == DBInfo.NOTIFICATION_TYPE_CHALLENGE_REQUEST) {
 			column = ", QUIZ_ID";
 			id = getQuizId(notification.getContent());
+		} else if (typeId == DBInfo.NOTIFICATION_TYPE_FRIEND_REQUEST) {
+			column = ", FRIEND_STATUS";
 		} else if (typeId == DBInfo.NOTIFICATION_TYPE_GRADE_REQUEST) {
 			column = ", QUESTION_ID";
 			id = Integer.parseInt(notification.getContent());
