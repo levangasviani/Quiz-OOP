@@ -37,6 +37,7 @@ public class FriendServlet extends HttpServlet {
 		String message = (String) request.getAttribute("message");
 		FriendManager friendManager = (FriendManager) getServletContext().getAttribute("friendManager");
 		friendManager.changeFriendship(new Friendship(sender, receiver, message));
+		response.sendRedirect("profile.jsp");
 	}
 
 	/**

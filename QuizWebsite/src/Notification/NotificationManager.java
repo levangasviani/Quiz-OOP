@@ -91,6 +91,8 @@ public class NotificationManager {
 				String content = "";
 				if (resultSet.getString(DBInfo.NOTIFICATIONS_MESSAGE) != null)
 					content = resultSet.getString(DBInfo.NOTIFICATIONS_MESSAGE);
+				else if (resultSet.getString(DBInfo.NOTIFICATIONS_FRIEND_STATUS) != null)
+					content = resultSet.getString(DBInfo.NOTIFICATIONS_FRIEND_STATUS);
 				else if (resultSet.getInt(DBInfo.NOTIFICATIONS_QUIZ_ID) > 0)
 					content = getQuizName(resultSet.getInt(DBInfo.NOTIFICATIONS_QUIZ_ID));
 				else if (resultSet.getInt(DBInfo.NOTIFICATIONS_QUESTION_ID) > 0)

@@ -8,7 +8,7 @@ package Database;
 public class DBInfo {
 
 	public static final String MYSQL_USERNAME = "root";
-	public static final String MYSQL_PASSWORD = "iniesta5";
+	public static final String MYSQL_PASSWORD = "";
 	public static final String MYSQL_DATABASE_NAME = "QuizWebsiteDatabase";
 	public static final String MYSQL_DATABASE_SERVER = "localhost:3306/" + MYSQL_DATABASE_NAME
 			+ "?autoReconnect=true&useSSL=false";
@@ -69,6 +69,7 @@ public class DBInfo {
 	public static final int FRIENDS_ID = 1;
 	public static final int FRIENDS_USER_ONE = 2;
 	public static final int FRIENDS_USER_TWO = 3;
+	public static final int FRIENDS_STATUS = 4;
 
 	// NOTIFICATION_COUNT columns
 	public static final int NOTIFICATION_COUNT_ID = 1;
@@ -83,10 +84,11 @@ public class DBInfo {
 	public static final int NOTIFICATIONS_ID = 1;
 	public static final int NOTIFICATIONS_SENDER_ID = 2;
 	public static final int NOTIFICATIONS_RECEIVER_ID = 3;
-	public static final int NOTIFICATIONS_MESSAGE = 4;
-	public static final int NOTIFICATIONS_QUIZ_ID = 5;
-	public static final int NOTIFICATIONS_QUESTION_ID = 6;
-	public static final int NOTIFICATIONS_TYPE_ID = 7;
+	public static final int NOTIFICATIONS_FRIEND_STATUS = 4;
+	public static final int NOTIFICATIONS_MESSAGE = 5;
+	public static final int NOTIFICATIONS_QUIZ_ID = 6;
+	public static final int NOTIFICATIONS_QUESTION_ID = 7;
+	public static final int NOTIFICATIONS_TYPE_ID = 8;
 
 	// QUESTION_TYPES columns
 	public static final int QUESTION_TYPES_ID = 1;

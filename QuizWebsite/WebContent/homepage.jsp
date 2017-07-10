@@ -31,7 +31,7 @@
 
 	<div class="navigation" id="navigationID">
 		<a id="home" href="homepage.jsp">Home</a> <a id="profile"
-			href="profile.jsp?username=sandro">Profile</a> <a id="achievements"
+			href="profile.jsp">Profile</a> <a id="achievements"
 			href=Achievements.jsp>Achievements</a> <a id="messages"
 			href="notifications.jsp">Notifications <%=notificationManager.getNotificationCount((String) request.getSession().getAttribute("username"))%>
 		</a> <a id="creatQuiz" href="CreateQuiz.jsp">Create Quiz</a> <a id
