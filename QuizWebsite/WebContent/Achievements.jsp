@@ -19,7 +19,7 @@
 
 <div class="navigation" id = "navigationID">
     <a class="active" id="home" href = "homepage.jsp" ><i class="fa fa-home"></i> Home</a> 	  
-	    <a class="active" id="profile" href = ""><i class="fa fa-user"></i> Profile</a>	    
+	    <a class="active" id="profile" href = "profile.jsp"><i class="fa fa-user"></i> Profile</a>	    
 	    <a class="active" id="achievements" href = "Achievements.jsp"><i class="fa fa-trophy"></i> Achievements</a>    
 	    <a class="active" id="messages" href = "notifications.jsp" ><i class="fa fa-envelope"></i> Messages</a>
 	    <a class="active" id="creatQuiz" href = "CreateQuiz.jsp"><i class="fa fa-plus"></i> Create Quiz</a>	   
@@ -36,17 +36,17 @@
   </div>
   </div>
  <div id = title>
- 	Your Achievements:
+ 	Your Achievements
  </div>
  <div id = achievementsDivID>
  <%
 	AchievementManager achManager = new AchievementManager();
-	String username = request.getParameter("UserName");
+	String username = request.getParameter("username");
 	
 	
 	
-	ArrayList<String> achievements = achManager.getAcievements("username");
-	
+	ArrayList<String> achievements = achManager.getAcievements(username);
+	out.println("<div id = res>");
 	if(achievements.size() == 0) {
 		out.println("<br>Unfortunatelly you do not have achievements!");
 	}
@@ -55,6 +55,7 @@
 		out.println(achievements.get(i));	
 		out.println("</li>");;		
 	}
+	out.println("</div>");
 %>
  </div>
 </body>
