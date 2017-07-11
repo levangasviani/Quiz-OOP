@@ -21,7 +21,7 @@
 
 	<div class="navigation" id = "navigationID">
     	<a class="active" id="home" href = "homepage.jsp" ><i class="fa fa-home"></i> Home</a> 	  
-	    <a class="active" id="profile" href = ""><i class="fa fa-user"></i> Profile</a>	    
+	    <a class="active" id="profile" href = "profile.jsp"><i class="fa fa-user"></i> Profile</a>	    
 	    <a class="active" id="achievements" href = "Achievements.jsp"><i class="fa fa-trophy"></i> Achievements</a>    
 	    <a class="active" id="messages" href = "notifications.jsp" ><i class="fa fa-envelope"></i> Messages</a>
 	    <a class="active" id="creatQuiz" href = "CreateQuiz.jsp"><i class="fa fa-plus"></i> Create Quiz</a>	   
@@ -35,22 +35,27 @@
 			<button id = searchButton type="submit" value="searchValue">search</button>
 		</form>
   	 </div>
+  	 <div id = res>
 <%
 	SearchManager sManager = new SearchManager();
-	//String value = request.getParameter("searchValue");
-	ArrayList<Quiz> quizzes = sManager.getQuizzes("user0");
-	ArrayList<Account> accounts = sManager.getAccounts("karanadze1");
-	out.println("Quizzes: ");
-	out.println(quizzes.size());
+	String value = request.getParameter("search");
+	ArrayList<Quiz> quizzes = sManager.getQuizzes(value);
+	ArrayList<Account> accounts = sManager.getAccounts(value);
+	out.println("<div id = quizRes>");
+	out.println("Quizzes (" + quizzes.size() + ")<br>");
 	for(int i = 0; i < quizzes.size(); i++) {
-		out.println(quizzes.get(i) + " ");	
+		out.println(quizzes.get(i).getName() + " ");	
 	}
+	out.println("</div>");
 	out.println("<br>");
-	out.println("Accounts: ");
+	out.println("<div id = accountsRes>");
+	out.println("Accounts (" + accounts.size() + ")<br>");
 	for(int i = 0; i < accounts.size(); i++) {
-		out.println(accounts.get(i) + " ");	
+		out.println(accounts.get(i).getUserName() + " ");	
 	}
+	out.println("</div>");
 %>
+	</div>
 
 </body>
 </html>

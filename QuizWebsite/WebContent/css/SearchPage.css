@@ -58,5 +58,36 @@ h1 {
     cursor: pointer;
 }
 
+#res {
+	height: 400px;
+	width: 60%;
+	text-aliogn: center;
+	float: center;
+	font-size: 20px;
+	background-color: #e3e2e1;
+	margin: auto;
+	/* background-image: url("images/47847.png"); */
+}
+
+
+#quizRes {
+	margin: auto;
+	margin-top: 2%;
+	background-color: #e3e2e1;
+	width: 60%;	
+	font-size: 20px;
+	float: center;
+	text-align: center;
+}
+
+#accountsRes {
+	margin: auto;
+	margin-top: 2%;
+	background-color: #e3e2e1;
+	width: 60%;	
+	font-size: 20px;
+	float: center;
+	text-align: center;
+}
 
 
