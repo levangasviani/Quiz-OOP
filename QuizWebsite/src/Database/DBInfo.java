@@ -147,4 +147,6 @@ public class DBInfo {
 	public static final int USER_TYPE_USER = 1;
 	public static final int USER_TYPE_ADMIN = 2;
 
+	// MAX ID Value
+	public static final int MAX_ID_VALUE = 2147483647;
 }
