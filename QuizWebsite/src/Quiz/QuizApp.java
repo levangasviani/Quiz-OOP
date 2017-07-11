@@ -124,7 +124,7 @@ public class QuizApp {
 		int time = 0;
 		int quizId = quizMan.getQuizID(quiz);
 		HashMap<String, String> answers = new HashMap<String, String>();
-		answers.put("Tbilisi, Kutaisi, Batumi, Rustavi", TRUE);
+		answers.put("Tbilisi:Kutaisi:Batumi:Rustavi", TRUE);
 		String order = FALSE;
 		
 		Question multiAnswer = new Multi_Answer(questionText,  answers,  quizId,  order,  checkType,  time,  score);
