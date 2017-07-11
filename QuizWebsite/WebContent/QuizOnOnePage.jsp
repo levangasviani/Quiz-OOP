@@ -27,7 +27,6 @@
 <%
 	out.println("<div id='questionsinf'>");
 	for(int i=0; i<questions.size(); i++){
-		System.out.println(questions.get(i).getId());
 		out.println("<input type='hidden' name='questionId' value='"+questions.get(i).getId()+"'>");
 		out.println("<input type='hidden' name='questionType' value='"+questions.get(i).getTypeId()+"'>");
 	}
@@ -69,6 +68,8 @@
 					file="ShowMultipleChoiceMultipleAnswers";
 				}else if(questionTyp==7){
 					file="ShowMatching";
+				}else if(questionTyp==8){
+					file="ShowGradedQuestion"
 				}
 					$.post(file+".jsp", { questionId: questionI, questionType: questionTyp}, function(data, status){
 						document.getElementById("questions").innerHTML+=data;

@@ -27,6 +27,7 @@ public class QuizApp {
 		addMultiAnswer(firstQuiz);
 		addMultipleChoiceMultipleAnswer(firstQuiz);
 		addMatching(firstQuiz);
+		addGraded(firstQuiz);
 		
 		ArrayList<Question> questions = quizMan.getQuestions(firstQuiz);
 		for(Question q : questions) {
@@ -99,7 +100,7 @@ public class QuizApp {
 	private static void addPictureResponse(Quiz quiz) {
 		QuestionManager questMan = new QuestionManager();
 		
-		String questionText = "link";
+		String questionText = "What is the name of this city?";
 		int score = 1;
 		String checkType = DBInfo.CHECK_TYPE_COMPUTER;
 		int time = 0;
@@ -162,13 +163,30 @@ public class QuizApp {
 		int time = 0;
 		int quizId = quizMan.getQuizID(quiz);
 		HashMap<String, String> answers = new HashMap<String, String>();
-		answers.put("Telavi_Kakheti", TRUE);
-		answers.put("Kutaisi_Imereti", TRUE);
-		answers.put("Batumi_Adjara", TRUE);
-		answers.put("Foti_Samegrelo", TRUE);
+		answers.put("Telavi:Kakheti", TRUE);
+		answers.put("Kutaisi:Imereti", TRUE);
+		answers.put("Batumi:Adjara", TRUE);
+		answers.put("Foti:Samegrelo", TRUE);
 		String order = FALSE;
 		
 		Question matching = new Matching(questionText,  answers,  quizId,  order,  checkType,  time,  score);
 		questMan.addQuestion(matching);
 	}
+	
+	// QuestionResponse
+	private static void addGraded(Quiz quiz) {
+		QuestionManager questMan = new QuestionManager();
+		
+		String questionText = "What is the capital of Georgia? (Checked by creator)";
+		int score = 1;
+		String checkType = DBInfo.CHECK_TYPE_USER;
+		int time = 0;
+		int quizId = quizMan.getQuizID(quiz);
+		HashMap<String, String> answers = new HashMap<String, String>();
+		String order = FALSE;
+		
+		Question graded = new Question_Response(questionText,  answers,  quizId,  order,  checkType,  time,  score);
+		questMan.addQuestion(graded);
+	}
+	
 }
