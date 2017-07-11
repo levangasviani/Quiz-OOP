@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="Notification.NotificationManager"%>
 <%
+	String username = (String) request.getSession().getAttribute("username");
 	NotificationManager notificationManager = (NotificationManager) getServletContext()
 			.getAttribute("notificationManager");
 %>
@@ -20,7 +21,6 @@
 <h1>QuizWebsite</h1>
 <h2>
 	<%
-		String username = request.getParameter("username");
 		if (username != null) {
 			out.println("You are logged in as " + username + "<br>");
 		} else {
@@ -32,12 +32,10 @@
 
 
 <div class="navigation" id = "navigationID">
-    	<a class="active" id="home" href = "homepage.jsp" ><i class="fa fa-home"></i> Home</a> 
-    	x <%=notificationManager.getNotificationCount((String) request.getSession().getAttribute("username"))%> 
-	   	  
-	    <a class="active" id="profile" href = "profile.jsp"><i class="fa fa-user"></i> Profile</a>	    
+    	<a class="active" id="home" href = "homepage.jsp" ><i class="fa fa-home"></i> Home</a>
+	    <a class="active" id="profile" href = "profile.jsp?username=<%=username %>"><i class="fa fa-user"></i> Profile</a>	    
 	    <a class="active" id="achievements" href = "Achievements.jsp"><i class="fa fa-trophy"></i> Achievements</a>    
-	    <a class="active" id="messages" href = "notifications.jsp" ><i class="fa fa-envelope"></i> Messages</a>
+	    <a class="active" id="messages" href = "notifications.jsp" ><i class="fa fa-envelope"></i> Notifications <%=notificationManager.getNotificationCount(username)%></a>
 	   <a class="active" id="creatQuiz" href = "CreateQuiz.jsp"><i class="fa fa-plus"></i> Create Quiz</a>	   
    		 <a id="logout" href = "index.html">Logout</a>
       <div class = "search" id = searchID>

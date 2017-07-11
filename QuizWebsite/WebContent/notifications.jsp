@@ -16,38 +16,38 @@
 </head>
 <body>
 	<ul style="float:left; width:50%; height:100%; overflow:auto">
-	<%
-	for(Notification notification : notifications){
-		if(notification.getType()==1){
-	%>
-			
 		<%
-		} else if(notification.getType()==2){
+		for(Notification notification : notifications){
+			if(notification.getType()==1){
 		%>
-			<li><a href="profile.jsp?username=<%=notification.getSender() %>"><%=notification.toString() %></a></li>
-		<%
-		} else if(notification.getType()==3){
-		%>
-			
-		<%
-		} else if(notification.getType()==4){
-		%>
-			<li><%=notification.toString() %></li>
+				
+			<%
+			} else if(notification.getType()==2){
+			%>
+				<li><a href="profile.jsp?username=<%=notification.getSender() %>"><%=notification.toString() %></a></li>
+			<%
+			} else if(notification.getType()==3){
+			%>
+				
+			<%
+			} else if(notification.getType()==4){
+			%>
+				<li><%=notification.toString() %></li>
+			<%
+			}
+			%>
 		<%
 		}
 		%>
-	<%
-	}
-	%>
 	</ul>
 	<div style="float:right">
-	<form action="NotificationServlet">
-	<input type="hidden" name="sender" value="<%=username %>" />
-	<input type="hidden" name="type" value="4" />
-	<input type="text" name="receiver" />
-	<input type="submit" value="Send" /><br />
-	<textarea rows="20" cols="40" name="message"></textarea>
-	</form>
+		<form action="NotificationServlet">
+			<input type="hidden" name="sender" value="<%=username %>" />
+			<input type="hidden" name="type" value="4" />
+			<input type="text" name="receiver" />
+			<input type="submit" value="Send" /><br />
+			<textarea rows="20" cols="40" name="message"></textarea>
+		</form>
 	</div>
 </body>
 </html>

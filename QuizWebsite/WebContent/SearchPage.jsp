@@ -2,8 +2,13 @@
 <%@page import="Quiz.Quiz"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="webclasses.SearchManager"%>
+<%@page import="Notification.NotificationManager"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%
+	String username = (String) request.getSession().getAttribute("username");
+	NotificationManager notificationManager = (NotificationManager) getServletContext().getAttribute("notificationManager");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,9 +26,9 @@
 
 	<div class="navigation" id = "navigationID">
     	<a class="active" id="home" href = "homepage.jsp" ><i class="fa fa-home"></i> Home</a> 	  
-	    <a class="active" id="profile" href = "profile.jsp"><i class="fa fa-user"></i> Profile</a>	    
+	    <a class="active" id="profile" href = "profile.jsp?username=<%=username %>"><i class="fa fa-user"></i> Profile</a>	    
 	    <a class="active" id="achievements" href = "Achievements.jsp"><i class="fa fa-trophy"></i> Achievements</a>    
-	    <a class="active" id="messages" href = "notifications.jsp" ><i class="fa fa-envelope"></i> Messages</a>
+	    <a class="active" id="messages" href = "notifications.jsp" ><i class="fa fa-envelope"></i> Notifications <%=notificationManager.getNotificationCount(username) %></a>
 	    <a class="active" id="creatQuiz" href = "CreateQuiz.jsp"><i class="fa fa-plus"></i> Create Quiz</a>	   
    		 <a id="logout" href = "index.html">Logout</a>
   </div>
@@ -36,8 +41,8 @@
 		</form>
   	 </div>
   	 <div id = res>
-<%
-	SearchManager sManager = new SearchManager();
+	<%
+	SearchManager sManager = (SearchManager) getServletContext().getAttribute("searchManager");
 	String value = request.getParameter("search");
 	ArrayList<Quiz> quizzes = sManager.getQuizzes(value);
 	ArrayList<Account> accounts = sManager.getAccounts(value);
@@ -50,11 +55,19 @@
 	out.println("<br>");
 	out.println("<div id = accountsRes>");
 	out.println("Accounts (" + accounts.size() + ")<br>");
+	%>
+	<ul>
+	<%
 	for(int i = 0; i < accounts.size(); i++) {
-		out.println(accounts.get(i).getUserName() + " ");	
+	%>
+		<li><a href="profile.jsp?username=<%=accounts.get(i).getUserName() %>"><%=accounts.get(i).getUserName() %></a></li>
+	<%
 	}
+	%>
+	</ul>
+	<%
 	out.println("</div>");
-%>
+	%>
 	</div>
 
 </body>

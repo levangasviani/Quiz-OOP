@@ -1,8 +1,13 @@
 <%@page import="WebSite.WebSiteInfo"%>
 <%@page import="Quiz.Quiz"%>
 <%@page import="Quiz.QuizManager"%>
+<%@page import="Notification.NotificationManager"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%
+	String username = (String) request.getSession().getAttribute("username");
+	NotificationManager notificationManager = (NotificationManager) getServletContext().getAttribute("notificationManager");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,9 +23,9 @@
 	
    <div class="navigation" id = "navigationID">
     	<a class="active" id="home" href = "homepage.jsp" ><i class="fa fa-home"></i> Home</a> 	  
-	    <a class="active" id="profile" href = "profile.jsp"><i class="fa fa-user"></i> Profile</a>	    
+	    <a class="active" id="profile" href = "profile.jsp?username=<%=username %>"><i class="fa fa-user"></i> Profile</a>	    
 	    <a class="active" id="achievements" href = "Achievements.jsp"><i class="fa fa-trophy"></i> Achievements</a>    
-	    <a class="active" id="messages" href = "notifications.jsp" ><i class="fa fa-envelope"></i> Messages</a>
+	    <a class="active" id="messages" href = "notifications.jsp" ><i class="fa fa-envelope"></i> Notifications <%=notificationManager.getNotificationCount(username) %></a>
 	    <a class="active" id="creatQuiz" href = "CreateQuiz.jsp"><i class="fa fa-plus"></i> Create Quiz</a>	   
    		 <a id="logout" href = "index.html">Logout</a>
       <div class = "search" id = searchID>
