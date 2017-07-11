@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import Notification.Notification;
 import Notification.NotificationManager;
+import WebSite.WebSiteInfo;
 
 /**
  * Servlet implementation class NotificationServlet
@@ -38,7 +39,7 @@ public class NotificationServlet extends HttpServlet {
 		String receiver = request.getParameter("receiver");
 		int type = Integer.parseInt(request.getParameter("type"));
 		String message = request.getParameter("message");
-		NotificationManager manager = (NotificationManager) getServletContext().getAttribute("notificationManager");
+		NotificationManager manager = (NotificationManager) getServletContext().getAttribute(WebSiteInfo.NOTIFICATION_MANAGER_ATTR);
 		manager.addNotification(new Notification(sender, receiver, message, type));
 		if (type == 1) {
 

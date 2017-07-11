@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import WebSite.WebSiteInfo;
 import friend.FriendManager;
 import friend.Friendship;
 
@@ -35,9 +36,9 @@ public class FriendServlet extends HttpServlet {
 		String sender = (String) request.getAttribute("sender");
 		String receiver = (String) request.getAttribute("receiver");
 		String message = (String) request.getAttribute("message");
-		FriendManager friendManager = (FriendManager) getServletContext().getAttribute("friendManager");
+		FriendManager friendManager = (FriendManager) getServletContext().getAttribute(WebSiteInfo.FRIEND_MANAGER_ATTR);
 		friendManager.changeFriendship(new Friendship(sender, receiver, message));
-		response.sendRedirect("profile.jsp?username=" + sender);
+		response.sendRedirect("profile.jsp?username=" + receiver);
 	}
 
 	/**

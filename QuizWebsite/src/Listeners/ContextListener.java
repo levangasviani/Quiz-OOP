@@ -10,6 +10,7 @@ import Quiz.QuizManager;
 import User.AccountManager;
 import WebSite.WebSiteInfo;
 import friend.FriendManager;
+import webclasses.AchievementManager;
 import webclasses.SearchManager;
 
 /**
@@ -41,8 +42,9 @@ public class ContextListener implements ServletContextListener {
 		arg0.getServletContext().setAttribute(WebSiteInfo.ACCOUNT_MANAGER_ATTR, new AccountManager());
 		arg0.getServletContext().setAttribute(WebSiteInfo.QUESTION_MANAGER_ATTR, new QuestionManager());
 		arg0.getServletContext().setAttribute(WebSiteInfo.QUIZ_MANAGER_ATTR, new QuizManager());
-		arg0.getServletContext().setAttribute("notificationManager", new NotificationManager());
-		arg0.getServletContext().setAttribute("friendManager", new FriendManager());
-		arg0.getServletContext().setAttribute("searchManager", new SearchManager());
+		arg0.getServletContext().setAttribute(WebSiteInfo.NOTIFICATION_MANAGER_ATTR, new NotificationManager());
+		arg0.getServletContext().setAttribute(WebSiteInfo.FRIEND_MANAGER_ATTR, new FriendManager());
+		arg0.getServletContext().setAttribute(WebSiteInfo.ACHIEVEMENT_MANAGER_ATTR, new AchievementManager());
+		arg0.getServletContext().setAttribute(WebSiteInfo.SEARCH_MANAGER_ATTR, new SearchManager());
 	}
 }
