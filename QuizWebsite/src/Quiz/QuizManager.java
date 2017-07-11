@@ -81,7 +81,7 @@ public class QuizManager {
 	public void addQuiz(String quizName, String description, boolean isRandom, boolean canPracticeMode) {
 		
 		if(!containsQuiz(quizName)){
-			String query = "INSERT INTO " + DBInfo.QUIZZES + " (NAME, DESCRIPtioN, RANDOM, PRACTICE_MODE, FREQUENCY) VALUES (?, ?, ?, ?, ?)";
+			String query = "INSERT INTO " + DBInfo.QUIZZES + " (NAME, DESCRIPTION, RANDOM, PRACTICE_MODE, FREQUENCY) VALUES (?, ?, ?, ?, ?)";
 			
 			try {
 				PreparedStatement preparedStatement = connection.prepareStatement(query);

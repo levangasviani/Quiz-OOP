@@ -86,7 +86,7 @@ CREATE TABLE `QuizWebsiteDatabase`.`QUIZZES` (
 	მომხმარებლის მიერ შევსებული ქვიზების ცხრილი
 */
 
-CREATE TABLE `QuizWebsiteDatabase`.`COMPLETED_QUIZES` (
+CREATE TABLE `QuizWebsiteDatabase`.`COMPLETED_QUIZZES` (
 	`ID` INT NOT NULL AUTO_INCREMENT,
 	`USER_ID` INT NOT NULL,
     `QUIZ_ID` INT NOT NULL,
