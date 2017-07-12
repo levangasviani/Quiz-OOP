@@ -1,6 +1,7 @@
 <%@page import="WebSite.WebSiteInfo"%>
 <%@page import="Quiz.Question"%>
 <%@page import="Quiz.QuestionManager"%>
+<%@ page import="Quiz.Picture_Response" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,7 +11,7 @@
 <%
 	Integer questionId = Integer.parseInt(request.getParameter("questionId"));
 	QuestionManager questMan = (QuestionManager) this.getServletContext().getAttribute(WebSiteInfo.QUESTION_MANAGER_ATTR);
-	Question q = questMan.getQuestion(questionId);
+	Picture_Response q = (Picture_Response)questMan.getQuestion(questionId);
 %>
 
 <title><%=request.getParameter("quizName") %></title>
@@ -18,14 +19,12 @@
 <body>
 	 
 	<%
-		String s = q.getQuestionText();
-		String parts[] = s.split(":");
-		String questionText = parts[0];
+		String s = q.getText();
 		//String url = parts[1];
 		//debugirebistvis
-		String url = "https://admin.freetour.com/images/tours/835/tbilisi-walkink-tour-01.jpg";
+		String url = q.getImageURL();
 			
-		out.print("<p class='ShowQuestionResponse'>" + questionText + "</p>");
+		out.print("<p class='ShowQuestionResponse'>" + s + "</p>");
 		out.print("<img src=" + url + ">");
 		out.print("<p>Answer</p>");
 		out.print("<input type='text' name='possible-answer'><br/>");

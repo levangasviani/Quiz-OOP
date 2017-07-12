@@ -27,21 +27,22 @@
 	<ul>
 		<%	
 			
-			HashSet<String> left = new HashSet<>();
-			HashSet<String> right = new HashSet<>(); 
+			HashSet<String> left = new HashSet<String>();
+			HashSet<String> right = new HashSet<String>(); 
 			
 			for (String s : answers.keySet()) {
 				String parts[] = s.split(":");
 				left.add(parts[0]);
 				right.add(parts[1]);
+				System.out.print(parts[0]);
 			}
 		
 			out.print("<p>Match Answers</p>");
 			for(String l : left) {
 				
-				out.print("<br>" + l);
+				out.print("<br>" + "<a name='option' value='"+l+"'>"+l+"</a>");
 				out.print("<select>");
-				out.print("<option value=''> </option><br/>");
+				out.print("<option value=' '> </option><br/>");
 				for (String r : right) {
 					out.print("<option value=" + r + ">" + r +"</option><br/>");
 				}

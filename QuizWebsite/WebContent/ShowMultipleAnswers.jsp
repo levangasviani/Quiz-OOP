@@ -31,7 +31,7 @@
 		}	
 	
 		for(int i = 0; i < size; i++) {
-			out.print("<br><input type='text' name='possible_answer'><br>");
+			out.print("<br><input type='text' name='possible_answer' value=''><br>");
 		}
 	%>
 
