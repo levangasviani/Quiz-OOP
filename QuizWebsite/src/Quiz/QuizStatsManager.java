@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import Database.DBConnection;
 import Database.DBInfo;
+import User.AccountManager;
 
 
 /**
@@ -34,10 +36,17 @@ public class QuizStatsManager {
 	 * adds user's id and quiz id pair into the CreatedQuizzes table
 	 * in the database
 	 * 
-	 * @param userId
-	 * @param quizId
+	 * @param username
+	 * @param quiz name
 	 */
-	public void addQuizCreated(int userId, int quizId) {
+	public void addQuizCreated(String username, String quizName) {
+		AccountManager accMan = new AccountManager();
+		QuizManager quizMan = new QuizManager();
+		Quiz quiz = quizMan.getQuiz(quizName);
+		
+		int userId = accMan.getAccountId(username);
+		int quizId = quizMan.getQuizID(quiz);
+		
 		String query = "INSERT INTO " + DBInfo.CREATED_QUIZZES + " (USER_ID, QUIZ_ID) VALUES(?, ?)";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -56,16 +65,24 @@ public class QuizStatsManager {
 	 * writes information into the database after completing the quiz
 	 *
 	 *
-	 * @param userId
-	 * 					-user's ID
-	 * @param quizId
-	 * 					-quiz ID
-	 * @param score
+	 * @param String user name
+	 * 					-user's name
+	 * @param String quiz name
+	 * 					-quiz name
+	 * @param int score
 	 * 					-score that user got in the quiz
-	 * @param timeSpent
-	 * 					-time that user spent on the quiz
+	 * @param int timeSpent
+	 * 					-time that user spent on the quiz in seconds
 	 */
-	public void addQuizCompleted(int userId, int quizId, int score, int timeSpent) {
+	public void addQuizCompleted(String username, String quizName, int score, int timeSpent) {
+		AccountManager accMan = new AccountManager();
+		QuizManager quizMan = new QuizManager();
+		Quiz quiz = quizMan.getQuiz(quizName);
+		
+		int userId = accMan.getAccountId(username);
+		int quizId = quizMan.getQuizID(quiz);
+		
+		
 		String query = "INSERT INTO " + DBInfo.COMPLETED_QUIZZES + " (USER_ID, QUIZ_ID, SCORE, SPENT_TIME) VALUES(?, ?, ?, ?)";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -90,8 +107,21 @@ public class QuizStatsManager {
 	 * @param quiz
 	 * @return Result set of all results
 	 */
-	public ResultSet getQuizStats(Quiz quiz) {
-		ResultSet rs = getBestResultsForQuiz(quiz, DBInfo.MAX_ID_VALUE);
+	public ResultSet getQuizStats(String quizName) {
+		ResultSet rs = getBestResultsForQuiz(quizName, DBInfo.MAX_ID_VALUE);
+		return rs;
+	}
+	
+	
+	/**
+	 * Returns best results for the passed quiz of default
+	 * statistic number
+	 * 
+	 * @param quizName
+	 * @return
+	 */
+	public ResultSet getBestResultOfDefaultSize(String quizName) {
+		ResultSet rs = getBestResultsForQuiz(quizName, DBInfo.DEFAULT_NUMBER_OF_STATS);
 		return rs;
 	}
 	
@@ -106,8 +136,9 @@ public class QuizStatsManager {
 	 * @param quantity
 	 * @return Result set of best completions
 	 */
-	public ResultSet getBestResultsForQuiz(Quiz quiz, int quantity) {
+	private ResultSet getBestResultsForQuiz(String quizName, int quantity) {
 		QuizManager qm = new QuizManager();
+		Quiz quiz = qm.getQuiz(quizName);
 		int quizId = qm.getQuizID(quiz);
 		
 		if(quizId != -1) {
@@ -127,5 +158,70 @@ public class QuizStatsManager {
 		return null;
 	}
 	
+	
+	
+	/**
+	 * Returns array list of recently created quiz names
+	 * If there are no quizzes returns empty Array list
+	 * 
+	 * @return Array list of quiz names
+	 */
+	public ArrayList<String> getRecentlyCreatedQuizzes() {
+		String query = "SELECT * FROM " + DBInfo.QUIZZES + " ORDER BY ID DESC LIMIT ?";
+		
+		ArrayList<String> quizNames = new ArrayList<>();
+		
+		try {
+			
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, DBInfo.DEFAULT_NUMBER_OF_STATS);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+				String quizName = rs.getString(DBInfo.QUIZZES_NAME);
+				quizNames.add(quizName);
+			} 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return quizNames;
+	}
+	
+	
+	/**
+	 * Returns array list of recently created quiz names by passed user
+	 * If there are no quizzes returns empty Array list
+	 * 
+	 * @return Array list of quiz names
+	 */
+	public ArrayList<String> getRecentlyCreatedQuizzes(String username) {
+		AccountManager accMan = new AccountManager();
+		int userId = accMan.getAccountId(username);
+		String query = "SELECT NAME FROM " + DBInfo.QUIZZES + " INNER JOIN " + DBInfo.CREATED_QUIZZES + " ON " +
+						DBInfo.QUIZZES + ".ID = " + DBInfo.CREATED_QUIZZES + ".QUIZ_ID WHERE USER_ID = ? " +
+						" ORDER BY " + DBInfo.CREATED_QUIZZES + ".ID DESC LIMIT ?";
+		
+		ArrayList<String> quizNames = new ArrayList<>();
+		
+		try {
+			
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, userId);
+			preparedStatement.setInt(2, DBInfo.DEFAULT_NUMBER_OF_STATS);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+				String quizName = rs.getString(1);
+				quizNames.add(quizName);
+			} 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return quizNames;
+	}
 	
 }
