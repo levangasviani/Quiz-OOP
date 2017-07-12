@@ -170,6 +170,34 @@ public class AccountManager {
 
 		return null;
 	}
+	
+	
+	/**
+	 * Returns user id from the database
+	 * If user doesn't exist method returns -1
+	 * 
+	 * @param username
+	 * @return int user Id
+	 */
+	public int getAccountId(String username) {
+		String query = "SELECT * FROM " + DBInfo.USERS + " WHERE USERNAME = ?;";
+		
+		int userId = -1;
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, username);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()){
+				userId = resultSet.getInt(DBInfo.USERS_ID);
+			} 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return userId;
+	}
 
 	/**
 	 * Returns Array List of Accounts which are in the database
