@@ -32,6 +32,7 @@ public class app {
 		ArrayList<Account> al = am.getAccountsList();
 		for(Account a : al) {
 			System.out.println(a.toString());
+			System.out.println(am.getAccountId(a.getUserName()) + " ");
 		}
 		
 	}
