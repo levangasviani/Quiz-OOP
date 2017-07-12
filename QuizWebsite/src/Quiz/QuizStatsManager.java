@@ -228,6 +228,7 @@ public class QuizStatsManager {
 	}
 	
 	
+	
 	/**
 	 * Increases the frequency of the quiz
 	 * 
@@ -283,4 +284,41 @@ public class QuizStatsManager {
 		return quizNames;
 	}
 	
+	
+	
+	/**
+	 * Returns names f recently taken quizzes by passed user
+	 * if user does not have any quizzes completed, then method
+	 * returns empty array list
+	 * 
+	 * @param username
+	 * @return array list of quiz names
+	 */
+	public ArrayList<String> getRecentlyTakenQuizzes(String username) {
+		AccountManager accMan = new AccountManager();
+		int userId = accMan.getAccountId(username);
+		String query = "SELECT NAME FROM " + DBInfo.QUIZZES + " INNER JOIN " + DBInfo.COMPLETED_QUIZZES + " ON " +
+						DBInfo.QUIZZES + ".ID = " + DBInfo.COMPLETED_QUIZZES + ".QUIZ_ID WHERE USER_ID = ? " +
+						" ORDER BY " + DBInfo.COMPLETED_QUIZZES + ".ID DESC LIMIT ?";
+		
+		ArrayList<String> quizNames = new ArrayList<>();
+		
+		try {
+			
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, userId);
+			preparedStatement.setInt(2, DBInfo.DEFAULT_NUMBER_OF_STATS);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+				String quizName = rs.getString(1);
+				quizNames.add(quizName);
+			} 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return quizNames;
+	}
 }
