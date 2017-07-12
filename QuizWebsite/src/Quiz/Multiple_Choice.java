@@ -15,12 +15,28 @@ public class Multiple_Choice extends Question{
 	public int getTypeId() {
 		return DBInfo.QUESTION_TYPE_MULTIPLE_CHOICE;
 	}
+	
+	
+	
+	/**
+	 * returns the correct answer
+	 * @return - string, correct answer
+	 */
+	private String getCorrectAnswer(){
+		HashMap<String, String> answers=getAnswers();
+		for(String s : answers.keySet()){
+			if(answers.get(s).equals("TRUE")){
+				return s;
+			}
+		}
+		return "";
+	}
 
 	
 	@Override
-	public int getPoints(ArrayList<String> chosenAnswers) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getPoints(String chosenAnswer) {
+		String correctAns=getCorrectAnswer();
+		return correctAns.equals(chosenAnswer) ? 1 : 0;
 	}
 
 }

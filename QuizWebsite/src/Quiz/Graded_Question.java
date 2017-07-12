@@ -18,8 +18,8 @@ public class Graded_Question extends Question{
 
 
 	@Override
-	public int getPoints(ArrayList<String> chosenAnswers) {
-		// TODO Auto-generated method stub
+	public int getPoints(String chosenAnswers) {
+		
 		return 0;
 	}
 	

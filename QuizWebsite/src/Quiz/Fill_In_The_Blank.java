@@ -17,11 +17,24 @@ public class Fill_In_The_Blank extends Question {
 		return DBInfo.QUESTION_TYPE_FILL_IN_THE_BLANK;
 	}
 
-
-	@Override
-	public int getPoints(ArrayList<String> chosenAnswers) {
-		// TODO Auto-generated method stub
-		return 0;
+	/**
+	 * returns correct answer
+	 * @return -  string, the correct answer
+	 */
+	private String getCorrectAnswer(){
+		HashMap<String, String> answers=getAnswers();
+		for(String s : answers.keySet()){
+			return s;
+		}
+		return "";
 	}
+
+	
+	@Override
+	public int getPoints(String chosenAnswer) {
+		String answer=getCorrectAnswer();
+		return LevenshteinDistance.correct(answer, chosenAnswer) ? 1 : 0;
+	}
+
 	
 }

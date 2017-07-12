@@ -74,8 +74,6 @@ public abstract class Question {
 	
 	
 	
-	public abstract int getPoints(ArrayList<String> chosenAnswers);
-	
 	/**
 	 * returns a question statement
 	 * @return - question statement
@@ -138,6 +136,9 @@ public abstract class Question {
 	public String getAnswerOrder() {
 		return answerOrder;
 	}
+
+
+	public abstract int getPoints(String chosenAnswer);
 	
 }
 

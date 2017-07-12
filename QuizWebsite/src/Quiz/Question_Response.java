@@ -19,8 +19,22 @@ public class Question_Response extends Question{
 	}
 
 
+	/**
+	 * returns the correct answer
+	 * 
+	 * @return - correct answer as a string
+	 */
+	private String getCorrectAnswer(){
+		HashMap<String, String> answers=getAnswers();
+		for(String s : answers.keySet()){
+			return s;
+		}
+		return "";
+	}
+
 	@Override
-	public int getPoints(ArrayList<String> chosenAnswers) {
-		return 0;
+	public int getPoints(String chosenAnswer) {
+		String answer=getCorrectAnswer();
+		return LevenshteinDistance.correct(answer, chosenAnswer) ? 1 : 0;
 	}
 }
