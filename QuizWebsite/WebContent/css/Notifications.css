@@ -1,0 +1,97 @@
+h1 {
+    text-align: center;
+    color: green;
+}
+
+
+#navigationID{
+   text-align: center;
+}
+
+.navigation {
+	background-color: green;
+    overflow: hidden;
+	padding: 12px 20px;
+    margin: 8px 0;
+    list-style:none;
+    margin:0;
+    padding:0;
+    text-align:center;
+    
+}
+
+.navigation a {
+	float: left;
+	display: block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+#logout {
+	float: right;
+}
+
+#searchID {
+	float: right;
+    margin: 8px 8px;
+}
+
+
+.sender {
+	height: 450px;
+	width: 30%;
+	text-aliogn: center;
+	float: right;
+	font-size: 20px;
+	background-color: #e3e2e1;
+	margin: auto;
+	margin-top: 14px;
+}
+
+#submitID {
+	text-align: center;
+    width: 25%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    cursor: pointer;
+	margin-top: 14px;
+	margin-right: 5px;
+	float: right;
+}
+
+
+#receiverID {
+	text-align: left;
+    width: 55%;
+    padding: 14px 20px;
+    margin-top: 14px;
+	margin-left: 5px;
+	float: left;
+}
+
+#textAreaID {
+	text-align: left;
+    width: 80%;
+    padding: 14px 20px;
+    margin: auto;
+    margin-bottom: 14px;
+	margin-left: 15px;
+	margin-top: 20px;
+	float: center;
+}
+
+#resID {
+	height: 450px;
+	width: 60%;
+	text-aliogn: center;
+	float: left;
+	font-size: 20px;
+	background-color: #e3e2e1;
+	margin: auto;
+	margin-top: 14px;
+}
+

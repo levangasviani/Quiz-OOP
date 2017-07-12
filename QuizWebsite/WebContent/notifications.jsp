@@ -15,7 +15,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Notifications</title>
 	<link rel="stylesheet" type="text/css" href="css/MainDesign.css">
-	<link rel="stylesheet" type="text/css" href="css/Achievements.css">
+	<link rel="stylesheet" type="text/css" href="css/Notifications.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -37,6 +37,7 @@
 			</div>
 		</div>
 	</div>
+	<div id = "resID">
 	<ul style="float:left; width:50%; height:100%; overflow:auto">
 		<%
 		for(Notification notification : notifications){
@@ -62,13 +63,14 @@
 		}
 		%>
 	</ul>
-	<div style="float:right">
+	</div>
+	<div class = "sender">
 		<form action="NotificationServlet">
 			<input type="hidden" name="sender" value="<%=username %>" />
 			<input type="hidden" name="type" value="4" />
-			<input type="text" name="receiver" />
-			<input type="submit" value="Send" /><br />
-			<textarea rows="20" cols="40" name="message"></textarea>
+			<input id = "receiverID" type="text" name="receiver" placeholder = "To:"/>
+			<input id = "submitID" type="submit" value="Send" /><br />
+			<textarea id = "textAreaID" rows="20" cols="40" name="message" placeholder = "text..."></textarea>
 		</form>
 	</div>
 </body>
