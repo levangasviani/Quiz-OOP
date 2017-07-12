@@ -168,7 +168,7 @@ public class QuestionCreateServlet extends HttpServlet {
 			Quiz qq=new Quiz(quizName, quizDescription, orderr, practice);
 			qm.addQuiz(qq);
 			processQuestions(questions, qm.getQuizID(qq));
-			response.sendRedirect("CreateQuiz.html");
+			response.sendRedirect("CreateQuiz.jsp");
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

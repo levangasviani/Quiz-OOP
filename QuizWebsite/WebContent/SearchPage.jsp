@@ -46,7 +46,10 @@
 	out.println("<div id = quizRes>");
 	out.println("Quizzes (" + quizzes.size() + ")<br>");
 	for(int i = 0; i < quizzes.size(); i++) {
-		out.println(quizzes.get(i).getName() + " ");	
+		out.println(quizzes.get(i).getName() + " ");
+		%>
+		<li><a href="StartQuizServlet?quizName=<%=quizzes.get(i).getName() %>"><%=quizzes.get(i).getName() %></a></li>
+	<%
 	}
 	out.println("</div>");
 	out.println("<br>");
