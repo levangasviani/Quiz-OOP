@@ -42,68 +42,64 @@ h1 {
     margin: 8px 8px;
 }
 
-#title{
-	margin: auto;
-	margin-top: 2%;
-	background-color: #e3e2e1;
-	width: 60%;
+#summaryID {
+    width: 15%;
+    background-color: #e3e2e1;
+    padding: 14px 20px;
+    margin: 8px 0px;
+    cursor: pointer;
+	float: right;
+}
+
+#title {
 	text-align: center;
+    padding: 14px 20px;
+    margin: 8px 8px;
 }
 
 
-#summaryID {	
-	width: 20%;
-	text-aliogn: center;
-	float: center;
+#finishID {
+	text-align: center;
+    width: 15%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    cursor: pointer;
 	margin: auto;
-	background-color: #e3e2e1;
+	float: bottom;
+}
+
+#div1 {
+	text-align: center;
+	float: center;
+	width: 50%;
+	height: 400px;
+    background-color: #e3e2e1;
+    padding: 14px 20px;
+    margin: auto;
+    margin-top: 14px;
+    overflow-y: scroll;
 }
 
 
 #questionsID {
 	background-color: #959595;
-    overflow: hidden;
-	padding: 12px 20px;
-    margin: 8px 0;
-    list-style:none;
-    margin:0;
-    padding:0;
-    width: 50%;
+    width: 15%;
+    height: 400px;
     text-align:center;
-    background-color: #e3e2e1;
-    olumn-count: 3;
+    padding: 14px 20px;
+    margin: 8px 0px;
+    float: left;
 }
 
-#questionsID a {
+.questionsClass a {
 	float: center;
 	display: block;
-	color: #f2f2f2;
+	color: #008000;
 	text-align: center;
-	padding: 14px 16px;
+	padding: 14px 0px;
+	margin: auto;
 	text-decoration: none;
-	font-size: 17px;
-}
-
-input [type = button], slecet {
-	float: center;
-	text-align: center;
-    width: 15%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 8px;
-    cursor: pointer;
-}
-
-
-#finishID {
-	float: center;
-	text-align: center;
-    width: 15%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 8px;
-    cursor: pointer;
+	width: 70%;
 }
 

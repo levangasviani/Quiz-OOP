@@ -29,7 +29,7 @@
 	    <a class="active" id="creatQuiz" href = "CreateQuiz.jsp"><i class="fa fa-plus"></i> Create Quiz</a>	   
    		<a id="logout" href = "index.html">Logout</a>
   	</div>
-	
+
 	<div class = "search" id = searchID>
   		<form action = "SearchPage.jsp">
 			<input id = searchInput type = "text" name = "search" placeholder = "enter value here..."> <br>
@@ -39,35 +39,25 @@
   	 </div>
   	 <div id = res>
 	<%
-	SearchManager sManager = (SearchManager) getServletContext().getAttribute(WebSiteInfo.SEARCH_MANAGER_ATTR);
-	String value = request.getParameter("search");
-	ArrayList<Quiz> quizzes = sManager.getQuizzes(value);
-	ArrayList<Account> accounts = sManager.getAccounts(value);
-	out.println("<div id = quizRes>");
-	out.println("Quizzes (" + quizzes.size() + ")<br>");
-	for(int i = 0; i < quizzes.size(); i++) {
-		out.println(quizzes.get(i).getName() + " ");
+			SearchManager sManager = (SearchManager) getServletContext().getAttribute(WebSiteInfo.SEARCH_MANAGER_ATTR);
+			String value = request.getParameter("search");
+			ArrayList<Quiz> quizzes = sManager.getQuizzes(value);
+			ArrayList<Account> accounts = sManager.getAccounts(value);
+			out.println("<div id = quizRes>");
+			out.println("Quizzes (" + quizzes.size() + ")<br>");
+			for (int i = 0; i < quizzes.size(); i++) {
+				out.println("<a href=\"StartQuizServlet?quizName=" + quizzes.get(i).getName() + "\">"+ quizzes.get(i).getName() +"</a>");
+			}
+			out.println("</div>");
+			out.println("<br>");
+			out.println("<div id = accountsRes>");
+			out.println("Accounts (" + accounts.size() + ")<br>");
+			for (int i = 0; i < accounts.size(); i++) {
+				out.println("<a href=\"profile.jsp?username=" + accounts.get(i).getUserName() + "\">"+ accounts.get(i).getUserName() +"</a>");
+			}
+			out.println("</div>");
+			out.println("</div>");
 		%>
-		<li><a href="StartQuizServlet?quizName=<%=quizzes.get(i).getName() %>"><%=quizzes.get(i).getName() %></a></li>
-	<%
-	}
-	out.println("</div>");
-	out.println("<br>");
-	out.println("<div id = accountsRes>");
-	out.println("Accounts (" + accounts.size() + ")<br>");
-	%>
-	<ul>
-	<%
-	for(int i = 0; i < accounts.size(); i++) {
-	%>
-		<li><a href="profile.jsp?username=<%=accounts.get(i).getUserName() %>"><%=accounts.get(i).getUserName() %></a></li>
-	<%
-	}
-	%>
-	</ul>
-	<%
-	out.println("</div>");
-	%>
 	</div>
 
 </body>

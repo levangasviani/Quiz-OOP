@@ -67,9 +67,6 @@ input [type = radio], slecet {
 	border: 2px solid red;
 }
 
-input[type="radio"] {
-  margin-bottom: 1%;
-}
 
 #start {
     width: 15%;
@@ -79,3 +76,4 @@ input[type="radio"] {
     margin: 8px 0;
     cursor: pointer;
 }
+

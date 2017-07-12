@@ -44,7 +44,7 @@
 		</div>
          <p id="numOfQuestions"></p>
     </div>
-    <div id = questionsID>
+    <div class= "questionsClass" id = "questionsID">
 		<a><button onclick="process('question_response')">Question Response</button></a>
 		<a><button onclick="process('fill_blank')">Fill In The Blank</button></a>
 		<a><button onclick="process('graded')">Graded Question</button></a>
@@ -54,15 +54,18 @@
 		<a><button onclick="process('picture_response')">Picture Response</button></a>
 		<a><button onclick="process('multiple_choice_multiple_answer')">Multiple Choice Multiple Answer</button></a>
    </div>
-   <div id="div1"></div>
-   <form action="QuestionCreateServlet" method="get" name="questions">
-   		<input type="hidden" name="quizName" value=<%=request.getParameter("quizName")%> >
-   		<input type="hidden" name="quizDescription" value=<%=request.getParameter("description")%> >
-   		<input type="hidden" name="orderOfQuestions" value=<%=request.getParameter("orderOfQuestions") %> >
-   		<input type="hidden" name="practiceMode" value=<%=request.getParameter("practiceMode") %>>
-   		<input id = finishID type="submit" value="Finish" style="font-size: 24px; margin: 10px 10px 10px 10px">
-   </form>
    
+   <form action="QuestionCreateServlet" method="get" name="questions">
+	   	<input type="hidden" name="quizName" value=<%=request.getParameter("quizName")%> >
+	   	<input type="hidden" name="quizDescription" value=<%=request.getParameter("description")%> >
+	 	<input type="hidden" name="orderOfQuestions" value=<%=request.getParameter("orderOfQuestions") %> >
+	   	<input type="hidden" name="practiceMode" value=<%=request.getParameter("practiceMode") %>>
+   		<input id = finishID type="submit" value="Finish" style="font-size: 24px; margin: 10px 10px 10px 10px">
+   		<div id="div1">
+
+   		</div>
+   		
+   </form>
 	<script type="text/javascript">
 		function process(file){
 			var xml=new XMLHttpRequest();
