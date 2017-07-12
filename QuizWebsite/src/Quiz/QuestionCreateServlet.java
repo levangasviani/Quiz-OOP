@@ -120,6 +120,7 @@ public class QuestionCreateServlet extends HttpServlet {
 		int time=-1;
 		try{
 			time=Integer.parseInt(jsonObject.getString("time"));
+			if(time<0)time=-1;
 		}catch(NumberFormatException e){
 			
 		}
