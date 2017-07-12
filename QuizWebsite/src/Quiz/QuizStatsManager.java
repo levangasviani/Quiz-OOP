@@ -92,9 +92,12 @@ public class QuizStatsManager {
 			preparedStatement.setInt(4, timeSpent);
 			
 			preparedStatement.executeUpdate();
+			
+			increaseQuizFrequency(quizName);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	
@@ -217,6 +220,62 @@ public class QuizStatsManager {
 				String quizName = rs.getString(1);
 				quizNames.add(quizName);
 			} 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return quizNames;
+	}
+	
+	
+	/**
+	 * Increases the frequency of the quiz
+	 * 
+	 * @param quizName
+	 */
+	private void increaseQuizFrequency(String quizName) {
+		String curValue = "SELECT * FROM " + DBInfo.QUIZZES + " WHERE NAME = ?;";
+		String newValue = "UPDATE " + DBInfo.QUIZZES + " SET FREQUENCY = ? WHERE NAME = ?;";
+		
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(curValue);
+			preparedStatement.setString(1, quizName);
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			rs.next();
+			int curFrequency = rs.getInt(DBInfo.QUIZZES_FREQUENCY);
+			int newFrequency = curFrequency + 1;
+			
+			preparedStatement = connection.prepareStatement(newValue);
+			preparedStatement.setInt(1, newFrequency);
+			preparedStatement.setString(2, quizName);
+			preparedStatement.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/**
+	 * Returns default number of popular quizzes
+	 * 
+	 * @return array list of popular quizzes
+	 */
+	public ArrayList<String> getPopularQuizzes() {
+		String query = "SELECT * FROM " + DBInfo.QUIZZES + " ORDER BY FREQUENCY DESC LIMIT ?;";
+		
+		ArrayList<String> quizNames = new ArrayList<>();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, DBInfo.DEFAULT_NUMBER_OF_STATS);
+			
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+				quizNames.add(rs.getString(DBInfo.QUIZZES_NAME));
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
