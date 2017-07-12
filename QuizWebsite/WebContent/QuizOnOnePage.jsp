@@ -24,6 +24,14 @@
 </head>
 <body>
 
+
+<div id="summaryID" style="width: 100px; height: 100px; border: 1px solid black">
+		<div id = "title">
+			Points Got:
+		</div>
+         <p id="points">0</p>
+    </div>
+
 <%
 	out.println("<div id='questionsinf'>");
 	for(int i=0; i<questions.size(); i++){
@@ -31,8 +39,11 @@
 		out.println("<input type='hidden' name='questionType' value='"+questions.get(i).getTypeId()+"'>");
 	}
 	out.println("</div>");
-	out.println("<button id='butt' onclick='process()'"+">"+"Start!"+"</button>");
+	out.println("<button id='butt' onclick='OnePageProcess()'"+">"+"Start!"+"</button>");
 %>
+
+	<div id="elapsedtime">
+	</div>
 
 	<div id="questions">
 		
@@ -41,48 +52,7 @@
 	
 	
 	
-	<script>
-		function process(){
-			document.getElementsByTagName("body")[0].innerHTML+="<input type='Submit' value='submit' onclick='finishQuiz()'>"
-			
-			document.getElementById("butt").style.display = "none";
-			var questionIds=document.getElementsByName("questionId");
-			var questionTypes=document.getElementsByName("questionType");
-			
-			var i;
-			for(i=0; i<questionIds.length; i++){
-				var questionI=questionIds[i].value;
-				var questionTyp=questionTypes[i].value;
-				var file="";
-				if(questionTyp==1){
-					file="ShowQuestionResponse";
-				}else if(questionTyp==2){
-					file="ShowFillInTheBlank";
-				}else if(questionTyp==3){
-					file="ShowMultipleChoice";
-				}else if(questionTyp==4){
-					file="ShowPictureResponse";
-				}else if(questionTyp==5){
-					file="ShowMultipleAnswers";
-				}else if(questionTyp==6){
-					file="ShowMultipleChoiceMultipleAnswers";
-				}else if(questionTyp==7){
-					file="ShowMatching";
-				}else if(questionTyp==8){
-					file="ShowGradedQuestion"
-				}
-					$.post(file+".jsp", { questionId: questionI, questionType: questionTyp}, function(data, status){
-						document.getElementById("questions").innerHTML+=data;
-					});
-				
-			}
-		}
-		
-		
-		function finishQuiz(){
-			window.location="homepage.jsp";
-		}
-	</script>
-
+<script src="checkans.js">
+</script>
 </body>
 </html>

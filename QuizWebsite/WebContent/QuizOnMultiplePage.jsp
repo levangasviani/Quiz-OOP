@@ -17,24 +17,19 @@
 	QuizManager qm = (QuizManager) this.getServletContext().getAttribute(WebSiteInfo.QUIZ_MANAGER_ATTR);
 	Quiz quiz = qm.getQuiz(request.getParameter("quizName"));
 	ArrayList<Question> questions = qm.getQuestions(quiz);
-	for(Question q : questions){
-		int questionType = q.getTypeId();
-		int questionId = q.getId();
-		
-		if(questionType == DBInfo.QUESTION_TYPE_QUESTION_RESPONSE) {
-			
-		}
-	}
 %>
 
 <%
 	out.println("<div id='questionsinf'>");
 	for(int i=0; i<questions.size(); i++){
+		System.out.println(questions.get(i).getId());
 		out.println("<input type='hidden' name='questionId' value='"+questions.get(i).getId()+"'>");
 		out.println("<input type='hidden' name='questionType' value='"+questions.get(i).getTypeId()+"'>");
+		out.println("<input type='hidden' name='time' value='"+questions.get(i).getTime()+"'>");
 	}
+		
 	out.println("</div>");
-	out.println("<button id='butt' onclick='process()'"+">"+"Start!"+"</button>");
+	out.println("<button id='butt' onclick='MultiPageProcess()'"+">"+"Start!"+"</button>");
 %>
 
 <title><%=request.getParameter("quizName")%></title>
@@ -42,6 +37,17 @@
 </head>
 <body>
 
+<div id="summaryID" style="width: 100px; height: 100px; border: 1px solid black">
+		<div id = "title">
+			Points Got:
+		</div>
+         <p id="points">0</p>
+    </div>
+
+
+<div id="elapsedtime" style="font-size: 15px"></div>
+
+<div id="timeLeft"></div>
 
 <div id="questions">
 
@@ -49,43 +55,12 @@
 </div>
 
 
-<script>
+<div id="subm">
+</div>
 
-var num=0;
-var questionIds=document.getElementsByName("questionId");
-var questionTypes=document.getElementsByName("questionType");
-var length=questionIds.length;
 
-		function process(){
-			if(num==length){
-				window.location="homepage.jsp";
-			}
-			document.getElementById("butt").style.display = "none";
-			var questionTyp=questionTypes[num].value;
-			var questionI=questionIds[num].value;
-				var file="";
-				if(questionTyp==1){
-					file="ShowQuestionResponse";
-				}else if(questionTyp==2){
-					file="ShowFillInTheBlank";
-				}else if(questionTyp==3){
-					file="ShowMultipleChoice";
-				}else if(questionTyp==4){
-					file="ShowPictureResponse";
-				}else if(questionTyp==5){
-					file="ShowMultipleAnswers";
-				}else if(questionTyp==6){
-					file="ShowMultipleChoiceMultipleAnswers";
-				}else if(questionTyp==7){
-					file="ShowMatching";
-				}else if(questionTyp==8){
-					file="ShowGradedQuestion"
-				}
-					$.post(file+".jsp", { questionId: questionI, questionType: questionTyp}, function(data, status){
-						document.getElementById("questions").innerHTML=data+"<input type='submit' value='submit' onclick='process()'>";
-					});
-				num++;
-			}
-	</script>
+
+
+<script src="checkans.js"></script>
 </body>
 </html>
