@@ -13,6 +13,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<link rel="stylesheet" type="text/css" href="css/MainDesign.css">
+	<link rel="stylesheet" type="text/css" href="css/QuizOnMultiplePage.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
 <%
 	QuizManager qm = (QuizManager) this.getServletContext().getAttribute(WebSiteInfo.QUIZ_MANAGER_ATTR);
 	Quiz quiz = qm.getQuiz(request.getParameter("quizName"));
@@ -37,17 +42,17 @@
 </head>
 <body>
 
-<div id="summaryID" style="width: 100px; height: 100px; border: 1px solid black">
+<div id="summaryID">
 		<div id = "title">
 			Points Got:
 		</div>
          <p id="points">0</p>
+         <div id="elapsedtime" ></div>
+         
     </div>
 
-
-<div id="elapsedtime" style="font-size: 15px"></div>
-
 <div id="timeLeft"></div>
+
 
 <div id="questions">
 
