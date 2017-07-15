@@ -47,7 +47,7 @@ h1 {
     background-color: #e3e2e1;
     padding: 14px 20px;
     margin: 8px 0px;
-    cursor: pointer;
+    margin-right: 20px;
 	float: right;
 }
 
@@ -66,7 +66,11 @@ h1 {
     padding: 14px 20px;
     cursor: pointer;
 	margin: auto;
-	float: bottom;
+	float: right;
+	margin-right: 20px;
+	position: fixed;
+    bottom: 330px;
+    right: 20px;
 }
 
 #div1 {
@@ -85,10 +89,11 @@ h1 {
 #questionsID {
 	background-color: #959595;
     width: 15%;
-    height: 400px;
+    height: 80%;
     text-align:center;
     padding: 14px 20px;
     margin: 8px 0px;
+    margin-left: 20px;
     float: left;
 }
 

@@ -5,9 +5,7 @@ h1 {
 input [type = radio], slecet {
 	border: 2px solid red;
 }
-body {
-	
-}
+
 #mainID {
 	width: 30%;
 	float: center;

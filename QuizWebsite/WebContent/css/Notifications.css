@@ -49,6 +49,9 @@ h1 {
 	background-color: #e3e2e1;
 	margin: auto;
 	margin-top: 14px;
+	margin-left: 20px;
+	margin-right: 20px;
+	
 }
 
 #submitID {
@@ -71,6 +74,7 @@ h1 {
     margin-top: 14px;
 	margin-left: 5px;
 	float: left;
+	
 }
 
 #textAreaID {
@@ -93,5 +97,6 @@ h1 {
 	background-color: #e3e2e1;
 	margin: auto;
 	margin-top: 14px;
+	margin-left: 20px;
 }
 
