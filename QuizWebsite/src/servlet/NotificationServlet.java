@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.StringTokenizer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -39,10 +40,11 @@ public class NotificationServlet extends HttpServlet {
 		String receiver = request.getParameter("receiver");
 		int type = Integer.parseInt(request.getParameter("type"));
 		String message = request.getParameter("message");
-		NotificationManager manager = (NotificationManager) getServletContext().getAttribute(WebSiteInfo.NOTIFICATION_MANAGER_ATTR);
+		NotificationManager manager = (NotificationManager) getServletContext()
+				.getAttribute(WebSiteInfo.NOTIFICATION_MANAGER_ATTR);
 		manager.addNotification(new Notification(sender, receiver, message, type));
 		if (type == 1) {
-
+			response.sendRedirect("StartQuizServlet?quizName=" + message);
 		} else if (type == 2) {
 			request.setAttribute("sender", sender);
 			request.setAttribute("receiver", receiver);
