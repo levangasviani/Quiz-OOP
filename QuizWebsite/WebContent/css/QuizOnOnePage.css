@@ -1,0 +1,27 @@
+#summaryID {
+    width: 15%;
+    background-color: #e3e2e1;
+    padding: 14px 20px;
+    margin: 8px 0px;
+    margin-right: 20px;
+	float: right;	
+}
+
+#elapsedtime {
+    background-color: #e3e2e1;
+	float: center;
+}
+
+#butt {
+	text-align: center;
+	float: center;
+ 
+}
+
+#questions {
+	text-align: center;
+	overflow-y: scroll;
+	width: 60%;
+	background-color: #959595;
+	margin-left: 20%; 
+}
