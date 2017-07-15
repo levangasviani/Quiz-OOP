@@ -41,6 +41,7 @@
 
 </head>
 <body>
+<input type="hidden" value=<%=request.getParameter("quizName")%> id="quizName">
 
 <div id="summaryID">
 		<div id = "title">

@@ -4,7 +4,7 @@
 	var length=questionTypes.length;
 	var questionIds=document.getElementsByName("questionId");
 	var times=document.getElementsByName("time");
-	
+	var checkedNumber=0;
 	
 	var startTime;
 	var minutes;
@@ -82,13 +82,27 @@
 				var questionId=questionIds[i].value;
 				checkOneAns(questionType, questionId);
 			}
+			
+			
 		}
+		
+
+function redirectToStats(){
+	var quizname=document.getElementById("quizName").value;
+	var elapsedtime=minutes*60+seconds;
+	checkedNumber=0;
+	window.location="ShowQuizStatistics.jsp?"+"quizName="+quizname+"&"+"score="+points+"&"+"elapsedTime="+elapsedtime;
+}
 
 function question_response(questionType, questionId){
 		var elements=document.getElementById(questionId).getElementsByTagName("input");
 					$.post("QuestionCheck", {answer : elements[0].value, type : questionType, Id : questionId}, function(data){
 						points+=parseInt(data);
 						updatePoints();
+						checkedNumber++;
+						if(checkedNumber==length){
+							redirectToStats();
+						}
 					});
 }
 
@@ -105,6 +119,10 @@ function fill_blank(questionType, questionId){
 					$.post("QuestionCheck", {answer : elements[0].value, type : questionType, Id : questionId}, function(data){
 						points+=parseInt(data);
 						updatePoints();
+						checkedNumber++;
+						if(checkedNumber==length){
+							redirectToStats();
+						}
 					});
 }
 
@@ -117,6 +135,10 @@ function multiple_choice(questionType, questionId){
 							$.post("QuestionCheck", {answer : elements[j].value, type : questionType, Id : questionId}, function(data){
 								points+=parseInt(data);
 								updatePoints();
+								checkedNumber++;
+								if(checkedNumber==length){
+									redirectToStats();
+								}
 							});
 							break;
 						}
@@ -129,6 +151,10 @@ function picture_response(questionType, questionId){
 					$.post("QuestionCheck", {answer : elements[0].value, type : questionType, Id : questionId}, function(data){
 						points+=parseInt(data);
 						updatePoints();
+						checkedNumber++;
+						if(checkedNumber==length){
+							redirectToStats();
+						}
 					});
 }
 
@@ -146,6 +172,10 @@ function multiple_answer(questionType, questionId){
 					$.post("QuestionCheck", {answer : inputAnswers, type : questionType, Id : questionId}, function(data){
 						points+=parseInt(data);
 						updatePoints();
+						checkedNumber++;
+						if(checkedNumber==length){
+							redirectToStats();
+						}
 					});
 }
 
@@ -170,6 +200,10 @@ function multiple_choice_multiple_answer(questionType, questionId){
 					$.post("QuestionCheck", {answer : inputAnswers, type : questionType, Id : questionId}, function(data){
 						points+=parseInt(data);
 						updatePoints();
+						checkedNumber++;
+						if(checkedNumber==length){
+							redirectToStats();
+						}
 					});
 }
 
@@ -186,11 +220,19 @@ function matching(questionType, questionId){
 					$.post("QuestionCheck", {answer : inputAnswers, type : questionType, Id : questionId}, function(data){
 						points+=parseInt(data);
 						updatePoints();
+						checkedNumber++;
+						if(checkedNumber==length){
+							redirectToStats();
+						}
 					});
 }
 
 
 function graded(questionType, questionId){
+	checkedNumber++;
+	if(checkedNumber==length){
+		redirectToStats();
+	}
 	return;
 }
 
@@ -204,7 +246,7 @@ function MultiPageProcess(){
 
 function MultiPageStart(){
 	if(num==length){
-		
+		redirectToStats();
 	}
 	document.getElementById("butt").style.display = "none";
 	var questionTyp=questionTypes[num].value;
