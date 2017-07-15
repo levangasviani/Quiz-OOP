@@ -1,3 +1,5 @@
+<%@page import="Quiz.QuizStatsManager"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="Notification.NotificationManager"%>
@@ -5,6 +7,14 @@
 <%
 	String username = (String) request.getSession().getAttribute("username");
 	NotificationManager notificationManager = (NotificationManager) getServletContext().getAttribute(WebSiteInfo.NOTIFICATION_MANAGER_ATTR);
+%>
+
+<%
+	QuizStatsManager qsm = new QuizStatsManager();
+	ArrayList<String> recentlyCreatedQuizzes = qsm.getRecentlyCreatedQuizzes();
+	ArrayList<String> popularQuizzes = qsm.getPopularQuizzes();
+	ArrayList<String> recentlyTakenQuizzes = qsm.getRecentlyTakenQuizzes(username);
+	ArrayList<String> recentlyTakenQuizzesByUser = qsm.getRecentlyCreatedQuizzes(username);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -51,22 +61,24 @@
 		<div id="popularQuizzes">
 			popular quizzes
 			<ul>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
+			<%
+				for(String s : popularQuizzes){
+					String urlPattern = "StartQuizServlet?quizName="+s;
+					out.print("<li><a href=" + urlPattern + " >" + s + "</a></li>");
+				}
+			%>
 			</ul>
 		</div>
 
 		<div id="recentQuizzes">
 			recently created quizzes
 			<ul>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
+			<%
+				for(String s : recentlyCreatedQuizzes){
+					String urlPattern = "StartQuizServlet?quizName="+s;
+					out.print("<li><a href=" + urlPattern + " >" + s + "</a></li>");
+				}
+			%>
 			</ul>
 		</div>
 	</div>
@@ -75,22 +87,24 @@
 		<div id="myRecentTakenQuizzes">
 			my recently taken quizzes
 			<ul>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
+			<%
+				for(String s : recentlyTakenQuizzes){
+					String urlPattern = "StartQuizServlet?quizName="+s;
+					out.print("<li><a href=" + urlPattern + " >" + s + "</a></li>");
+				}
+			%>
 			</ul>
 		</div>
 
 		<div id="myRecentCreatedQuizzes">
 			my recently created quizzes
 			<ul>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
+			<%
+				for(String s : recentlyTakenQuizzesByUser){
+					String urlPattern = "StartQuizServlet?quizName="+s;
+					out.print("<li><a href=" + urlPattern + " >" + s + "</a></li>");
+				}
+			%>
 			</ul>
 		</div>
 

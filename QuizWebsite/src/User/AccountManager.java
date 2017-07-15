@@ -198,7 +198,34 @@ public class AccountManager {
 		
 		return userId;
 	}
-
+	
+	
+	/**
+	 * Returns username of passed id
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public String getUserNameById(int id) {
+		String query = "SELECT * FROM " + DBInfo.USERS + " WHERE ID = ?;";
+		
+		String username = "";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, id);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()){
+				username = resultSet.getString(DBInfo.USERS_USERNAME);
+			} 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return username;
+	}
+	
 	/**
 	 * Returns Array List of Accounts which are in the database
 	 * 

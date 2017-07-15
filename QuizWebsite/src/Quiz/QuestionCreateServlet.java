@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 import Database.DBInfo;
 import WebSite.WebSiteInfo;
+import webclasses.AchievementManager;
 
 
 /**
@@ -157,6 +158,8 @@ public class QuestionCreateServlet extends HttpServlet {
 		}
 		try {
 			QuizManager qm=(QuizManager) this.getServletContext().getAttribute(WebSiteInfo.QUIZ_MANAGER_ATTR);
+			QuizStatsManager qsm = (QuizStatsManager) this.getServletContext().getAttribute(WebSiteInfo.QUIZ_STATS_MANAGER);
+			AchievementManager am=(AchievementManager) this.getServletContext().getAttribute(WebSiteInfo.ACHIEVEMENT_MANAGER_ATTR);
 			String quizName=request.getParameter("quizName");
 			String quizDescription=request.getParameter("quizDescription");
 			String order=request.getParameter("orderOfQuestions");
@@ -167,7 +170,9 @@ public class QuestionCreateServlet extends HttpServlet {
 			if(practicemode.equals("on"))practice=true;
 			Quiz qq=new Quiz(quizName, quizDescription, orderr, practice);
 			qm.addQuiz(qq);
+			String username = (String) request.getSession().getAttribute("username");
 			processQuestions(questions, qm.getQuizID(qq));
+			qsm.addQuizCreated(username, quizName);
 			response.sendRedirect("CreateQuiz.jsp");
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block

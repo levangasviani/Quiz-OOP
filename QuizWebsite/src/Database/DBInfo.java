@@ -8,7 +8,7 @@ package Database;
 public class DBInfo {
 
 	public static final String MYSQL_USERNAME = "root";
-	public static final String MYSQL_PASSWORD = "soad123";
+	public static final String MYSQL_PASSWORD = "sius25";
 	public static final String MYSQL_DATABASE_NAME = "QuizWebsiteDatabase";
 	public static final String MYSQL_DATABASE_SERVER = "localhost:3306/" + MYSQL_DATABASE_NAME
 			+ "?autoReconnect=true&useSSL=false";
@@ -16,6 +16,7 @@ public class DBInfo {
 	// Database table names
 	public static final String ACHIEVEMENT_TYPES = "ACHIEVEMENT_TYPES";
 	public static final String ACHIEVEMENTS = "ACHIEVEMENTS";
+	public static final String ANNOUNCEMENTS = "ANNOUNCEMENTS";
 	public static final String ANSWERS = "ANSWERS";
 	public static final String COMPLETED_QUIZZES = "COMPLETED_QUIZZES";
 	public static final String CREATED_QUIZZES = "CREATED_QUIZZES";
@@ -46,6 +47,11 @@ public class DBInfo {
 	public static final int ACHIEVEMENTS_USER_ID = 2;
 	public static final int ACHEIVEMENTS_TYPE_ID = 3;
 
+	// ANNOUNCEMETS columns
+	public static final int ANNOUNCEMETS_ID = 1;
+	public static final int ANNOUNCEMETS_TEXT = 2;
+	public static final int ANNOUNCEMETS_ADMIN_ID = 3;
+
 	// ANSWERS columns
 	public static final int ANSWERS_ID = 1;
 	public static final int ANSWERS_ANSWER = 2;
@@ -64,7 +70,7 @@ public class DBInfo {
 	public static final int CREATED_QUIZZES_ID = 1;
 	public static final int CREATED_QUIZZES_USER_ID = 2;
 	public static final int CREATED_QUIZZES_QUIZ_ID = 3;
-
+	
 	// FRIENDS columns
 	public static final int FRIENDS_ID = 1;
 	public static final int FRIENDS_USER_ONE = 2;
@@ -150,4 +156,5 @@ public class DBInfo {
 	
 	// Default quantity for home page information
 	public static final int DEFAULT_NUMBER_OF_STATS = 5;
+	public static final int DEFAULT_NUMBER_OF_RESULTS = 10;
 }

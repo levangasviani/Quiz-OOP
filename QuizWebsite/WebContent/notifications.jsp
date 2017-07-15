@@ -43,7 +43,7 @@
 		for(Notification notification : notifications){
 			if(notification.getType()==1){
 		%>
-				
+				<li><%=notification.getSender() %> sent quiz challenge: <a href="StartQuizServlet?quizName=<%=notification.getContent() %>"><%=notification.getContent() %></a></li>
 			<%
 			} else if(notification.getType()==2){
 			%>

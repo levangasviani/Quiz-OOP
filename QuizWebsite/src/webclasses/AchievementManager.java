@@ -57,7 +57,7 @@ public class AchievementManager {
 			preparedStatement.setInt(1, userID);
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
-				int id = rs.getInt(DBInfo.ACHIEVEMENTS_ID);
+				int id = rs.getInt(3);
 				result.add(id);
 			}
 		} catch (SQLException e) {
@@ -93,16 +93,48 @@ public class AchievementManager {
 		return result;
 	}
 	
+	private int getAchievementTypeID(String achievement) {
+		int result = 0;
+		String query = "SELECT * FROM " + DBInfo.ACHIEVEMENT_TYPES + " WHERE NAME = ?;";
+		try {
+			PreparedStatement preparedStatement = con.prepareStatement(query);
+			preparedStatement.setString(1, achievement);
+			ResultSet rs = preparedStatement.executeQuery();
+			while(rs.next()) {
+				int id = rs.getInt(DBInfo.ACHIEVEMENT_TYPES_ID);
+				return id;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public void setAchievement(String achievement, String username) {
+		int achievementTypeID = getAchievementTypeID(achievement);
+		int userID = getUserID(username);
+		String query = "INSERT INTO " + DBInfo.ACHIEVEMENTS+ " (USER_ID, TYPE_ID) VALUES (?, ?)";
+		try {
+			PreparedStatement preparedStatement = con.prepareStatement(query);
+			preparedStatement.setInt(1, userID);
+			preparedStatement.setInt(2, achievementTypeID);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	/*
 	 * main
 	 */
 	public static void main(String[] args) {
 		AchievementManager am = new AchievementManager();
-		ArrayList<String> arr = am.getAcievements("user0");
+		am.setAchievement("Prolific Author", "levan1");
+		ArrayList<String> arr = am.getAcievements("levan1");
+		System.out.println(arr.size());
 		for(int i = 0; i < arr.size(); i++) {
 			System.out.println(arr.get(i));
 		}
 	}
 	
 }
-
