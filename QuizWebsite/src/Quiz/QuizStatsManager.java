@@ -124,7 +124,7 @@ public class QuizStatsManager {
 	 * @return
 	 */
 	public ResultSet getBestResultOfDefaultSize(String quizName) {
-		ResultSet rs = getBestResultsForQuiz(quizName, DBInfo.DEFAULT_NUMBER_OF_STATS);
+		ResultSet rs = getBestResultsForQuiz(quizName, DBInfo.DEFAULT_NUMBER_OF_RESULTS);
 		return rs;
 	}
 	

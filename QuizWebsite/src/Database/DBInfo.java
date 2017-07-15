@@ -156,4 +156,5 @@ public class DBInfo {
 	
 	// Default quantity for home page information
 	public static final int DEFAULT_NUMBER_OF_STATS = 5;
+	public static final int DEFAULT_NUMBER_OF_RESULTS = 10;
 }
