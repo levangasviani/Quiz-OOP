@@ -19,4 +19,5 @@ public class WebSiteInfo {
 	public static final String FRIEND_MANAGER_ATTR = "FriendManager";
 	public static final String ACHIEVEMENT_MANAGER_ATTR = "AchievementManager";
 	public static final String SEARCH_MANAGER_ATTR = "SearchManager";
+	public static final String QUIZ_STATS_MANAGER = "QuizStatsManager";
 }

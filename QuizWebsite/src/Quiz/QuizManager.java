@@ -251,7 +251,5 @@ public class QuizManager {
 		return result;
 	}
 	
-	
-	
 }
 
