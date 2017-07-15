@@ -1,178 +1,171 @@
-*, *:before, *:after {
-  box-sizing: border-box;
+body{
+	margin:0;
+	color:#6a6f8c;
+	background:url("http://cdn2.business2community.com/wp-content/uploads/2014/12/Facebook-Quiz-Marketing-.jpg.jpg");
+    background-repeat: no-repeat;
+    background-position: 110%;
+	font:600 16px/18px 'Open Sans',sans-serif;
 }
+*,:after,:before{box-sizing:border-box}
+.clearfix:after,.clearfix:before{content:'';display:table}
+.clearfix:after{clear:both;display:block}
+a{color:inherit;text-decoration:none}
 
-html {
-  overflow-y: scroll;
+.login-wrap{
+	width:100%;
+	margin: 0px;
+	max-width:525px;
+	min-height:850px;
+	position:relative;
+	background:url("http://www.bedifferentorbedead.com/images/uploads/Quiz.jpg") ;
+	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
 }
-
-body {
-  background: #c1bdba;
-  font-family: 'Titillium Web', sans-serif;
+.login-html{
+	width:100%;
+	height:100%;
+	position:absolute;
+	padding:90px 70px 50px 70px;
+	background:rgba(40,57,101,.5);
 }
-
-a {
-  text-decoration: none;
-  color: #1ab188;
-  -webkit-transition: .5s ease;
-  transition: .5s ease;
+.login-html .sign-in-htm,
+.login-html .sign-up-htm{
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	position:absolute;
+	-webkit-transform:rotateY(180deg);
+	        transform:rotateY(180deg);
+	-webkit-backface-visibility:hidden;
+	        backface-visibility:hidden;
+	-webkit-transition:all .4s linear;
+	transition:all .4s linear;
 }
-a:hover {
-  color: #179b77;
+.login-html .sign-in,
+.login-html .sign-up,
+.login-form .group .check{
+	display:none;
 }
-
-.form {
-  background: rgba(19, 35, 47, 0.9);
-  padding: 40px;
-  max-width: 600px;
-  margin: 40px auto;
-  border-radius: 4px;
-  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+.login-html .tab,
+.login-form .group .label,
+.login-form .group .button{
+	text-transform:uppercase;
 }
-
-.tab-group {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 40px 0;
+.login-html .tab{
+    color: white;
+	font-size:22px;
+	margin-right:15px;
+	padding-bottom:5px;
+	margin:0 15px 10px 0;
+	display:inline-block;
+	border-bottom:2px solid transparent;
 }
-.tab-group:after {
-  content: "";
-  display: table;
-  clear: both;
+.login-html .sign-in:checked + .tab,
+.login-html .sign-up:checked + .tab{
+	color: rgba(90,250,0,1);
+	border-color:#1161ee;
 }
-.tab-group li a {
-  display: block;
-  text-decoration: none;
-  padding: 15px;
-  background: rgba(160, 179, 176, 0.25);
-  color: #a0b3b0;
-  font-size: 20px;
-  float: left;
-  width: 50%;
-  text-align: center;
-  cursor: pointer;
-  -webkit-transition: .5s ease;
-  transition: .5s ease;
+.login-form{
+	min-height:345px;
+	position:relative;
+	-webkit-perspective:1000px;
+	        perspective:1000px;
+	-webkit-transform-style:preserve-3d;
+	        transform-style:preserve-3d;
 }
-.tab-group li a:hover {
-  background: #179b77;
-  color: #ffffff;
+.login-form .group{
+	margin-bottom:15px;
 }
-.tab-group .active a {
-  background: #1ab188;
-  color: #ffffff;
+.login-form .group .label,
+.login-form .group .input,
+.login-form .group .button{
+	width:100%;
+	color:#fff;
+	display:block;
 }
-
-.tab-content > div:last-child {
-  display: none;
+.login-form .group .input,
+.login-form .group .button{
+	border:none;
+	padding:15px 20px;
+	border-radius:25px;
+	background:rgba(255,255,255,.1);
 }
-
-h1 {
-  text-align: center;
-  color: #ffffff;
-  font-weight: 300;
-  margin: 0 0 40px;
+.login-form .group input[data-type="password"]{
+	text-security:circle;
+	-webkit-text-security:circle;
 }
-
-label {
-  position: absolute;
-  -webkit-transform: translateY(6px);
-          transform: translateY(6px);
-  left: 13px;
-  color: rgba(255, 255, 255, 0.5);
-  -webkit-transition: all 0.25s ease;
-  transition: all 0.25s ease;
-  -webkit-backface-visibility: hidden;
-  pointer-events: none;
-  font-size: 22px;
+.login-form .group .label{
+	color:white;
+	font-size:12px;
 }
-label .req {
-  margin: 2px;
-  color: #1ab188;
+.login-form .group .button{
+	background:rgba(90,250,0,1);
 }
-
-label.active {
-  -webkit-transform: translateY(50px);
-          transform: translateY(50px);
-  left: 2px;
-  font-size: 14px;
+.login-form .group label .icon{
+    
+	width:15px;
+	height:15px;
+	border-radius:2px;
+	position:relative;
+	display:inline-block;
+	background:rgba(255,255,255,.1);
 }
-label.active .req {
-  opacity: 0;
+.login-form .group label .icon:before,
+.login-form .group label .icon:after{
+	content:'';
+	width:10px;
+	height:2px;
+	background:#fff;
+	position:absolute;
+	-webkit-transition:all .2s ease-in-out 0s;
+	transition:all .2s ease-in-out 0s;
 }
-
-label.highlight {
-  color: #ffffff;
+.login-form .group label .icon:before{
+	left:3px;
+	width:5px;
+	bottom:6px;
+	-webkit-transform:scale(0) rotate(0);
+	        transform:scale(0) rotate(0);
 }
-
-input, textarea {
-  font-size: 22px;
-  display: block;
-  width: 100%;
-  height: 100%;
-  padding: 5px 10px;
-  background: none;
-  background-image: none;
-  border: 1px solid #a0b3b0;
-  color: #ffffff;
-  border-radius: 0;
-  -webkit-transition: border-color .25s ease, box-shadow .25s ease;
-  transition: border-color .25s ease, box-shadow .25s ease;
+.login-form .group label .icon:after{
+	top:6px;
+	right:0;
+	-webkit-transform:scale(0) rotate(0);
+	        transform:scale(0) rotate(0);
 }
-input:focus, textarea:focus {
-  outline: 0;
-  border-color: #1ab188;
+.login-form .group .check:checked + label{
+	color:#fff;
+    font-size:12px;
 }
-
-textarea {
-  border: 2px solid #a0b3b0;
-  resize: vertical;
+.login-form .group .check:checked + label .icon{
+	background:#1161ee;
 }
-
-.field-wrap {
-  position: relative;
-  margin-bottom: 40px;
+.login-form .group .check:checked + label .icon:before{
+    color: #F90E74;
+	-webkit-transform:scale(1) rotate(45deg);
+	        transform:scale(1) rotate(45deg);
 }
-
-.top-row:after {
-  content: "";
-  display: table;
-  clear: both;
+.login-form .group .check:checked + label .icon:after{
+	-webkit-transform:scale(1) rotate(-45deg);
+	        transform:scale(1) rotate(-45deg);
 }
-.top-row > div {
-  float: left;
-  width: 48%;
-  margin-right: 4%;
+.login-html .sign-in:checked + .tab + .sign-up + .tab + .login-form .sign-in-htm{
+	-webkit-transform:rotate(0);
+	        transform:rotate(0);
 }
-.top-row > div:last-child {
-  margin: 0;
+.login-html .sign-up:checked + .tab + .login-form .sign-up-htm{
+	-webkit-transform:rotate(0);
+	        transform:rotate(0);
 }
-
-.button {
-  border: 0;
-  outline: none;
-  border-radius: 0;
-  padding: 15px 0;
-  font-size: 2rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  background: #1ab188;
-  color: #ffffff;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-  -webkit-appearance: none;
+.hr{
+    
+	height:2px;
+	margin:60px 0 50px 0;
+	background:rgba(255,255,255,.2);
 }
-.button:hover, .button:focus {
-  background: #179b77;
+.foot-lnk{
+	text-align:center;
 }
-
-.button-block {
-  display: block;
-  width: 100%;
-}
-
-.forgot {
-  margin-top: -20px;
-  text-align: right;
+.quiz-icon{
+    background: url("http://www.commercialmotor.com/sites/default/files/news-article-images/2016/03/Quiz-2.JPG");
 }
