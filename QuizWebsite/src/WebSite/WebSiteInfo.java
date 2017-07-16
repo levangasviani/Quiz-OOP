@@ -20,4 +20,5 @@ public class WebSiteInfo {
 	public static final String ACHIEVEMENT_MANAGER_ATTR = "AchievementManager";
 	public static final String SEARCH_MANAGER_ATTR = "SearchManager";
 	public static final String QUIZ_STATS_MANAGER = "QuizStatsManager";
+	public static final String ANNOUNCEMENT_ATTR="Announcements";
 }
