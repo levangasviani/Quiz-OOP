@@ -1,8 +1,10 @@
 <div class="form">
-    <form class="register-form">
-      <input type="text" placeholder="name"/>
-      <input type="password" placeholder="password"/>
-      <input type="text" placeholder="email address"/>
+    <form class="register-form" action="RegistrationServlet" method="post">
+      <input type="text" name = "username"       placeholder="username"/>
+      <input type="text" name = "firstname"      placeholder="firstname"/>
+      <input type="text" name = "lastname"       placeholder="lastname"/>
+      <input type="password" name = "password" placeholder="password"/>
+      <input type="text"  name = "email" placeholder="email address"/>
       <button>create</button>
       <p class="message">Already registered? <a href="#">Sign In</a></p>
     </form>
