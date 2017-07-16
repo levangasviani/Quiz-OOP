@@ -102,6 +102,7 @@ CREATE TABLE `QuizWebsiteDatabase`.`COMPLETED_QUIZZES` (
 
 
 
+
 /**
 	მომხმარებლის მიერ გაკეთებული ქვიზებსი ცხრილი
 */
@@ -307,3 +308,12 @@ CREATE TABLE `QuizWebsiteDatabase`.`ANNOUNCEMENTS` (
     REFERENCES `QuizWebsiteDatabase`.`USERS` (`ID`)
     ON DELETE cascade
     ON UPDATE NO ACTION);
+    
+    
+    
+    
+    
+    
+SELECT COUNT(*) FROM COMPLETED_QUIZZES WHERE USER_ID = 1;
+
+
