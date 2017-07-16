@@ -29,11 +29,12 @@
 	 	if(username != null){
 	 		acc=acm.getAccount(username);
 	 		type=acc.getType();
-	 		recentlyCreatedQuizzes = qsm.getRecentlyCreatedQuizzes();
-	 		popularQuizzes = qsm.getPopularQuizzes();
 	 		recentlyTakenQuizzes = qsm.getRecentlyTakenQuizzes(username);
 	 		recentlyTakenQuizzesByUser = qsm.getRecentlyCreatedQuizzes(username);
 	 	}
+	 	recentlyCreatedQuizzes = qsm.getRecentlyCreatedQuizzes();
+ 		popularQuizzes = qsm.getPopularQuizzes();
+ 		
 %>
 
 
