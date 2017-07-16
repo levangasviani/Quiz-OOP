@@ -251,5 +251,24 @@ public class QuizManager {
 		return result;
 	}
 	
+	/**
+	 * returns the number of existent quizzes
+	 * @return - int number of quizzes
+	 */
+	public int getNumberOfQuizzes(){
+		String query="SELECT COUNT(*) FROM "+DBInfo.QUIZZES;
+		ResultSet rs;
+		try {
+			PreparedStatement preparedStatement=connection.prepareStatement(query);
+			rs = preparedStatement.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
 }
 
