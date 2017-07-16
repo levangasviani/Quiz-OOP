@@ -11,6 +11,10 @@
 	FriendManager friendManager = (FriendManager) getServletContext().getAttribute(WebSiteInfo.FRIEND_MANAGER_ATTR);
 	NotificationManager notificationManager = (NotificationManager) getServletContext().getAttribute(WebSiteInfo.NOTIFICATION_MANAGER_ATTR);
 	AccountManager accountManager = (AccountManager) getServletContext().getAttribute(WebSiteInfo.ACCOUNT_MANAGER_ATTR);
+	if(username2 == null || !accountManager.containsAccount(username2))
+	    username2 = "la";
+	if(username1 == null)
+	    username1 = "la";
 	Account account = accountManager.getAccount(username2);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

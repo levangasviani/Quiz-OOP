@@ -46,14 +46,14 @@
 <div id="summaryID">
 		<div id = "title">
 			Points Got:
+			<p id="points">0</p>
 		</div>
-         <p id="points">0</p>
          <div id="elapsedtime">
-	</div>
+		</div>
     </div>
-
+<div align = center >
 <%
-	out.println("<div id='questionsinf'>");
+	out.println("<div  id='questionsinf'>");
 	for(int i=0; i<questions.size(); i++){
 		out.println("<input type='hidden' name='questionId' value='"+questions.get(i).getId()+"'>");
 		out.println("<input type='hidden' name='questionType' value='"+questions.get(i).getTypeId()+"'>");
@@ -61,9 +61,9 @@
 		out.println("<input type='hidden' name='receiver' value=\""  + receiver + "\">");
 	}
 	out.println("</div>");
-	out.println("<button id='butt' onclick='OnePageProcess()'"+">"+"Start!"+"</button>");
+	out.println("<button  align = 'center' id='btn' onclick='OnePageProcess()'"+">"+"Start!"+"</button>");
 %>
-
+</div>
 	<div id="questions">
 		
 	</div>

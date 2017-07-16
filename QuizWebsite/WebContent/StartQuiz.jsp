@@ -47,6 +47,8 @@
 	    <br><a><input id= "btn" type="submit" value="Start Quiz"></a><br>
 	   
 	    </form>
+	    <br>
+		<br>
 		<form action="NotificationServlet">
 			<input type="hidden" name="sender" value="<%=username %>" />
 			<input type="text" name="receiver" />
