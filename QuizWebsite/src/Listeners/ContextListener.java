@@ -9,6 +9,7 @@ import Quiz.QuestionManager;
 import Quiz.QuizManager;
 import Quiz.QuizStatsManager;
 import User.AccountManager;
+import User.AnnouncementManager;
 import WebSite.WebSiteInfo;
 import friend.FriendManager;
 import webclasses.AchievementManager;
@@ -48,5 +49,6 @@ public class ContextListener implements ServletContextListener {
 		arg0.getServletContext().setAttribute(WebSiteInfo.ACHIEVEMENT_MANAGER_ATTR, new AchievementManager());
 		arg0.getServletContext().setAttribute(WebSiteInfo.SEARCH_MANAGER_ATTR, new SearchManager());
 		arg0.getServletContext().setAttribute(WebSiteInfo.QUIZ_STATS_MANAGER, new QuizStatsManager());
+		arg0.getServletContext().setAttribute(WebSiteInfo.ANNOUNCEMENT_ATTR, new AnnouncementManager());
 	}
 }
