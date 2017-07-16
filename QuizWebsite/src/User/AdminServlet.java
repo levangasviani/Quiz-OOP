@@ -91,7 +91,7 @@ public class AdminServlet extends HttpServlet {
 		}else{
 			String username=request.getParameter("username");
 			if(promote(username)){
-				out.print("Account successfully removed!");
+				out.print("Account successfully got promoted!");
 			}
 			else{
 				out.print("Account with that name does not exist");
