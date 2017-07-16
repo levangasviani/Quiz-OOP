@@ -9,6 +9,9 @@
 <%@page import="User.AnnouncementManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%
+	if(request.getParameter("status")!= null && request.getParameter("status").equals("logout")){
+	    request.getSession().setAttribute("username", null);
+	}
 	String username = (String) request.getSession().getAttribute("username");
 	NotificationManager notificationManager = (NotificationManager) getServletContext().getAttribute(WebSiteInfo.NOTIFICATION_MANAGER_ATTR);
 	AnnouncementManager anm=(AnnouncementManager)this.getServletContext().getAttribute(WebSiteInfo.ANNOUNCEMENT_ATTR);
@@ -40,7 +43,7 @@
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>QuizWebsite</title>
-	<link rel="stylesheet"  type="text/css" href="css/loginstyle.css">
+	
 	<link rel="stylesheet" type="text/css" href="css/MainDesign.css">
 	<link rel="stylesheet" type="text/css" href="css/HomePage.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

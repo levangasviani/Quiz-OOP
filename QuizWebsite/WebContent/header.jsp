@@ -2,6 +2,8 @@
 <%@page import="WebSite.WebSiteInfo" %>
 <%@page import="User.AccountManager" %>
 <%@page import="User.Account" %>
+	<link rel="stylesheet"  type="text/css" href="css/loginstyle.css">
+	<link rel="stylesheet" type="text/css" href="css/HomePage.css">
 	<h1>QuizWebsite</h1>
 	<h2>
 		<%
@@ -37,7 +39,7 @@
 				out.print("<a class='active' id='admin' href = 'Admin.jsp'> Administrator Panel</a>");
 			}
 		%>  	   
-		<a id="logout" href = "index.html">Logout</a>
+		<a id="logout" href = "homepage.jsp?status=logout">Logout</a>
 		<div class = "search" id = searchID>
 			<div class = "search" id = searchID>
 				<form action = "SearchPage.jsp">
