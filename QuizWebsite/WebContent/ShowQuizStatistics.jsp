@@ -1,3 +1,7 @@
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="webclasses.AchievementManager"%>
+<%@page import="webclasses.AchievementsCalculator"%>
 <%@page import="Quiz.QuizManager"%>
 <%@page import="User.AccountManager"%>
 <%@page import="Database.DBInfo"%>
@@ -44,7 +48,32 @@
 		
 	</div>
 	
+	<%
+	AchievementsCalculator calc = new AchievementsCalculator();
+	QuizStatsManager statManager = new QuizStatsManager();
+	AchievementManager achManager = new AchievementManager();
 	
+	int completed = statManager.getCompletedQuizzesCount(username);
+	ArrayList<String> achievementsNow = calc.getAchievements(0, completed);
+	
+	ArrayList<String> achievementsBefore = achManager.getAchievements(username);
+	
+	HashSet<String> achievementsNowSet = new HashSet<String>();
+	for(int i = 0; i < achievementsNow.size(); i++) {
+		achievementsNowSet.add(achievementsNow.get(i));
+	}
+	HashSet<String> achievementsBeforeSet = new HashSet<String>();
+	for(int i = 0; i < achievementsBefore.size(); i++) {
+		achievementsBeforeSet.add(achievementsBefore.get(i));
+	}
+	
+	for(String s: achievementsNowSet) {
+		if(!achievementsBeforeSet.contains(s)) {
+			achManager.setAchievement(s, username);
+		}
+	}
+	
+	%>
 	
 	<%
 		out.print("<ul>");

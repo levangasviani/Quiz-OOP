@@ -326,7 +326,7 @@ public class QuizStatsManager {
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, userId);
 
-			ResultSet rs = preparedStatement.executeQuery(query);
+			ResultSet rs = preparedStatement.executeQuery();
 			rs.next();
 			res = rs.getInt(1);
 
@@ -346,8 +346,8 @@ public class QuizStatsManager {
 	public int getCompletedQuizzesCount(String username) {
 		AccountManager accMan = new AccountManager();
 		int userId = accMan.getAccountId(username);
-
-		String query = "SELECT COUNT(*) FROM " + DBInfo.COMPLETED_QUIZZES + " WHERE USER_ID = ?;";
+		System.out.print(userId);
+		String query = "SELECT COUNT(*) FROM " + DBInfo.COMPLETED_QUIZZES + " WHERE USER_ID=?";
 
 		int res = 0;
 
@@ -355,7 +355,7 @@ public class QuizStatsManager {
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, userId);
 
-			ResultSet rs = preparedStatement.executeQuery(query);
+			ResultSet rs = preparedStatement.executeQuery();
 			rs.next();
 			res = rs.getInt(1);
 

@@ -36,8 +36,11 @@ public class AchievementsCalculator {
 			result.add("Prodigious Author");
 		}
 		
-		if(numOfCompletedQuizzes >= 10) {
+		if(numOfCreatedQuizzes >= 10) {
 			result.add("Quiz Machine");
+		}
+		if(numOfCreatedQuizzes >= 1) {
+			result.add("New one");
 		}
 		return result;
 	}
