@@ -96,60 +96,6 @@ public class QuizStatsManager {
 		}
 
 	}
-	
-	public void updateQuizScore(String username, String quizname){
-		String sql = "UPDATE " + DBInfo.COMPLETED_QUIZZES + " SET SCORE = SCORE + 1 WHERE USER_ID = ? AND QUIZ_ID = ? ORDER BY ID DESC LIMIT 1 ";
-		try {
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, getUserId(username));
-			preparedStatement.setInt(2, getQuizId(quizname));
-			preparedStatement.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * Gets the id of passed user name
-	 * 
-	 * @param username
-	 * @return ID of user
-	 */
-	private int getUserId(String username) {
-		String sql = "SELECT ID FROM " + DBInfo.USERS + " WHERE USERNAME = ?";
-		try {
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, username);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			resultSet.next();
-			return resultSet.getInt(1);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
-	}
-
-	/**
-	 * Returns the id of passed Quiz
-	 * 
-	 * @param quizName
-	 * @return ID of quiz
-	 */
-	private int getQuizId(String quizName) {
-		String sql = "SELECT ID FROM " + DBInfo.QUIZZES + " WHERE NAME = ?";
-		try {
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, quizName);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			resultSet.next();
-			return resultSet.getInt(1);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return 0;
-	}
 
 	/**
 	 * 
@@ -400,8 +346,8 @@ public class QuizStatsManager {
 	public int getCompletedQuizzesCount(String username) {
 		AccountManager accMan = new AccountManager();
 		int userId = accMan.getAccountId(username);
-
-		String query = "SELECT COUNT(*) FROM " + DBInfo.COMPLETED_QUIZZES + " WHERE USER_ID = ?;";
+		System.out.print(userId);
+		String query = "SELECT COUNT(*) FROM " + DBInfo.COMPLETED_QUIZZES + " WHERE USER_ID=?";
 
 		int res = 0;
 
