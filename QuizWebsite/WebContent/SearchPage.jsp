@@ -1,3 +1,4 @@
+<%@page import="java.util.HashSet"%>
 <%@page import="User.Account"%>
 <%@page import="Quiz.Quiz"%>
 <%@page import="java.util.ArrayList"%>
@@ -42,19 +43,41 @@
 	<%
 			SearchManager sManager = (SearchManager) getServletContext().getAttribute(WebSiteInfo.SEARCH_MANAGER_ATTR);
 			String value = request.getParameter("search");
+			
 			ArrayList<Quiz> quizzes = sManager.getQuizzes(value);
+			HashSet<Quiz> quizzesSet = new HashSet<Quiz>();
+			
 			ArrayList<Account> accounts = sManager.getAccounts(value);
+			HashSet<String> accountsSet = new HashSet<String>();
+			
+			for(int i = 0; i < quizzes.size(); i++) {
+				quizzesSet.add(quizzes.get(i));
+			}
+			
+			for(int i = 0; i < accounts.size(); i++) {
+				String uName = accounts.get(i).getUserName();
+				if(!accountsSet.contains(uName)) {
+					accountsSet.add(uName);
+				}
+			}
+			
 			out.println("<div id = quizRes>");
-			out.println("Quizzes (" + quizzes.size() + ")<br>");
-			for (int i = 0; i < quizzes.size(); i++) {
+			out.println("Quizzes (" + quizzesSet.size() + ")<br>");
+			/* for (int i = 0; i < quizzes.size(); i++) {
 				out.println("<a href=\"StartQuizServlet?quizName=" + quizzes.get(i).getName() + "\">"+ quizzes.get(i).getName() +"</a>");
+			} */
+			for(Quiz q: quizzesSet) {
+				out.println("<a href=\"StartQuizServlet?quizName=" + q.getName() + "\">"+ q.getName() +"</a>");
 			}
 			out.println("</div>");
 			out.println("<br>");
 			out.println("<div id = accountsRes>");
-			out.println("Accounts (" + accounts.size() + ")<br>");
-			for (int i = 0; i < accounts.size(); i++) {
+			out.println("Accounts (" + accountsSet.size() + ")<br>");
+			/* for (int i = 0; i < accounts.size(); i++) {
 				out.println("<a href=\"profile.jsp?username=" + accounts.get(i).getUserName() + "\">"+ accounts.get(i).getUserName() +"</a>");
+			} */
+			for(String a: accountsSet) {
+				out.println("<a href=\"profile.jsp?username=" + a + "\">"+ a +"</a>");			
 			}
 			out.println("</div>");
 			out.println("</div>");
