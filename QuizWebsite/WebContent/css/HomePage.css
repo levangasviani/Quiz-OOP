@@ -2,7 +2,6 @@ h1 {
     text-align: center;
     color: green;
 }
-
 h2	 {
     text-align: right;
     color: #400040;
@@ -35,6 +34,9 @@ h2	 {
 
 #logout {
 	float: right;
+}
+#logoutbutton{
+    background-image : url("http://icons.veryicon.com/ico/System/100%20Flat%20Vol.%202/inside%20logout.ico");
 }
 
 
@@ -89,6 +91,13 @@ h2	 {
     color: white;
     font-size: 36px;
 }
+#btn {
+    background-color: #4CAF50;
+    color: white;
+    border: 2px solid #4CAF50;
+}
 
-
+#btn:hover {
+}
+  
 

@@ -4,8 +4,12 @@
 <%@page import="User.Account" %>
 	<link rel="stylesheet"  type="text/css" href="css/loginstyle.css">
 	<link rel="stylesheet" type="text/css" href="css/HomePage.css">
-	<h1>QuizWebsite</h1>
-	<h2>
+	<a href= "homepage.jsp" >
+	<div style = "background: green;">
+		<div style = "background-image:url('https://s-media-cache-ak0.pinimg.com/originals/b1/54/3f/b1543f0956dab41afae39956e4f08f27.png'); height: 130px;" >
+		</div>
+	</div>
+	</a>
 		<%
 		AccountManager acm=(AccountManager)this.getServletContext().getAttribute(WebSiteInfo.ACCOUNT_MANAGER_ATTR);
 		NotificationManager notificationManager = (NotificationManager) getServletContext().getAttribute(WebSiteInfo.NOTIFICATION_MANAGER_ATTR);
@@ -15,11 +19,9 @@
 		if(username != null){
 		 	type = acm.getAccount(username).getType();
 		 	notnum = notificationManager.getNotificationCount(username);
-		 	out.println("You are logginded as" + username);
+		 	out.println("You are logginded as" + username + "");
 		 }
 		%>
-	</h2>
-	
 	<div id = "loginplace">
   		<%
  		if (username == null){
@@ -38,14 +40,16 @@
 			if(type==2){
 				out.print("<a class='active' id='admin' href = 'Admin.jsp'> Administrator Panel</a>");
 			}
+			if(username != null){
+			    out.println("<a  id = 'logout' href = 'homepage.jsp?status=logout'> <img src = 'http://icons.veryicon.com/ico/System/100%20Flat%20Vol.%202/inside%20logout.ico' width = 30 height = 30/></a>");	
+			}
 		%>  	   
-		<a id="logout" href = "homepage.jsp?status=logout">Logout</a>
+		
 		<div class = "search" id = searchID>
 			<div class = "search" id = searchID>
 				<form action = "SearchPage.jsp">
-					<input type = "text" name = "search" placeholder = "enter value here...">
-					<i class="fa fa-search" aria-hidden="true"></i>
-					<button type="submit" value="searchValue">search</button>
+					<input  type = "text" name = "search" placeholder = "enter value here...">
+					<button  id = "btn" type="submit" value="searchValue" >search</button>
 				</form>
 			</div>
 		</div>
