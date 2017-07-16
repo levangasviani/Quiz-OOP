@@ -11,6 +11,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Achievements</title>
 	<link rel="stylesheet" type="text/css" href="css/MainDesign.css">
@@ -19,23 +20,14 @@
 </head>
 
 <body>
-	<h1>Achievements</h1>
-	<div class="navigation" id = "navigationID">
-		<a class="active" id="home" href = "homepage.jsp" ><i class="fa fa-home"></i> Home</a> 	  
-		<a class="active" id="profile" href = "profile.jsp?username=<%=username %>"><i class="fa fa-user"></i> Profile</a>	    
-		<a class="active" id="achievements" href = "Achievements.jsp"><i class="fa fa-trophy"></i> Achievements</a>    
-		<a class="active" id="messages" href = "notifications.jsp" ><i class="fa fa-envelope"></i> Notifications <%=notificationManager.getNotificationCount(username) %></a>
-		<a class="active" id="creatQuiz" href = "CreateQuiz.jsp"><i class="fa fa-plus"></i> Create Quiz</a>	   	   
-		<a id="logout" href = "index.html">Logout</a>
-		<div class = "search" id = searchID>
-			<div class = "search" id = searchID>
-				<form action = "SearchPage.jsp">
-					<input type = "text" name = "search" placeholder = "enter value here...">
-					<i class="fa fa-search" aria-hidden="true"></i>
-					<button type="submit" value="searchValue">search</button>
-				</form>
-			</div>
-		</div>
+	<script>
+		$(document).ready(function(){
+			$('#header').load('header.jsp');
+		});
+	</script>
+
+	<div id="header">
+		
 	</div>
 	<div id = title>
 	 	Your Achievements

@@ -4,58 +4,50 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="Notification.NotificationManager"%>
 <%@page import="WebSite.WebSiteInfo"%>
+<%@page import="User.AccountManager"%>
+<%@page import="User.Account"%>
+<%@page import="User.AnnouncementManager"%>
+<%@page import="java.sql.ResultSet"%>
 <%
 	String username = (String) request.getSession().getAttribute("username");
 	NotificationManager notificationManager = (NotificationManager) getServletContext().getAttribute(WebSiteInfo.NOTIFICATION_MANAGER_ATTR);
+	AnnouncementManager anm=(AnnouncementManager)this.getServletContext().getAttribute(WebSiteInfo.ANNOUNCEMENT_ATTR);
 %>
 
 <%
+	AccountManager acm=new AccountManager();
+	Account acc=acm.getAccount(username);
+	int type=acc.getType();
 	QuizStatsManager qsm = new QuizStatsManager();
 	ArrayList<String> recentlyCreatedQuizzes = qsm.getRecentlyCreatedQuizzes();
 	ArrayList<String> popularQuizzes = qsm.getPopularQuizzes();
 	ArrayList<String> recentlyTakenQuizzes = qsm.getRecentlyTakenQuizzes(username);
 	ArrayList<String> recentlyTakenQuizzesByUser = qsm.getRecentlyCreatedQuizzes(username);
 %>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>QuizWebsite</title>
 	<link rel="stylesheet" type="text/css" href="css/MainDesign.css">
 	<link rel="stylesheet" type="text/css" href="css/HomePage.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body>
-	<h1>QuizWebsite</h1>
-	<h2>
-		<%
-			if (username != null) {
-				out.println("You are logged in as " + username + "<br>");
-			} else {
-				out.println("You are not  logged in<br>");
-			}
-		%>
-	</h2>
-
-	<div class="navigation" id = "navigationID">
-		<a class="active" id="home" href = "homepage.jsp" ><i class="fa fa-home"></i> Home</a> 	  
-		<a class="active" id="profile" href = "profile.jsp?username=<%=username %>"><i class="fa fa-user"></i> Profile</a>	    
-		<a class="active" id="achievements" href = "Achievements.jsp"><i class="fa fa-trophy"></i> Achievements</a>    
-		<a class="active" id="messages" href = "notifications.jsp" ><i class="fa fa-envelope"></i> Notifications <%=notificationManager.getNotificationCount(username) %></a>
-		<a class="active" id="creatQuiz" href = "CreateQuiz.jsp"><i class="fa fa-plus"></i> Create Quiz</a>	   	   
-		<a id="logout" href = "index.html">Logout</a>
-		<div class = "search" id = searchID>
-			<div class = "search" id = searchID>
-				<form action = "SearchPage.jsp">
-					<input type = "text" name = "search" placeholder = "enter value here...">
-					<i class="fa fa-search" aria-hidden="true"></i>
-					<button type="submit" value="searchValue">search</button>
-				</form>
-			</div>
-		</div>
-	</div>
-
 	
+</head>
+
+<body>
+	<script>
+		$(document).ready(function(){
+			$('#header').load('header.jsp');
+		});
+	</script>
+
+	<div id="header">
+		
+	</div>
 
 	<div id="generalInfo">
 		<div id="popularQuizzes">
@@ -122,6 +114,18 @@
 
 	<div id="announcements">
 		<p id="announcement-title">Announcements</p>
+		<%
+			ResultSet rs=anm.getAllAnnouncements();
+			while(rs.next()){
+				int admin=rs.getInt(3);
+				String adminName=acm.getUserNameById(admin);
+				String text=rs.getString(2);
+				out.print("<div name='announce' style='border: 1px green solid'>");
+				out.print("<p>Author: <strong>"+adminName+"</strong></p>");
+				out.print("<p>"+text+"</p>");
+				out.print("</div>");
+			}
+		%>
 	</div>
 
 </body>
