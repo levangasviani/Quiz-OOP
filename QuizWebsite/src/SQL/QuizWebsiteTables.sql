@@ -256,17 +256,6 @@ CREATE TABLE `QuizWebsiteDatabase`.`NOTIFICATION_TYPES` (
   `ID` INT NOT NULL,
   `NAME` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`ID`));
-);
-
-insert into `NOTIFICATION_TYPES`(`ID`, `NAME`) values(1, 'sdasd');
-insert into `NOTIFICATION_TYPES`(`ID`, `NAME`) values(2, 'asds');
-insert into `NOTIFICATION_TYPES`(`ID`, `NAME`) values(3, 'ads');
-insert into `NOTIFICATION_TYPES`(`ID`, `NAME`) values(4, 'sdasdasd');
-insert into `NOTIFICATION_TYPES`(`ID`, `NAME`) values(5, 'aad');
-insert into `NOTIFICATION_TYPES`(`ID`, `NAME`) values(6, 'asd');
-insert into `NOTIFICATION_TYPES`(`ID`, `NAME`) values(7, 'as');
-insert into `NOTIFICATION_TYPES`(`ID`, `NAME`) values(8, 'sdaadsd');
-
 
   
 /**
