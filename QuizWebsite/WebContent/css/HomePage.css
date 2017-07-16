@@ -94,10 +94,10 @@ h2	 {
 #btn {
     background-color: #4CAF50;
     color: white;
-    border: 2px solid #4CAF50;
+    border: 2px solid white;
+    font-size: 20px;
+    cursor: pointer;
 }
 
 #btn:hover {
 }
-  
-

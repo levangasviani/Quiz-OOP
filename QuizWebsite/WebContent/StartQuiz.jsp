@@ -30,31 +30,31 @@
 	<div id="header">
 		
 	</div>
-	
-	<h1 id="h1"><%=request.getAttribute("quizName") %> </h1>
-	<h1 id="h1"><%=request.getAttribute("description") %> </h1>
-	<div id = "mainID">								
-    <form action="ShowQuestionsServlet" >
-   
-    <input type = "hidden" name = "quizName" value = <%=request.getAttribute("quizName") %>>
-     
-    Practice Mode: <input type = "radio" name = "practiceMode" value = "off" checked = "checked"> Off
-	<input type = "radio" name = "practiceMode" value = "on"> On <br>		
-			
-	Display settings: <input type = "radio" name = "pageDisplay" value = "onePage" checked = "checked"> One Page
-	<input type = "radio" name = "pageDisplay" value = "multiplePage"> Multiple Page <br>
-   
-    <br><input id= "start" type="submit" value="Start Quiz"><br>
-   
-    </form>
-	</div>
-	<form action="NotificationServlet">
-		<input type="hidden" name="sender" value="<%=username %>" />
-		<input type="text" name="receiver" />
-		<input type="hidden" name="type" value="1" />
-		<input type="hidden" name="message" value="<%=request.getAttribute("quizName") %>" />
-		<input type="submit" value="Send Challenge" />
-	</form>
-
+	<div >
+		<h1 id="h1"><%=request.getAttribute("quizName") %> </h1>
+		<h1 id="h1"><%=request.getAttribute("description") %> </h1>
+		<div  align = "center" >								
+	    <form action="ShowQuestionsServlet" >
+	   
+	    <input type = "hidden" name = "quizName" value = <%=request.getAttribute("quizName") %>>
+	    
+	    Practice Mode: <input type = "radio" name = "practiceMode" value = "off" checked = "checked"> Off
+		<input type = "radio" name = "practiceMode" value = "on"> On <br>		
+				
+		Display settings: <input type = "radio" name = "pageDisplay" value = "onePage" checked = "checked"> One Page
+		<input type = "radio" name = "pageDisplay" value = "multiplePage"> Multiple Page <br>
+	   
+	    <br><a><input id= "btn" type="submit" value="Start Quiz"></a><br>
+	   
+	    </form>
+		<form action="NotificationServlet">
+			<input type="hidden" name="sender" value="<%=username %>" />
+			<input type="text" name="receiver" />
+			<input type="hidden" name="type" value="1" />
+			<input type="hidden" name="message" value="<%=request.getAttribute("quizName") %>" />
+			<a><input type="submit"  id = "btn" value="Send Challenge" /> </a>
+		</form>
+		</div>
+	<</div>
 </body>
 </html>
