@@ -2,7 +2,7 @@ create schema QuizWebsiteDatabase
 
 default character set utf8;
 
-
+use QuizWebsiteDatabase;
 
 
 /**
@@ -14,6 +14,11 @@ CREATE TABLE `QuizWebsiteDatabase`.`USER_TYPES` (
     `NAME` VARCHAR(45) NOT NULL,
     PRIMARY KEY (`ID`)
 );
+
+
+
+insert into `USER_TYPES`(`ID`, `NAME`) values(1, 'sdasd');
+insert into `USER_TYPES`(`ID`, `NAME`) values(2, 'asd');
 
 
 
@@ -55,10 +60,10 @@ CREATE TABLE `QuizWebsiteDatabase`.`FRIENDS` (
     INDEX `fk_FRIENDS_1_idx` (`USER_ONE` ASC),
     INDEX `fk_FRIENDS_2_idx` (`USER_TWO` ASC),
     CONSTRAINT `fk_FRIENDS_1` FOREIGN KEY (`USER_ONE`)
-        REFERENCES `QuizWebsiteDatabase`.`USERS` (`ID`),
+        REFERENCES `QuizWebsiteDatabase`.`USERS` (`ID`) on delete cascade,
     CONSTRAINT `fk_FRIENDS_2` FOREIGN KEY (`USER_TWO`)
         REFERENCES `QuizWebsiteDatabase`.`USERS` (`ID`)
-        ON DELETE NO ACTION ON UPDATE NO ACTION
+        ON DELETE cascade ON UPDATE NO ACTION
 );
 
 
@@ -96,10 +101,10 @@ CREATE TABLE `QuizWebsiteDatabase`.`COMPLETED_QUIZZES` (
      INDEX `fk_COMPLETED_QUIZES_1_idx` (`USER_ID` ASC),
      INDEX `fk_COMPLETED_QUIZES_2_idx` (`QUIZ_ID` ASC),
     CONSTRAINT `fk_COMPLETED_QUIZES_TO_USERS` FOREIGN KEY (`USER_ID`)
-        REFERENCES `QuizWebsiteDatabase`.`USERS` (`ID`),
+        REFERENCES `QuizWebsiteDatabase`.`USERS` (`ID`) ON DELETE cascade,
     CONSTRAINT `fk_COMPLETED_QUIZES_TO_QUIZES` FOREIGN KEY (`QUIZ_ID`)
         REFERENCES `QuizWebsiteDatabase`.`QUIZZES` (`ID`)
-        ON DELETE NO ACTION ON UPDATE NO ACTION
+        ON DELETE cascade ON UPDATE NO ACTION
 );
 
 
@@ -120,12 +125,12 @@ CREATE TABLE `QuizWebsiteDatabase`.`CREATED_QUIZZES` (
   CONSTRAINT `fk_CREATED_TO_USERS`
     FOREIGN KEY (`USER_ID`)
     REFERENCES `QuizWebsiteDatabase`.`USERS` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE cascade
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_CREATED_TO_QUIZZES`
     FOREIGN KEY (`QUIZ_ID`)
     REFERENCES `QuizWebsiteDatabase`.`QUIZZES` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE cascade
     ON UPDATE NO ACTION
 );
 
@@ -143,7 +148,14 @@ CREATE TABLE `QuizWebsiteDatabase`.`QUESTION_TYPES` (
     PRIMARY KEY (`ID`)
 );
 
-
+insert into `QUESTION_TYPES`(`ID`, `NAME`) values(1, 'sdasd');
+insert into `QUESTION_TYPES`(`ID`, `NAME`) values(2, 'asds');
+insert into `QUESTION_TYPES`(`ID`, `NAME`) values(3, 'ads');
+insert into `QUESTION_TYPES`(`ID`, `NAME`) values(4, 'sdasdasd');
+insert into `QUESTION_TYPES`(`ID`, `NAME`) values(5, 'aad');
+insert into `QUESTION_TYPES`(`ID`, `NAME`) values(6, 'asd');
+insert into `QUESTION_TYPES`(`ID`, `NAME`) values(7, 'as');
+insert into `QUESTION_TYPES`(`ID`, `NAME`) values(8, 'sdaadsd');
 
 
 /**
@@ -202,6 +214,18 @@ CREATE TABLE `QuizWebsiteDatabase`.`ACHIEVEMENT_TYPES` (
 );
 
 
+insert into `ACHIEVEMENT_TYPES`(`ID`, `NAME`) values(1, 'sdasd');
+insert into `ACHIEVEMENT_TYPES`(`ID`, `NAME`) values(2, 'asds');
+insert into `ACHIEVEMENT_TYPES`(`ID`, `NAME`) values(3, 'ads');
+insert into `ACHIEVEMENT_TYPES`(`ID`, `NAME`) values(4, 'sdasdasd');
+insert into `ACHIEVEMENT_TYPES`(`ID`, `NAME`) values(5, 'aad');
+insert into `ACHIEVEMENT_TYPES`(`ID`, `NAME`) values(6, 'asd');
+insert into `ACHIEVEMENT_TYPES`(`ID`, `NAME`) values(7, 'as');
+insert into `ACHIEVEMENT_TYPES`(`ID`, `NAME`) values(8, 'sdaadsd');
+
+
+
+
 
 /**
 	მომხმარებლების ცხრილი
@@ -216,10 +240,10 @@ CREATE TABLE `QuizWebsiteDatabase`.`ACHIEVEMENTS` (
     INDEX `fk_ACHIEVEMENTS_2_idx` (`TYPE_ID` ASC),
     CONSTRAINT `fk_ACHIEVEMENTS_TO_USERS` FOREIGN KEY (`USER_ID`)
         REFERENCES `QuizWebsiteDatabase`.`USERS` (`ID`)
-        ON DELETE NO ACTION ON UPDATE NO ACTION,
+        ON DELETE cascade ON UPDATE NO ACTION,
     CONSTRAINT `fk_ACHIEVEMENTS_TO_TYPES` FOREIGN KEY (`TYPE_ID`)
         REFERENCES `QuizWebsiteDatabase`.`ACHIEVEMENT_TYPES` (`ID`)
-        ON DELETE NO ACTION ON UPDATE NO ACTION
+        ON DELETE cascade ON UPDATE NO ACTION
 );
 
 
@@ -232,6 +256,17 @@ CREATE TABLE `QuizWebsiteDatabase`.`NOTIFICATION_TYPES` (
   `ID` INT NOT NULL,
   `NAME` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`ID`));
+);
+
+insert into `NOTIFICATION_TYPES`(`ID`, `NAME`) values(1, 'sdasd');
+insert into `NOTIFICATION_TYPES`(`ID`, `NAME`) values(2, 'asds');
+insert into `NOTIFICATION_TYPES`(`ID`, `NAME`) values(3, 'ads');
+insert into `NOTIFICATION_TYPES`(`ID`, `NAME`) values(4, 'sdasdasd');
+insert into `NOTIFICATION_TYPES`(`ID`, `NAME`) values(5, 'aad');
+insert into `NOTIFICATION_TYPES`(`ID`, `NAME`) values(6, 'asd');
+insert into `NOTIFICATION_TYPES`(`ID`, `NAME`) values(7, 'as');
+insert into `NOTIFICATION_TYPES`(`ID`, `NAME`) values(8, 'sdaadsd');
+
 
   
 /**
@@ -256,27 +291,27 @@ CREATE TABLE `QuizWebsiteDatabase`.`NOTIFICATIONS` (
   CONSTRAINT `fk_NOTIFICATIONS_TO_USERS1`
     FOREIGN KEY (`SENDER_ID`)
     REFERENCES `QuizWebsiteDatabase`.`USERS` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE cascade
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_NOTIFICATIONS_TO_USERS2`
     FOREIGN KEY (`RECEIVER_ID`)
     REFERENCES `QuizWebsiteDatabase`.`USERS` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE cascade
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_NOTIFICATIONS_TO_QUIZZES`
     FOREIGN KEY (`QUIZ_ID`)
     REFERENCES `QuizWebsiteDatabase`.`QUIZZES` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE cascade
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_NOTIFICATIONS_TO_QUESTIONS`
     FOREIGN KEY (`QUESTION_ID`)
     REFERENCES `QuizWebsiteDatabase`.`QUESTIONS` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE cascade
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_NOTIFICATIONS_TO_NOTIFICATION_TYPES`
     FOREIGN KEY (`TYPE_ID`)
     REFERENCES `QuizWebsiteDatabase`.`NOTIFICATION_TYPES` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE cascade
     ON UPDATE NO ACTION);
 
     
@@ -293,7 +328,7 @@ CREATE TABLE `QuizWebsiteDatabase`.`NOTIFICATION_COUNT` (
   CONSTRAINT `fk_NITIFICATION_COUNT_TO_USERS`
     FOREIGN KEY (`USER_ID`)
     REFERENCES `QuizWebsiteDatabase`.`USERS` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE cascade
     ON UPDATE NO ACTION);
     
 
@@ -310,5 +345,5 @@ CREATE TABLE `QuizWebsiteDatabase`.`ANNOUNCEMENTS` (
   CONSTRAINT `fk_ANNOUNCEMENTS_TO_USERS`
     FOREIGN KEY (`ADMIN_ID`)
     REFERENCES `QuizWebsiteDatabase`.`USERS` (`ID`)
-    ON DELETE NO ACTION
+    ON DELETE cascade
     ON UPDATE NO ACTION);
