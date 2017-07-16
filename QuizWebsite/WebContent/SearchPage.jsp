@@ -31,14 +31,6 @@
 	<div id="header">
 		
 	</div>
-
-	<div class = "search" id = searchID>
-  		<form action = "SearchPage.jsp">
-			<input id = searchInput type = "text" name = "search" placeholder = "enter value here..."> <br>
-    		<!-- <i class="fa fa-search" aria-hidden="true"></i> <br> -->
-			<button id = searchButton type="submit" value="searchValue">search</button>
-		</form>
-  	 </div>
   	 <div id = res>
 	<%
 			SearchManager sManager = (SearchManager) getServletContext().getAttribute(WebSiteInfo.SEARCH_MANAGER_ATTR);
