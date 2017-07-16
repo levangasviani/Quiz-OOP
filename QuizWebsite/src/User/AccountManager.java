@@ -172,6 +172,26 @@ public class AccountManager {
 	}
 	
 	
+	
+	/**
+	 * user with the given username becomes admin
+	 * @param username - username
+	 * 
+	 */
+	public void promoteAccount(String username){
+		String query="UPDATE "+DBInfo.USERS+" SET TYPE_ID=2 "+" WHERE USERNAME=?;";
+		try {
+			PreparedStatement preparedStatement=connection.prepareStatement(query);
+			preparedStatement.setString(1, username);
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 	/**
 	 * Returns user id from the database
 	 * If user doesn't exist method returns -1
@@ -272,5 +292,24 @@ public class AccountManager {
 		}
 
 		return acc;
+	}
+	
+	/**
+	 * returns the number of existent accounts
+	 * @return - int number of accounts
+	 */
+	public int getNumberOfaccounts(){
+		String query="SELECT COUNT(*) FROM "+DBInfo.USERS;
+		ResultSet rs;
+		try {
+			PreparedStatement preparedStatement=connection.prepareStatement(query);
+			rs = preparedStatement.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 	}
 }
