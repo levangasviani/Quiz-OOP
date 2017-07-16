@@ -94,12 +94,16 @@ function redirectToStats(){
 	window.location="ShowQuizStatistics.jsp?"+"quizName="+quizname+"&"+"score="+points+"&"+"elapsedTime="+elapsedtime;
 }
 
+
+
+
 function question_response(questionType, questionId){
 		var elements=document.getElementById(questionId).getElementsByTagName("input");
 					$.post("QuestionCheck", {answer : elements[0].value, type : questionType, Id : questionId}, function(data){
 						points+=parseInt(data);
 						updatePoints();
 						checkedNumber++;
+					
 						if(checkedNumber==length){
 							redirectToStats();
 						}
@@ -120,6 +124,7 @@ function fill_blank(questionType, questionId){
 						points+=parseInt(data);
 						updatePoints();
 						checkedNumber++;
+				
 						if(checkedNumber==length){
 							redirectToStats();
 						}
@@ -139,10 +144,16 @@ function multiple_choice(questionType, questionId){
 								if(checkedNumber==length){
 									redirectToStats();
 								}
+								
 							});
-							break;
+							return;
 						}
 					}
+					checkedNumber++;
+					if(checkedNumber==length){
+						redirectToStats();
+					}
+					
 }
 
 
@@ -152,6 +163,7 @@ function picture_response(questionType, questionId){
 						points+=parseInt(data);
 						updatePoints();
 						checkedNumber++;
+					
 						if(checkedNumber==length){
 							redirectToStats();
 						}
@@ -199,8 +211,9 @@ function multiple_choice_multiple_answer(questionType, questionId){
 					}
 					$.post("QuestionCheck", {answer : inputAnswers, type : questionType, Id : questionId}, function(data){
 						points+=parseInt(data);
-						updatePoints();
 						checkedNumber++;
+						updatePoints();
+					
 						if(checkedNumber==length){
 							redirectToStats();
 						}
@@ -221,6 +234,7 @@ function matching(questionType, questionId){
 						points+=parseInt(data);
 						updatePoints();
 						checkedNumber++;
+					
 						if(checkedNumber==length){
 							redirectToStats();
 						}
@@ -246,22 +260,25 @@ function MultiPageProcess(){
 
 function MultiPageStart(){
 	if(num==length){
-		redirectToStats();
+		return;
 	}
+	var i;
 	document.getElementById("butt").style.display = "none";
 	var questionTyp=questionTypes[num].value;
 	var questionI=questionIds[num].value;
 	var time=times[num].value;
 	num++;
-	if(time!=-1){
-		setCountDown(time);
-	}
 	
 		var file=getFile(questionTyp);
 			$.post(file+".jsp", { questionId: questionI, questionType: questionTyp}, function(data, status){
 				document.getElementById("questions").innerHTML="<div id='"+questionI+"'>"+data+"</div>";
-				document.getElementById("subm").innerHTML="<input type='Submit' value='submit' onclick='getNextQuestion("+questionTyp+", "+questionI+")'>";
-				
+				document.getElementById("subm").innerHTML="<input type='submit' id='nextq' value='submit' onclick='getNextQuestion("+questionTyp+", "+questionI+")'>";
+				if(time!=-1){
+					setCountDown(time);
+				}
+				else{
+					document.getElementById("timeLeft").innerHTML="";
+				}
 			});
 			
 	}
@@ -309,8 +326,8 @@ function displayTime(){
 	 var min = Math.floor(countDownTime/60);
 	 var sec = Math.floor(countDownTime-min*60);
 	 if(countDownTime<0){
-		 clearTimeout(disp);
-		 MultiPageStart();
+		 document.getElementById("nextq").click();
+		 return;
 	 }
 	 countDownTime--;
 	 document.getElementById("timeLeft").innerHTML=min+"m "+sec+"s";
