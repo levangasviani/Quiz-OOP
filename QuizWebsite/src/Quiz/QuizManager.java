@@ -306,4 +306,18 @@ public class QuizManager {
 		return quizCreator;
 	}
 
+	public String getQuizName(int id){
+		String sql = "SELECT NAME FROM " + DBInfo.QUIZZES + " WHERE ID = ?";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			return resultSet.getString(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+	}
 }

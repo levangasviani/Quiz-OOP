@@ -53,7 +53,10 @@ public class NotificationServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("FriendServlet");
 			dispatcher.forward(request, response);
 		} else if (type == 3) {
-
+			request.setAttribute("receiver", receiver);
+			request.setAttribute("message", message);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("GradeServlet");
+			dispatcher.forward(request, response);
 		} else if (type == 4) {
 			response.sendRedirect("notifications.jsp");
 		}

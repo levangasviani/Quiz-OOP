@@ -39,6 +39,8 @@
 	<%
 	QuizManager qm = (QuizManager) this.getServletContext().getAttribute(WebSiteInfo.QUIZ_MANAGER_ATTR);
 	Quiz quiz = qm.getQuiz(request.getParameter("quizName"));
+	String sender = (String) request.getSession().getAttribute("username");
+	String receiver = (String) qm.getQuizCreator(quiz.getName());
 	ArrayList<Question> questions = qm.getQuestions(quiz);
 %>
 
@@ -55,6 +57,8 @@
 	out.println("<button id='butt' onclick='MultiPageProcess()'"+">"+"Start!"+"</button>");
 %>
 <input type="hidden" value=<%=request.getParameter("quizName")%> id="quizName">
+<input type="hidden" value=<%=sender %> id="sender">
+<input type="hidden" value=<%=receiver %> id="receiver">
 
 <div id="summaryID">
 		<div id = "title">

@@ -37,10 +37,15 @@
 <%
 	QuizManager qm = (QuizManager) this.getServletContext().getAttribute(WebSiteInfo.QUIZ_MANAGER_ATTR);
 	Quiz quiz = qm.getQuiz(request.getParameter("quizName"));
+	String sender = (String) request.getSession().getAttribute("username");
+	String receiver = (String) qm.getQuizCreator(quiz.getName());
 	ArrayList<Question> questions = qm.getQuestions(quiz);
    	
 %>
 <input type="hidden" value=<%=request.getParameter("quizName")%> id="quizName">
+<input type="hidden" value=<%=sender %> id="sender">
+<input type="hidden" value=<%=receiver %> id="receiver">
+
 
 <div id="summaryID">
 		<div id = "title">
@@ -56,6 +61,8 @@
 	for(int i=0; i<questions.size(); i++){
 		out.println("<input type='hidden' name='questionId' value='"+questions.get(i).getId()+"'>");
 		out.println("<input type='hidden' name='questionType' value='"+questions.get(i).getTypeId()+"'>");
+		out.println("<input type='hidden' name='sender' value=\""  + sender + "\">");
+		out.println("<input type='hidden' name='receiver' value=\""  + receiver + "\">");
 	}
 	out.println("</div>");
 	out.println("<button id='butt' onclick='OnePageProcess()'"+">"+"Start!"+"</button>");
