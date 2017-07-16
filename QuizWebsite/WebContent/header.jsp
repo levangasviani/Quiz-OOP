@@ -7,21 +7,30 @@
 		<%
 		AccountManager acm=(AccountManager)this.getServletContext().getAttribute(WebSiteInfo.ACCOUNT_MANAGER_ATTR);
 		NotificationManager notificationManager = (NotificationManager) getServletContext().getAttribute(WebSiteInfo.NOTIFICATION_MANAGER_ATTR);
-			String username = (String) request.getSession().getAttribute("username");
-			int type=acm.getAccount(username).getType();
-			if (username != null) {
-				out.println("You are logged in as " + username + "<br>");
-			} else {
-				out.println("You are not  logged in<br>");
-			}
+		String username = (String) request.getSession().getAttribute("username");
+		int type = 1;
+		int notnum = 0;
+		if(username != null){
+		 	type = acm.getAccount(username).getType();
+		 	notnum = notificationManager.getNotificationCount(username);
+		 	out.println("You are logginded as" + username);
+		 }
 		%>
 	</h2>
-
+	
+	<div id = "loginplace">
+  		<%
+ 		if (username == null){
+   		    %>
+  		<%@include  file="loginindex.html" %>
+  		<%} %>
+  	</div>
+  	
 	<div class="navigation" id = "navigationID">
 		<a class="active" id="home" href = "homepage.jsp" ><i class="fa fa-home"></i> Home</a> 	  
 		<a class="active" id="profile" href = "profile.jsp?username=<%=username %>"><i class="fa fa-user"></i> Profile</a>	    
 		<a class="active" id="achievements" href = "Achievements.jsp"><i class="fa fa-trophy"></i> Achievements</a>    
-		<a class="active" id="messages" href = "notifications.jsp" ><i class="fa fa-envelope"></i> Notifications <%=notificationManager.getNotificationCount(username) %></a>
+		<a class="active" id="messages" href = "notifications.jsp" ><i class="fa fa-envelope"></i> Notifications <%=notnum %></a>
 		<a class="active" id="creatQuiz" href = "CreateQuiz.jsp"><i class="fa fa-plus"></i> Create Quiz</a>
 		<%
 			if(type==2){
