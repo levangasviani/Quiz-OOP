@@ -16,13 +16,21 @@
 
 <%
 	AccountManager acm=new AccountManager();
-	Account acc=acm.getAccount(username);
-	int type=acc.getType();
+	int type = 1;
 	QuizStatsManager qsm = new QuizStatsManager();
-	ArrayList<String> recentlyCreatedQuizzes = qsm.getRecentlyCreatedQuizzes();
-	ArrayList<String> popularQuizzes = qsm.getPopularQuizzes();
-	ArrayList<String> recentlyTakenQuizzes = qsm.getRecentlyTakenQuizzes(username);
-	ArrayList<String> recentlyTakenQuizzesByUser = qsm.getRecentlyCreatedQuizzes(username);
+	ArrayList<String> recentlyCreatedQuizzes = new ArrayList<String>();
+	 	ArrayList<String> popularQuizzes = new ArrayList<String>();
+	 	ArrayList<String> recentlyTakenQuizzes = new ArrayList<String>();
+	 	ArrayList<String> recentlyTakenQuizzesByUser = new ArrayList<String>();
+	 	Account acc;
+	 	if(username != null){
+	 		acc=acm.getAccount(username);
+	 		type=acc.getType();
+	 		recentlyCreatedQuizzes = qsm.getRecentlyCreatedQuizzes();
+	 		popularQuizzes = qsm.getPopularQuizzes();
+	 		recentlyTakenQuizzes = qsm.getRecentlyTakenQuizzes(username);
+	 		recentlyTakenQuizzesByUser = qsm.getRecentlyCreatedQuizzes(username);
+	 	}
 %>
 
 
@@ -32,6 +40,7 @@
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>QuizWebsite</title>
+	<link rel="stylesheet"  type="text/css" href="css/loginstyle.css">
 	<link rel="stylesheet" type="text/css" href="css/MainDesign.css">
 	<link rel="stylesheet" type="text/css" href="css/HomePage.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -115,15 +124,17 @@
 	<div id="announcements">
 		<p id="announcement-title">Announcements</p>
 		<%
-			ResultSet rs=anm.getAllAnnouncements();
-			while(rs.next()){
-				int admin=rs.getInt(3);
-				String adminName=acm.getUserNameById(admin);
-				String text=rs.getString(2);
-				out.print("<div name='announce' style='border: 1px green solid'>");
-				out.print("<p>Author: <strong>"+adminName+"</strong></p>");
-				out.print("<p>"+text+"</p>");
-				out.print("</div>");
+			if(username!= null && anm != null){
+   				ResultSet rs=anm.getAllAnnouncements();
+   				while(rs.next()){
+   					int admin=rs.getInt(3);
+   					String adminName=acm.getUserNameById(admin);
+   					String text=rs.getString(2);
+   					out.print("<div name='announce' style='border: 1px green solid'>");
+   					out.print("<p>Author: <strong>"+adminName+"</strong></p>");
+   					out.print("<p>"+text+"</p>");
+   					out.print("</div>");
+   				}
 			}
 		%>
 	</div>
