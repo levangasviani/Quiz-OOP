@@ -32,8 +32,9 @@ public class QuizApp {
 		ArrayList<Question> questions = quizMan.getQuestions(firstQuiz);
 		for(Question q : questions) {
 			System.out.println(q.toString());
+			
 		}
-		
+		System.out.println(quizMan.getNumberOfQuizzes());
 		//quizMan.deleteQuiz(firstQuiz.getName());
 		
 		

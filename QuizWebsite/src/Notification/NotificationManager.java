@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import Database.DBConnection;
 import Database.DBInfo;
@@ -35,7 +36,10 @@ public class NotificationManager {
 		int receiver = getUserId(notification.getReceiver()); // id of receiver
 		int typeId = notification.getType(); // notification type
 		String column = ""; // which column must be changed, depending on type
+		String additionalColumn = "";
 		int id = 0; // if its challenge or grade, id of target
+		String message = "";
+		String status = "";
 
 		if (typeId == DBInfo.NOTIFICATION_TYPE_CHALLENGE_REQUEST) {
 			column = ", QUIZ_ID";
@@ -43,23 +47,33 @@ public class NotificationManager {
 		} else if (typeId == DBInfo.NOTIFICATION_TYPE_FRIEND_REQUEST) {
 			column = ", FRIEND_STATUS";
 		} else if (typeId == DBInfo.NOTIFICATION_TYPE_GRADE_REQUEST) {
-			column = ", QUESTION_ID";
-			id = Integer.parseInt(notification.getContent());
+			column = ", QUESTION_ID, MESSAGE, FRIEND_STATUS";
+			additionalColumn = ", ?, ?";
+			String content = notification.getContent();
+			StringTokenizer tokenizer = new StringTokenizer(content, ":");
+			status = tokenizer.nextToken();
+			id = Integer.parseInt(tokenizer.nextToken());
+			message = tokenizer.nextToken();
 		} else if (typeId == DBInfo.NOTIFICATION_TYPE_MESSAGE) {
 			column = ", MESSAGE";
+			message = notification.getContent();
 		}
-		String sql = "INSERT INTO " + DBInfo.NOTIFICATIONS + " (SENDER_ID, RECEIVER_ID" + column
-				+ ", TYPE_ID) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO " + DBInfo.NOTIFICATIONS + " (SENDER_ID, RECEIVER_ID, TYPE_ID" + column
+				+ ") VALUES (?, ?, ?, ?" + additionalColumn + ")";
 
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, sender);
 			preparedStatement.setInt(2, receiver);
+			preparedStatement.setInt(3, typeId);
 			if (id != 0)
-				preparedStatement.setInt(3, id);
+				preparedStatement.setInt(4, id);
 			else
-				preparedStatement.setString(3, notification.getContent());
-			preparedStatement.setInt(4, typeId);
+				preparedStatement.setString(4, message);
+			if (!additionalColumn.equals("")) {
+				preparedStatement.setString(5, message);
+				preparedStatement.setString(6, status);
+			}
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -89,16 +103,20 @@ public class NotificationManager {
 
 			while (resultSet.next()) {
 				String content = "";
-				if (resultSet.getString(DBInfo.NOTIFICATIONS_MESSAGE) != null)
+				if (resultSet.getInt(DBInfo.NOTIFICATIONS_TYPE_ID) == 4)
 					content = resultSet.getString(DBInfo.NOTIFICATIONS_MESSAGE);
-				else if (resultSet.getString(DBInfo.NOTIFICATIONS_FRIEND_STATUS) != null)
+				else if (resultSet.getInt(DBInfo.NOTIFICATIONS_TYPE_ID) == 2)
 					content = resultSet.getString(DBInfo.NOTIFICATIONS_FRIEND_STATUS);
-				else if (resultSet.getInt(DBInfo.NOTIFICATIONS_QUIZ_ID) > 0)
+				else if (resultSet.getInt(DBInfo.NOTIFICATIONS_TYPE_ID) == 1)
 					content = getQuizName(resultSet.getInt(DBInfo.NOTIFICATIONS_QUIZ_ID));
-				else if (resultSet.getInt(DBInfo.NOTIFICATIONS_QUESTION_ID) > 0)
-					content += resultSet.getInt(DBInfo.NOTIFICATIONS_QUESTION_ID);
-				result.add(new Notification(getUserUsername(resultSet.getInt(DBInfo.NOTIFICATIONS_SENDER_ID)), getUserUsername(resultSet.getInt(DBInfo.NOTIFICATIONS_RECEIVER_ID)),
-						content, resultSet.getInt(DBInfo.NOTIFICATIONS_TYPE_ID)));
+				else if (resultSet.getInt(DBInfo.NOTIFICATIONS_TYPE_ID) == 3)
+					content += resultSet.getString(DBInfo.NOTIFICATIONS_FRIEND_STATUS) + ":"
+							+ resultSet.getInt(DBInfo.NOTIFICATIONS_QUESTION_ID) + ":"
+							+ resultSet.getString(DBInfo.NOTIFICATIONS_MESSAGE);
+				System.out.println(content);
+				result.add(new Notification(getUserUsername(resultSet.getInt(DBInfo.NOTIFICATIONS_SENDER_ID)),
+						getUserUsername(resultSet.getInt(DBInfo.NOTIFICATIONS_RECEIVER_ID)), content,
+						resultSet.getInt(DBInfo.NOTIFICATIONS_TYPE_ID)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -126,6 +144,7 @@ public class NotificationManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("Sandro");
 		return 0;
 	}
 

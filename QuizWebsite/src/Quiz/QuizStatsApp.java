@@ -11,7 +11,7 @@ public class QuizStatsApp {
 		qsm.addQuizCompleted("levangasviani", "FirstQuiz", 8, 60);
 		
 		ArrayList<String> a = qsm.getRecentlyCreatedQuizzes("SIUS25");
-			
+		
 		for(String s : a) System.out.println(s);
 	}
 

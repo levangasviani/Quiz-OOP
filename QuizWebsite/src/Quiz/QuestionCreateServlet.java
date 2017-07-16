@@ -1,7 +1,9 @@
 package Quiz;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 
 import javax.servlet.RequestDispatcher;
@@ -17,6 +19,7 @@ import org.json.JSONObject;
 import Database.DBInfo;
 import WebSite.WebSiteInfo;
 import webclasses.AchievementManager;
+import webclasses.AchievementsCalculator;
 
 
 /**
@@ -173,6 +176,32 @@ public class QuestionCreateServlet extends HttpServlet {
 			String username = (String) request.getSession().getAttribute("username");
 			processQuestions(questions, qm.getQuizID(qq));
 			qsm.addQuizCreated(username, quizName);
+			
+			AchievementsCalculator calc = new AchievementsCalculator();
+			QuizStatsManager statManager = new QuizStatsManager();
+			AchievementManager achManager = new AchievementManager();
+			
+			int created = statManager.getCreatedQuizzesCount(username);
+			ArrayList<String> achievementsNow = calc.getAchievements(created, 0);
+			System.out.println(achievementsNow.size());
+			ArrayList<String> achievementsBefore = achManager.getAchievements(username);
+			
+			HashSet<String> achievementsNowSet = new HashSet<String>();
+			for(int i = 0; i < achievementsNow.size(); i++) {
+				achievementsNowSet.add(achievementsNow.get(i));
+			}
+			HashSet<String> achievementsBeforeSet = new HashSet<String>();
+			for(int i = 0; i < achievementsBefore.size(); i++) {
+				achievementsBeforeSet.add(achievementsBefore.get(i));
+			}
+			
+			for(String s: achievementsNowSet) {
+				if(!achievementsBeforeSet.contains(s)) {
+					achManager.setAchievement(s, username);
+				}
+			}
+			
+			
 			response.sendRedirect("CreateQuiz.jsp");
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block

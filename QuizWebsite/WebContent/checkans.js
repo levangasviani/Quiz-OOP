@@ -243,11 +243,16 @@ function matching(questionType, questionId){
 
 
 function graded(questionType, questionId){
+	var sender=document.getElementById("sender").value;
+	var receiver=document.getElementById("receiver").value;
+	var elements=document.getElementById(questionId).getElementsByTagName("input");
+	$.post("NotificationServlet", {sender: sender, receiver: receiver, type: 3, message: "SENT:"+questionId+":"+elements[0].value}, function(data){
+		
+	});
 	checkedNumber++;
 	if(checkedNumber==length){
 		redirectToStats();
 	}
-	return;
 }
 
 

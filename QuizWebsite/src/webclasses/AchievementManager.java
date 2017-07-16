@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import Database.DBConnection;
 import Database.DBInfo;
+import User.AccountManager;
 
 /**
  * @author levanAmateur(lkara15)
@@ -27,23 +28,6 @@ public class AchievementManager {
 	 */
 	public AchievementManager() {
 		con = DBConnection.getConnection();
-	}
-	
-	/*
-	 * Returns userID according to a username.
-	 */
-	private int getUserID(String username) {
-		int result = 0;
-		String query = "SELECT * FROM " + DBInfo.USERS + " WHERE USERNAME = ?;";
-		try {
-			PreparedStatement preparedStatement = con.prepareStatement(query);
-			preparedStatement.setString(1, username);
-			ResultSet rs = preparedStatement.executeQuery();
-			if(rs.next()) result = rs.getInt(DBInfo.USERS_ID);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
 	}
 	
 	/*
@@ -71,9 +55,10 @@ public class AchievementManager {
 	 * @param username
 	 * @return
 	 */
-	public ArrayList<String> getAcievements(String username) {
+	public ArrayList<String> getAchievements(String username) {
 		ArrayList<String> result = new ArrayList<>();
-		int userID = getUserID(username);
+		AccountManager am = new AccountManager();
+		int userID = am.getAccountId(username);
 		ArrayList<Integer> achievementIDs = getAchievementIDs(userID);
 		for(int i = 0; i < achievementIDs.size(); i++) {
 			int id = achievementIDs.get(i);
@@ -112,8 +97,9 @@ public class AchievementManager {
 	
 	public void setAchievement(String achievement, String username) {
 		int achievementTypeID = getAchievementTypeID(achievement);
-		int userID = getUserID(username);
-		String query = "INSERT INTO " + DBInfo.ACHIEVEMENTS+ " (USER_ID, TYPE_ID) VALUES (?, ?)";
+		AccountManager am = new AccountManager();
+		int userID = am.getAccountId(username);
+		String query = "INSERT INTO " + DBInfo.ACHIEVEMENTS + " (USER_ID, TYPE_ID) VALUES (?, ?)";
 		try {
 			PreparedStatement preparedStatement = con.prepareStatement(query);
 			preparedStatement.setInt(1, userID);
@@ -129,12 +115,20 @@ public class AchievementManager {
 	 */
 	public static void main(String[] args) {
 		AchievementManager am = new AchievementManager();
-		am.setAchievement("Prolific Author", "levan1");
-		ArrayList<String> arr = am.getAcievements("levan1");
+		am.setAchievement("New one", "levan");
+		ArrayList<String> arr = am.getAchievements("levan");
 		System.out.println(arr.size());
 		for(int i = 0; i < arr.size(); i++) {
 			System.out.println(arr.get(i));
 		}
+		am.setAchievement("Amateur Author", "levan");
+		/*System.out.println(am.getAchievementTypeID("Prolific Author"));
+		System.out.println(am.getAchievementTypeID("Prodigious Author"));
+		System.out.println(am.getAchievementTypeID("Quiz Machine"));
+		System.out.println(am.getAchievementTypeID("I am the Greatest"));
+		System.out.println(am.getAchievementTypeID("Practice Makes Perfect"));
+		System.out.println(am.getAchievementTypeID("New one"));*/
+		
 	}
 	
 }
