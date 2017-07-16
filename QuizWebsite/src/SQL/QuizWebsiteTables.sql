@@ -16,13 +16,6 @@ CREATE TABLE `QuizWebsiteDatabase`.`USER_TYPES` (
 );
 
 
-
-insert into `USER_TYPES`(`ID`, `NAME`) values(1, 'sdasd');
-insert into `USER_TYPES`(`ID`, `NAME`) values(2, 'asd');
-
-
-
-
 /**
 	მომხმარებლების ცხრილი
 */
@@ -148,15 +141,6 @@ CREATE TABLE `QuizWebsiteDatabase`.`QUESTION_TYPES` (
     PRIMARY KEY (`ID`)
 );
 
-insert into `QUESTION_TYPES`(`ID`, `NAME`) values(1, 'sdasd');
-insert into `QUESTION_TYPES`(`ID`, `NAME`) values(2, 'asds');
-insert into `QUESTION_TYPES`(`ID`, `NAME`) values(3, 'ads');
-insert into `QUESTION_TYPES`(`ID`, `NAME`) values(4, 'sdasdasd');
-insert into `QUESTION_TYPES`(`ID`, `NAME`) values(5, 'aad');
-insert into `QUESTION_TYPES`(`ID`, `NAME`) values(6, 'asd');
-insert into `QUESTION_TYPES`(`ID`, `NAME`) values(7, 'as');
-insert into `QUESTION_TYPES`(`ID`, `NAME`) values(8, 'sdaadsd');
-
 
 /**
 	კითხვების ცხრილი
@@ -212,19 +196,6 @@ CREATE TABLE `QuizWebsiteDatabase`.`ACHIEVEMENT_TYPES` (
     `NAME` VARCHAR(45) NOT NULL,
     PRIMARY KEY (`ID`)
 );
-
-
-insert into `ACHIEVEMENT_TYPES`(`ID`, `NAME`) values(1, 'sdasd');
-insert into `ACHIEVEMENT_TYPES`(`ID`, `NAME`) values(2, 'asds');
-insert into `ACHIEVEMENT_TYPES`(`ID`, `NAME`) values(3, 'ads');
-insert into `ACHIEVEMENT_TYPES`(`ID`, `NAME`) values(4, 'sdasdasd');
-insert into `ACHIEVEMENT_TYPES`(`ID`, `NAME`) values(5, 'aad');
-insert into `ACHIEVEMENT_TYPES`(`ID`, `NAME`) values(6, 'asd');
-insert into `ACHIEVEMENT_TYPES`(`ID`, `NAME`) values(7, 'as');
-insert into `ACHIEVEMENT_TYPES`(`ID`, `NAME`) values(8, 'sdaadsd');
-
-
-
 
 
 /**
