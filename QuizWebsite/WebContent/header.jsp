@@ -6,7 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="css/HomePage.css">
 	<a href= "homepage.jsp" >
 	<div style = "background: white;">
-		<div style = "background-image:url('http://www.go-green.ae/images/greenquiz_hd.jpg'); background-repeat-x: no-repeat;
+		<div style = "background-image:url('img/greenquiz_hd.jpg'); background-repeat-x: no-repeat;
 background-repeat-y: no-repeat;height: 150px; float: center; margin-left: 23%;
 		" >
 		</div>
