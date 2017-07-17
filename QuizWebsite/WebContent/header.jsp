@@ -19,7 +19,6 @@
 		if(username != null){
 		 	type = acm.getAccount(username).getType();
 		 	notnum = notificationManager.getNotificationCount(username);
-		 	out.println("You are logginded as" + username + "");
 		 }
 		%>
 	<div id = "loginplace">
