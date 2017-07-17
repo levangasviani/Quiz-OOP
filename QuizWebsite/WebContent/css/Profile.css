@@ -30,4 +30,25 @@ h1 {
 	font-size: 17px;
 }
 
+#info {
+	width: 50%;
+	height: 200px;
+	float: center;
+	text-align: center;
+	margin: auto;
+	margin-top: 20px;
+	background-color: #808080;
+}
+
+#addFriendID {
+	width: 15%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    cursor: pointer;
+    margin-left: 43%;
+}
+
+
 

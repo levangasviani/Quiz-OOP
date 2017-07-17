@@ -24,7 +24,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title><%=account.getFirstName() %> <%=account.getLastName() %></title>
 	<link rel="stylesheet" type="text/css" href="css/MainDesign.css">
-	<link rel="stylesheet" type="text/css" href="css/Achievements.css">
+	<link rel="stylesheet" type="text/css" href="css/Profile.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -36,6 +36,15 @@
 
 	<div id="header">
 		
+	</div>
+	<div id = "info">
+		<%
+		AccountManager am = new AccountManager();
+		Account acc = am.getAccount(username2);
+		out.println("Username: " + acc.getUserName() + "<br>");	
+		out.println("First Name :" + acc.getFirstName() + "<br>");
+		out.println("Last name: " + acc.getLastName() + "<br>");
+		%>
 	</div>
 	<%
 	if (!friendManager.areFriends(username1, username2) && !username1.equals(username2)) {
@@ -57,7 +66,7 @@
 				<input type="hidden" name="receiver" value="<%=username2 %>" />
 				<input type="hidden" name="type" value="2" />
 				<input type="hidden" name="message" value="SENT" />
-				<input type="submit" value="Add Friend" />
+				<input id = "addFriendID" type="submit" value="Add Friend" />
 			</form>
 		<%
 		}
