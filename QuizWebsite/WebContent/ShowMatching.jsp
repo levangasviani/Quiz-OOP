@@ -10,6 +10,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/ShowQuestions.css">
+
 
 <%
 	Integer questionId = Integer.parseInt(request.getParameter("questionId"));
@@ -21,9 +24,13 @@
 <title><%=request.getParameter("quizName") %></title>
 </head>
 <body>
-
+	
+	<div id = showDIV>
+	<hr>
+	<i id = "icon" class="fa fa-question-circle " aria-hidden="true" style="font-size:60px; margin-left: 5px; color: white;"></i>
+	<div id = showQuestion>
 	<p class="ShowMatching"><%=q.getQuestionText()%></p>
-
+	</div>
 	<ul>
 		<%	
 			
@@ -40,7 +47,7 @@
 			out.print("<p>Match Answers</p>");
 			for(String l : left) {
 				
-				out.print("<br>" + "<a name='option' value='"+l+"'>"+l+"</a>");
+				out.print("<br>" + "<a name='option' value='"+l+"'>"+l+" </a>");
 				out.print("<select>");
 				out.print("<option value=' '> </option><br/>");
 				for (String r : right) {
@@ -52,6 +59,7 @@
 		%>
 
 	</ul>
-	
+	<hr>
+	</div>
 </body>
 </html>

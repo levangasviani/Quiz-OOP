@@ -13,7 +13,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Achievements</title>
 	<link rel="stylesheet" type="text/css" href="css/MainDesign.css">
-	<link rel="stylesheet" type="text/css" href="css/Achievements.css">
+	<link rel="stylesheet" type="text/css" href="css/takeQuiz.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -68,15 +68,14 @@
 
 
 <div id="summaryID">
+<i class="fa fa-clock-o" aria-hidden="true" style="font-size:60px; margin-left: 5px; color: #035e45;"></i>
 		<div id = "title">
 			Points Got:
 		</div>
          <p id="points">0</p>
          <div id="elapsedtime" ></div>
-         
+         <a>Time left:</a><div id="timeLeft"></div>
     </div>
-
-<div id="timeLeft"></div>
 
 
 <div id="questions">

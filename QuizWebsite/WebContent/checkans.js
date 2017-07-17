@@ -43,7 +43,7 @@
 					num++;
 					if(num<=length-1)OnePageStart();
 					else{
-						document.getElementsByTagName("body")[0].innerHTML+="<input type='Submit' value='submit' onclick='finishQuiz()'>"
+						document.getElementsByTagName("body")[0].innerHTML+="<input type='Submit' id = 'subID' value='submit' onclick='finishQuiz()'>"
 					}
 				});
 			}
@@ -278,7 +278,7 @@ function MultiPageStart(){
 		var file=getFile(questionTyp);
 			$.post(file+".jsp", { questionId: questionI, questionType: questionTyp}, function(data, status){
 				document.getElementById("questions").innerHTML="<div id='"+questionI+"'>"+data+"</div>";
-				document.getElementById("subm").innerHTML="<input type='submit' id='nextq' value='submit' onclick='getNextQuestion("+questionTyp+", "+questionI+")'>";
+				document.getElementById("subm").innerHTML="<input type='submit' id='subID' value='submit' onclick='getNextQuestion("+questionTyp+", "+questionI+")'>";
 				if(time!=-1){
 					setCountDown(time);
 				}
