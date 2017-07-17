@@ -1,0 +1,61 @@
+h1 {
+    text-align: center;
+    color: green;
+}
+
+#questions{
+	width: 70%;
+	float: center;
+	text-align: center;
+    margin: auto;
+    margin-top: 40px;
+    border: 2px solid #808080;
+    border-radius: 4px;
+    background-color: #ffffff;
+    box-sizing: border-box;		
+}
+
+#summaryID {
+	width: 10%;
+	float: right;
+	text-align: center;
+    margin: auto;
+    margin-top: 20px;
+    margin-right: 20px; 
+    border: 2px solid #808080;
+    border-radius: 4px;
+    background-color: #1ab188;
+    box-sizing: border-box;
+    color: white;
+}
+
+#butt {
+    width: 15%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    margin-left: 42%;
+    cursor: pointer;
+}
+
+
+#timeLeft {
+	float: center;
+	text-align: center;
+	margin-top: 3px;
+    background-color: #1ab188;
+    color: white;
+}
+
+#subID {
+    width: 15%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    margin-left: 42%;
+    cursor: pointer;
+}
+
+
