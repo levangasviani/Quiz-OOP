@@ -36,7 +36,9 @@
 	<div id = "resID">
 	<ul style="float:left; width:50%; height:100%; overflow:auto">
 		<%
+		int counter=0;
 		for(Notification notification : notifications){
+			counter++;
 			if(notification.getType()==1){
 		%>
 				<li><%=notification.getSender() %> sent quiz challenge: <a href="StartQuizServlet?quizName=<%=notification.getContent() %>"><%=notification.getContent() %></a></li>
@@ -69,12 +71,12 @@
 						<input type="hidden" name="sender" value="<%=notification.getReceiver() %>" />
 						<input type="hidden" name="receiver" value="<%=notification.getSender() %>" />
 						<input type="hidden" name="type" value="3" />
-						<input type="hidden" name="message" id="message:<%=notification.getSender() %>:<%=notification.getReceiver() %>:<%=question.getId() %>" value="" />
+						<input type="hidden" name="message" id=<%=counter%> value="" />
 						<%
 						if(st.equals("SENT")){
 						%>
-						<input type="submit" onclick="acceptReq('<%=notification.getSender() %>', '<%=notification.getReceiver() %>', '<%=questionId %>', '<%=answer %>')" value="Accept" />
-						<input type="submit" onclick="rejectReq('<%=notification.getSender() %>', '<%=notification.getReceiver() %>', '<%=questionId %>', '<%=answer %>')" value="Reject" />
+						<input type="submit" onclick="acceptReq('<%=counter %>', '<%=questionId %>', '<%=answer %>')" value="Accept" />
+						<input type="submit" onclick="rejectReq('<%=counter %>', '<%=questionId %>', '<%=answer %>')" value="Reject" />
 						<%
 						}
 						%>
@@ -102,11 +104,12 @@
 		</form>
 	</div>
 	<script>
-		function acceptReq(sender, receiver, questionId, answer) {
-			document.getElementById("message:" + sender + ":" + receiver + ":" + questionId).value = "ACCEPTED:" + questionId + ":" + answer;
+		function acceptReq(counter, questionId, answer) {
+			
+			document.getElementById(counter).value= "ACCEPTED:" + questionId + ":" + answer;
 		}
-		function rejectReq(questionId, answer) {
-			document.getElementById("message:" + sender + ":" + receiver + ":" + questionId).value = "REJECTED:" + questionId + ":" + answer;
+		function rejectReq(counter, questionId, answer) {
+			document.getElementById(counter).value = "REJECTED:" + questionId + ":" + answer;
 		}
 	</script>
 </body>
