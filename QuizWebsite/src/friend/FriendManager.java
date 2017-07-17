@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import Database.DBConnection;
 import Database.DBInfo;
@@ -123,4 +124,29 @@ public class FriendManager {
 			e.printStackTrace();
 		}
 	}
+	
+	public ArrayList<String> getAllFriends(String username) {
+		AccountManager accMan = new AccountManager();
+		int userId = accMan.getAccountId(username);
+
+		String query = "SELECT * FROM " + DBInfo.FRIENDS + " WHERE USER_ONE = ?;";
+		ArrayList<String> friends = new ArrayList<>();
+		
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, userId);
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			while(rs.next()) {
+				int friendId = rs.getInt(DBInfo.FRIENDS_USER_TWO);
+				String friendName = accMan.getUserNameById(friendId);
+				friends.add(friendName);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return friends;
+	}
+	
 }
