@@ -134,7 +134,7 @@
    					int admin=rs.getInt(3);
    					String adminName=acm.getUserNameById(admin);
    					String text=rs.getString(2);
-   					out.print("<div name='announce' style='border: 1px green solid'>");
+   					out.print("<div name='announce' style='overflow-y: scroll; border: 1px green solid'>");
    					out.print("<p>Author: <strong>"+adminName+"</strong></p>");
    					out.print("<p>"+text+"</p>");
    					out.print("</div>");
