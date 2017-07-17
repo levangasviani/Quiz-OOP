@@ -14,6 +14,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%
+	String practiceMode=request.getParameter("practiceMode");
 	String username = (String) request.getSession().getAttribute("username");
 	NotificationManager notificationManager = (NotificationManager) getServletContext().getAttribute(WebSiteInfo.NOTIFICATION_MANAGER_ATTR);
 	String quizName = request.getParameter("quizName");
@@ -21,7 +22,7 @@
 	int resultTime = Integer.parseInt(request.getParameter("elapsedTime"));
 	QuizStatsManager qsm = (QuizStatsManager)this.getServletContext().getAttribute(WebSiteInfo.QUIZ_STATS_MANAGER);
 	AccountManager accMan = (AccountManager)this.getServletContext().getAttribute(WebSiteInfo.ACCOUNT_MANAGER_ATTR);
-	qsm.addQuizCompleted(username, quizName, resultScore, resultTime);
+	if(!practiceMode.equals("on"))qsm.addQuizCompleted(username, quizName, resultScore, resultTime);
 	ResultSet rs = qsm.getBestResultOfDefaultSize(quizName);
 %>
 
@@ -49,40 +50,49 @@
 	</div>
 	
 	<%
-	AchievementsCalculator calc = new AchievementsCalculator();
-	QuizStatsManager statManager = new QuizStatsManager();
-	AchievementManager achManager = new AchievementManager();
-	
-	int completed = statManager.getCompletedQuizzesCount(username);
-	ArrayList<String> achievementsNow = calc.getAchievements(0, completed);
-	
-	ArrayList<String> achievementsBefore = achManager.getAchievements(username);
-	
-	HashSet<String> achievementsNowSet = new HashSet<String>();
-	for(int i = 0; i < achievementsNow.size(); i++) {
-		achievementsNowSet.add(achievementsNow.get(i));
-	}
-	HashSet<String> achievementsBeforeSet = new HashSet<String>();
-	for(int i = 0; i < achievementsBefore.size(); i++) {
-		achievementsBeforeSet.add(achievementsBefore.get(i));
-	}
-	
-	for(String s: achievementsNowSet) {
-		if(!achievementsBeforeSet.contains(s)) {
-			achManager.setAchievement(s, username);
+		AchievementsCalculator calc = new AchievementsCalculator();
+		QuizStatsManager statManager = new QuizStatsManager();
+		AchievementManager achManager = new AchievementManager();
+		
+		int completed = statManager.getCompletedQuizzesCount(username);
+		ArrayList<String> achievementsNow = calc.getAchievements(0, completed);
+		
+		ArrayList<String> achievementsBefore = achManager.getAchievements(username);
+		
+		HashSet<String> achievementsNowSet = new HashSet<String>();
+		for(int i = 0; i < achievementsNow.size(); i++) {
+			achievementsNowSet.add(achievementsNow.get(i));
 		}
-	}
+		HashSet<String> achievementsBeforeSet = new HashSet<String>();
+		for(int i = 0; i < achievementsBefore.size(); i++) {
+			achievementsBeforeSet.add(achievementsBefore.get(i));
+		}
+		String practice="Practice Makes Perfect";
+		if(practiceMode.equals("on") && !achievementsBeforeSet.contains(practice)){
+			achManager.setAchievement(practice, username);
+		}
+		for(String s: achievementsNowSet) {
+			if(!achievementsBeforeSet.contains(s)) {
+			
+				achManager.setAchievement(s, username);
+			}
+		}
 	
 	%>
 	
 	<%
 		out.print("<ul>");
 		int position=1;
+		String best="I am the Greatest";
 		while(rs.next()){
+			
 			String curUser = accMan.getUserNameById(rs.getInt(DBInfo.COMPLETED_QUIZZES_USER_ID));
 			int score = rs.getInt(DBInfo.COMPLETED_QUIZZES_SCORE);
 			int time = rs.getInt(DBInfo.COMPLETED_QUIZZES_SPENT_TIME);
 			
+			if(position==1 && username.equals(curUser) && !achievementsBeforeSet.contains(best) && !practiceMode.equals("on")){
+				achManager.setAchievement(best, username);
+			}
 			String urlPatternForUser = "profile.jsp?username="+curUser;
 			String urlForUser = "<a href=" + urlPatternForUser + " >" + curUser + "</a>";
 			
