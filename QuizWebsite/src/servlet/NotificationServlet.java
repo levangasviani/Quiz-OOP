@@ -53,6 +53,7 @@ public class NotificationServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("FriendServlet");
 			dispatcher.forward(request, response);
 		} else if (type == 3) {
+			request.setAttribute("sender", sender);
 			request.setAttribute("receiver", receiver);
 			request.setAttribute("message", message);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("GradeServlet");

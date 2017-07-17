@@ -55,6 +55,8 @@
 					status = "accepted your answer: ";
 				else if (st.equals("REJECTED"))
 					status = "rejected your answer: ";
+				else if (st.equals("CHECKED"))
+					status = "sent grade request: ";
 				int quizId = Integer.parseInt(tokenizer.nextToken());
 				String question = questionManager.getQuestion(quizId).getQuestionText();
 				String answer = tokenizer.nextToken();

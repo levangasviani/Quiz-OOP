@@ -9,6 +9,8 @@ import java.util.StringTokenizer;
 
 import Database.DBConnection;
 import Database.DBInfo;
+import Quiz.QuizManager;
+import User.AccountManager;
 
 /**
  * Public class that manages transferring information between database and
@@ -31,21 +33,23 @@ public class NotificationManager {
 	 * @param notification
 	 */
 	public void addNotification(Notification notification) {
-
-		int sender = getUserId(notification.getSender()); // id of sender
-		int receiver = getUserId(notification.getReceiver()); // id of receiver
+		AccountManager accountManager = new AccountManager();
+		QuizManager quizManager = new QuizManager();
+		int sender = accountManager.getAccountId(notification.getSender()); // id of sender
+		int receiver = accountManager.getAccountId(notification.getReceiver()); // id of receiver
 		int typeId = notification.getType(); // notification type
 		String column = ""; // which column must be changed, depending on type
-		String additionalColumn = "";
+		String additionalColumn = ""; // adds additional ? if necessary
 		int id = 0; // if its challenge or grade, id of target
-		String message = "";
-		String status = "";
+		String message = ""; // notification content
+		String status = ""; // status of notification
 
 		if (typeId == DBInfo.NOTIFICATION_TYPE_CHALLENGE_REQUEST) {
 			column = ", QUIZ_ID";
-			id = getQuizId(notification.getContent());
+			id = quizManager.getQuizID(quizManager.getQuiz(notification.getContent()));
 		} else if (typeId == DBInfo.NOTIFICATION_TYPE_FRIEND_REQUEST) {
 			column = ", FRIEND_STATUS";
+			message = notification.getContent();
 		} else if (typeId == DBInfo.NOTIFICATION_TYPE_GRADE_REQUEST) {
 			column = ", QUESTION_ID, MESSAGE, FRIEND_STATUS";
 			additionalColumn = ", ?, ?";
@@ -93,12 +97,15 @@ public class NotificationManager {
 	 * @return ArryList of Notifications
 	 */
 	public ArrayList<Notification> getNotifications(String username) {
+		AccountManager accountManager = new AccountManager();
+		QuizManager quizManager = new QuizManager();
 		ArrayList<Notification> result = new ArrayList<Notification>();
+		ArrayList<Notification> resultTemp = new ArrayList<Notification>();
 		String sql = "SELECT * FROM " + DBInfo.NOTIFICATIONS + " WHERE RECEIVER_ID = ?";
 
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, getUserId(username));
+			preparedStatement.setInt(1, accountManager.getAccountId(username));
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -108,21 +115,21 @@ public class NotificationManager {
 				else if (resultSet.getInt(DBInfo.NOTIFICATIONS_TYPE_ID) == 2)
 					content = resultSet.getString(DBInfo.NOTIFICATIONS_FRIEND_STATUS);
 				else if (resultSet.getInt(DBInfo.NOTIFICATIONS_TYPE_ID) == 1)
-					content = getQuizName(resultSet.getInt(DBInfo.NOTIFICATIONS_QUIZ_ID));
+					content = quizManager.getQuizName(resultSet.getInt(DBInfo.NOTIFICATIONS_QUIZ_ID));
 				else if (resultSet.getInt(DBInfo.NOTIFICATIONS_TYPE_ID) == 3)
 					content += resultSet.getString(DBInfo.NOTIFICATIONS_FRIEND_STATUS) + ":"
 							+ resultSet.getInt(DBInfo.NOTIFICATIONS_QUESTION_ID) + ":"
 							+ resultSet.getString(DBInfo.NOTIFICATIONS_MESSAGE);
-				System.out.println(content);
-				result.add(new Notification(getUserUsername(resultSet.getInt(DBInfo.NOTIFICATIONS_SENDER_ID)),
+				resultTemp.add(new Notification(getUserUsername(resultSet.getInt(DBInfo.NOTIFICATIONS_SENDER_ID)),
 						getUserUsername(resultSet.getInt(DBInfo.NOTIFICATIONS_RECEIVER_ID)), content,
 						resultSet.getInt(DBInfo.NOTIFICATIONS_TYPE_ID)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		deleteNotificationCount(getUserId(username));
+		for (int i = resultTemp.size()-1; i >= 0; i--)
+			result.add(resultTemp.get(i));
+		deleteNotificationCount(accountManager.getAccountId(username));
 		return result;
 	}
 
@@ -133,10 +140,11 @@ public class NotificationManager {
 	 * @return
 	 */
 	public int getNotificationCount(String username) {
+		AccountManager accountManager = new AccountManager();
 		String sql = "SELECT COUNT FROM " + DBInfo.NOTIFICATION_COUNT + " WHERE USER_ID = ?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, getUserId(username));
+			preparedStatement.setInt(1, accountManager.getAccountId(username));
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if (resultSet.next())
 				return resultSet.getInt(1);
@@ -144,49 +152,22 @@ public class NotificationManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Sandro");
 		return 0;
 	}
-
-	/**
-	 * Gets the id of passed user name
-	 * 
-	 * @param username
-	 * @return ID of user
-	 */
-	private int getUserId(String username) {
-		String sql = "SELECT ID FROM " + DBInfo.USERS + " WHERE USERNAME = ?";
+	
+	public void updateNotification(String sender, String receiver, int questionId){
+		AccountManager accountManager = new AccountManager();
+		String sql = "UPDATE " + DBInfo.NOTIFICATIONS + " SET FRIEND_STATUS = 'CHECKED' WHERE TYPE_ID = 3 AND SENDER_ID = ? AND RECEIVER_ID = ? AND QUESTION_ID = ? AND FRIEND_STATUS = 'SENT'";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, username);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			resultSet.next();
-			return resultSet.getInt(1);
+			preparedStatement.setInt(1, accountManager.getAccountId(sender));
+			preparedStatement.setInt(2, accountManager.getAccountId(receiver));
+			preparedStatement.setInt(3, questionId);
+			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 0;
-	}
-
-	/**
-	 * Returns the id of passed Quiz
-	 * 
-	 * @param quizName
-	 * @return ID of quiz
-	 */
-	private int getQuizId(String quizName) {
-		String sql = "SELECT ID FROM " + DBInfo.QUIZZES + " WHERE NAME = ?";
-		try {
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, quizName);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			resultSet.next();
-			return resultSet.getInt(1);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return 0;
 	}
 
 	/**
@@ -250,26 +231,6 @@ public class NotificationManager {
 	 */
 	private String getUserUsername(int id) {
 		String sql = "SELECT USERNAME FROM " + DBInfo.USERS + " WHERE ID = ?";
-		try {
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, id);
-			ResultSet resultSet = preparedStatement.executeQuery();
-			resultSet.next();
-			return resultSet.getString(1);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return "";
-	}
-
-	/**
-	 * Gets quiz name for passed id
-	 * 
-	 * @param id
-	 * @return quiz name
-	 */
-	private String getQuizName(int id) {
-		String sql = "SELECT NAME FROM " + DBInfo.QUIZZES + " WHERE ID = ?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, id);
