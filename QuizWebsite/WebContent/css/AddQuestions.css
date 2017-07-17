@@ -75,6 +75,18 @@ h1 {
 }
 
 
+#div1 {
+ 	text-align: center;
+ 	float: center;
+ 	width: 50%;
+ 	height: 400px;
+     background-color: #e3e2e1;
+     padding: 14px 20px;
+     margin: auto;
+     margin-top: 14px;
+     overflow-y: scroll;
+ }
+
 
 #questionsID {
 	background-color: #13232f;
