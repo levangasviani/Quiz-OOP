@@ -48,7 +48,7 @@
 			<a class="active" id="messages" href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'" ><i class="fa fa-envelope"></i> Notifications <%=notnum %></a>
 			<a class="active" id="creatQuiz" href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><i class="fa fa-plus"></i> Create Quiz</a>
 	     	
-	     	<label align = "right"> <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><button id = "btn">sing in</button>   </label> </a>
+	     	<label align = "right"> <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><button id = "btn">Sign In</button>   </label> </a>
 	     <%} 
 	     %>
 	     <%
