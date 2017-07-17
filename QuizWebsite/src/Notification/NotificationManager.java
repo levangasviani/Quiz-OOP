@@ -35,8 +35,12 @@ public class NotificationManager {
 	public void addNotification(Notification notification) {
 		AccountManager accountManager = new AccountManager();
 		QuizManager quizManager = new QuizManager();
-		int sender = accountManager.getAccountId(notification.getSender()); // id of sender
-		int receiver = accountManager.getAccountId(notification.getReceiver()); // id of receiver
+		int sender = accountManager.getAccountId(notification.getSender()); // id
+																			// of
+																			// sender
+		int receiver = accountManager.getAccountId(notification.getReceiver()); // id
+																				// of
+																				// receiver
 		int typeId = notification.getType(); // notification type
 		String column = ""; // which column must be changed, depending on type
 		String additionalColumn = ""; // adds additional ? if necessary
@@ -58,6 +62,8 @@ public class NotificationManager {
 			status = tokenizer.nextToken();
 			id = Integer.parseInt(tokenizer.nextToken());
 			message = tokenizer.nextToken();
+			if (status.equals("SENT"))
+				deleteOldGradeRequests(sender, receiver, id);
 		} else if (typeId == DBInfo.NOTIFICATION_TYPE_MESSAGE) {
 			column = ", MESSAGE";
 			message = notification.getContent();
@@ -127,7 +133,7 @@ public class NotificationManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		for (int i = resultTemp.size()-1; i >= 0; i--)
+		for (int i = resultTemp.size() - 1; i >= 0; i--)
 			result.add(resultTemp.get(i));
 		deleteNotificationCount(accountManager.getAccountId(username));
 		return result;
@@ -154,16 +160,35 @@ public class NotificationManager {
 		}
 		return 0;
 	}
-	
-	public void updateNotification(String sender, String receiver, int questionId){
+
+	public void updateNotification(String sender, String receiver, int questionId) {
 		AccountManager accountManager = new AccountManager();
-		String sql = "UPDATE " + DBInfo.NOTIFICATIONS + " SET FRIEND_STATUS = 'CHECKED' WHERE TYPE_ID = 3 AND SENDER_ID = ? AND RECEIVER_ID = ? AND QUESTION_ID = ? AND FRIEND_STATUS = 'SENT'";
+		String sql = "UPDATE " + DBInfo.NOTIFICATIONS
+				+ " SET FRIEND_STATUS = 'CHECKED' WHERE TYPE_ID = 3 AND SENDER_ID = ? AND RECEIVER_ID = ? AND QUESTION_ID = ? AND FRIEND_STATUS = 'SENT'";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, accountManager.getAccountId(sender));
 			preparedStatement.setInt(2, accountManager.getAccountId(receiver));
 			preparedStatement.setInt(3, questionId);
 			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void deleteOldGradeRequests(int sender, int receiver, int questionId) {
+		String sql = "SELECT * FROM " + DBInfo.NOTIFICATIONS
+				+ " WHERE TYPE_ID = 3 AND SENDER_ID = ? AND RECEIVER_ID = ? AND QUESTION_ID = ? AND FRIEND_STATUS = 'SENT' ORDER BY ID DESC";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, sender);
+			preparedStatement.setInt(2, receiver);
+			preparedStatement.setInt(3, questionId);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				deleteNotification(resultSet.getInt(DBInfo.NOTIFICATIONS_ID));
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -248,7 +273,7 @@ public class NotificationManager {
 	 * 
 	 * @param id
 	 */
-	private void deleteNotifications(int id) {
+	private void deleteNotification(int id) {
 		String sql = "DELETE FROM " + DBInfo.NOTIFICATIONS + " WHERE RECEIVER_ID = ?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
