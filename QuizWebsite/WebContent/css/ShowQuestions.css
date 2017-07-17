@@ -1,0 +1,42 @@
+input[type=text], select {
+   // width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #808080;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#icon {
+	float: left;
+}
+
+#showQuestionResponseDIV {
+	background-color: #1ab188;
+}
+
+#showDIV {
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    textalign: center;
+	font-weight: bold;
+	font-size: 25px;
+	color: white;
+}
+
+#showFillInTheBlankID{
+	background-color: #1ab188;
+}
+
+#showDIV {
+	background-color: #1ab188;
+}
+
+#showQuestion {
+	margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    textalign: center;
+	font-weight: bold;
+	font-size: 25px;
+}
