@@ -3,6 +3,7 @@
 <%@ page import="Notification.NotificationManager" %>
 <%@ page import="Quiz.QuizManager" %>
 <%@ page import="WebSite.WebSiteInfo" %>
+<%@page import="Quiz.Quiz" %>
 <%
 	String username = (String) request.getSession().getAttribute("username");
 	NotificationManager notificationManager = (NotificationManager) getServletContext().getAttribute(WebSiteInfo.NOTIFICATION_MANAGER_ATTR);
@@ -34,12 +35,21 @@
 		<h1 id="h1"><%=request.getAttribute("quizName") %> </h1>
 		<h1 id="h1"><%=request.getAttribute("description") %> </h1>
 		<div  align = "center" >								
-	    <form action="ShowQuestionsServlet" >
+	    <form action="takeQuiz.jsp" >
 	   
 	    <input type = "hidden" name = "quizName" value = <%=request.getAttribute("quizName") %>>
 	    
-	    Practice Mode: <input type = "radio" name = "practiceMode" value = "off" checked = "checked"> Off
-		<input type = "radio" name = "practiceMode" value = "on"> On <br>		
+	    <%
+    	
+			Quiz q=quizManager.getQuiz((String)request.getAttribute("quizName"));
+			if(q.canPracticeMode()){
+				out.print("Practice Mode: <input type = 'radio' name = 'practiceMode' value = 'off' checked = 'checked'> Off <input type = 'radio' name = 'practiceMode' value = 'on'> On <br>");	
+			}
+			else{
+				out.print("<input type='hidden' name='practiceMode' value='off'>");
+			}
+		%>
+    		
 				
 		Display settings: <input type = "radio" name = "pageDisplay" value = "onePage" checked = "checked"> One Page
 		<input type = "radio" name = "pageDisplay" value = "multiplePage"> Multiple Page <br>
