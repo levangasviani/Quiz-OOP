@@ -5,6 +5,7 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.StringTokenizer" %>
 <%@ page import="Quiz.QuestionManager" %>
+<%@ page import="Quiz.Question" %>
 <%@page import="WebSite.WebSiteInfo"%>
 <%
 	String username = (String) request.getSession().getAttribute("username");
@@ -57,24 +58,23 @@
 					status = "rejected your answer: ";
 				else if (st.equals("CHECKED"))
 					status = "sent grade request: ";
-				int quizId = Integer.parseInt(tokenizer.nextToken());
-				String question = questionManager.getQuestion(quizId).getQuestionText();
+				int questionId = Integer.parseInt(tokenizer.nextToken());
+				Question question = questionManager.getQuestion(questionId);
+				String questionText = questionManager.getQuestion(questionId).getQuestionText();
 				String answer = tokenizer.nextToken();
 			%>
 				<li>
-					<%=notification.getSender() %> <%=status %> <%=question %> - <%=answer %><br />
+					<%=notification.getSender() %> <%=status %> <%=questionText %> - <%=answer %><br />
 					<form action="NotificationServlet">
 						<input type="hidden" name="sender" value="<%=notification.getReceiver() %>" />
 						<input type="hidden" name="receiver" value="<%=notification.getSender() %>" />
 						<input type="hidden" name="type" value="3" />
-						<input type="hidden" id="quizId" value="<%=quizId %>" />
-						<input type="hidden" id="answer" value="<%=answer %>" />
-						<input type="hidden" name="message" id="message" value="" />
+						<input type="hidden" name="message" id="message:<%=notification.getSender() %>:<%=notification.getReceiver() %>:<%=question.getId() %>" value="" />
 						<%
 						if(st.equals("SENT")){
 						%>
-						<input type="submit" class="accept" value="Accept" />
-						<input type="submit" class="reject" value="Reject" />
+						<input type="submit" onclick="acceptReq('<%=notification.getSender() %>', '<%=notification.getReceiver() %>', '<%=questionId %>', '<%=answer %>')" value="Accept" />
+						<input type="submit" onclick="rejectReq('<%=notification.getSender() %>', '<%=notification.getReceiver() %>', '<%=questionId %>', '<%=answer %>')" value="Reject" />
 						<%
 						}
 						%>
@@ -102,14 +102,12 @@
 		</form>
 	</div>
 	<script>
-		function accept() {
-			document.getElementById("message").value = "ACCEPTED:" + document.getElementById("quizId").value + ":" + document.getElementById("answer").value;
+		function acceptReq(sender, receiver, questionId, answer) {
+			document.getElementById("message:" + sender + ":" + receiver + ":" + questionId).value = "ACCEPTED:" + questionId + ":" + answer;
 		}
-		function reject() {
-			document.getElementById("message").value = "REJECTED:" + document.getElementById("quizId").value + ":" + document.getElementById("answer").value;
+		function rejectReq(questionId, answer) {
+			document.getElementById("message:" + sender + ":" + receiver + ":" + questionId).value = "REJECTED:" + questionId + ":" + answer;
 		}
-		document.querySelector(".accept").addEventListener("click", accept);
-		document.querySelector(".reject").addEventListener("click", reject);
 	</script>
 </body>
 </html>
