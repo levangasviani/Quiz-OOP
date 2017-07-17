@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 import Database.DBConnection;
 import Database.DBInfo;
@@ -153,7 +155,7 @@ public class QuizManager {
 				String practiceMode = rs.getString(DBInfo.QUIZZES_PRACTICE_MODE);
 				boolean canPracticeMode = false;
 				if (practiceMode.equals("TRUE"))
-					isRandom = true;
+					canPracticeMode = true;
 				Quiz quiz = new Quiz(quizName, description, isRandom, canPracticeMode);
 				return quiz;
 			}
@@ -239,13 +241,17 @@ public class QuizManager {
 				int questionID = rs.getInt(DBInfo.QUESTIONS_ID);
 				Question question = qM.getQuestion(questionID);
 				result.add(question);
-
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		if(quiz.isRandom()){
+			Collections.shuffle(result);
+		}
 		return result;
 	}
+	
+	
 
 	/**
 	 * returns the number of existent quizzes

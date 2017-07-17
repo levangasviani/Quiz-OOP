@@ -26,6 +26,7 @@ public class Quiz {
 		this.description = description;
 		this.random = random;
 		this.practiceMode = practiceMode;
+		
 	}
 	
 	/**
