@@ -55,8 +55,8 @@
 				<input type="hidden" name="receiver" value="<%=username2 %>" />
 				<input type="hidden" name="type" value="2" />
 				<input type="hidden" name="message" id="message" value="" />
-				<input type="submit" class="accept" value="Accept" />
-				<input type="submit" class="reject" value="Reject" />
+				<input id = "acceptID" type="submit" class="accept" value="Accept" />
+				<input id = "rejectID" type="submit" class="reject" value="Reject" />
 			</form>
 		<%
 		} else if (!friendManager.requestReceived(username2, username1)) {
