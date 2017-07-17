@@ -27,7 +27,7 @@
 	<i id = "icon" class="fa fa-question-circle " aria-hidden="true" style="font-size:60px; margin-left: 5px; color: white;"></i>
 	<div id = showQuestion>
 	<p class="ShowMultipleChoiceMultipleAnswers"><%=q.getQuestionText()%></p>
-	</div>div>
+	</div>
 	<ul>
 		<%
 			for (String s : answers.keySet()) {

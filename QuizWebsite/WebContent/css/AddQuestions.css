@@ -44,7 +44,8 @@ h1 {
 
 #summaryID {
     width: 15%;
-    background-color: #e3e2e1;
+    background-color: #13232f;
+    color: white;
     padding: 14px 20px;
     margin: 8px 0px;
     margin-right: 20px;
@@ -73,26 +74,15 @@ h1 {
     right: 20px;
 }
 
-#div1 {
-	text-align: center;
-	float: center;
-	width: 50%;
-	height: 400px;
-    background-color: #e3e2e1;
-    padding: 14px 20px;
-    margin: auto;
-    margin-top: 14px;
-    overflow-y: scroll;
-}
 
 
 #questionsID {
-	background-color: #959595;
+	background-color: #13232f;
     width: 15%;
     height: 80%;
     text-align:center;
-    padding: 14px 20px;
-    margin: 8px 0px;
+    padding: 7px 20px;
+    margin: 4px 0px;
     margin-left: 20px;
     float: left;
 }
@@ -102,9 +92,79 @@ h1 {
 	display: block;
 	color: #008000;
 	text-align: center;
-	padding: 14px 0px;
+	padding: 2px 0px;
 	margin: auto;
 	text-decoration: none;
 	width: 70%;
 }
+
+
+.questionsClass button {
+    background-color: #1ab188; /* Green */
+    border: none;
+    color: white;
+    padding: 14px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.questionsClass button:hover {
+    background-color: white;
+    color: #1ab188;
+}
+
+
+
+
+input[type=text], select {
+   // width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #808080;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+#div1 textarea {
+   // width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #808080;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#div1 text {
+   // width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #808080;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#div1 {
+	background-color: #1ab188;
+}
+
+#div1 p{
+	color: white;
+	margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    textalign: center;
+	font-weight: bold;
+	font-size: 25px;
+}
+
+
 

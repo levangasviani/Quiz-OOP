@@ -5,8 +5,10 @@
 	<link rel="stylesheet"  type="text/css" href="css/loginstyle.css">
 	<link rel="stylesheet" type="text/css" href="css/HomePage.css">
 	<a href= "homepage.jsp" >
-	<div style = "background: green;">
-		<div style = "background-image:url('https://s-media-cache-ak0.pinimg.com/originals/b1/54/3f/b1543f0956dab41afae39956e4f08f27.png'); height: 130px;" >
+	<div style = "background: white;">
+		<div style = "background-image:url('http://www.go-green.ae/images/greenquiz_hd.jpg'); background-repeat-x: no-repeat;
+background-repeat-y: no-repeat;height: 150px; float: center; margin-left: 23%;
+		" >
 		</div>
 	</div>
 	</a>

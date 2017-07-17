@@ -63,7 +63,7 @@
 	</div>
 
 	<div id="generalInfo">
-		<div id="popularQuizzes">
+		<div id="popularQuizzes" style="margin: 15px;">
 			popular quizzes
 			<ul>
 			<%
@@ -75,7 +75,7 @@
 			</ul>
 		</div>
 
-		<div id="recentQuizzes">
+		<div id="recentQuizzes" style="margin: 15px;">
 			recently created quizzes
 			<ul>
 			<%
@@ -89,7 +89,7 @@
 	</div>
 
 	<div id="myInfo">
-		<div id="myRecentTakenQuizzes">
+		<div id="myRecentTakenQuizzes" style="margin: 15px;">
 			my recently taken quizzes
 			<ul>
 			<%
@@ -101,7 +101,7 @@
 			</ul>
 		</div>
 
-		<div id="myRecentCreatedQuizzes">
+		<div id="myRecentCreatedQuizzes" style="margin: 15px;">
 			my recently created quizzes
 			<ul>
 			<%
@@ -113,8 +113,8 @@
 			</ul>
 		</div>
 
-		<div id="friendsAchievements">
-			friends' activities
+		<div id="friendsAchievements" style="margin: 15px;">
+			<p>FRIENDS' ACTIVITIES</p>
 			<ul>
 				<li></li>
 				<li></li>

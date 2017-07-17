@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="friend.FriendManager"%>
@@ -16,7 +17,9 @@
 	if(username1 == null)
 	    username1 = "la";
 	Account account = accountManager.getAccount(username2);
+	ArrayList<String> friends = friendManager.getAllFriends(username2);
 %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -45,6 +48,20 @@
 		out.println("First Name :" + acc.getFirstName() + "<br>");
 		out.println("Last name: " + acc.getLastName() + "<br>");
 		%>
+	</div>
+	
+	<div>
+		<% 
+		
+		for(String f : friends) {
+			
+			String urlPatternForUser = "profile.jsp?username="+f;
+			String urlForUser = "<a href=" + urlPatternForUser + " >" + f + "</a>";
+			out.print("<li> " + urlForUser + "</li>");
+		}
+	
+		%>
+		
 	</div>
 	<%
 	if (!friendManager.areFriends(username1, username2) && !username1.equals(username2)) {
@@ -82,5 +99,6 @@
 		document.querySelector(".accept").addEventListener("click", accept);
 		document.querySelector(".reject").addEventListener("click", reject);
 	</script>
+	
 </body>
 </html>

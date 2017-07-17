@@ -14,6 +14,7 @@
 	<title>Create A Quiz</title>
 	<link rel="stylesheet" type="text/css" href="css/MainDesign.css">
 	<link rel="stylesheet" type="text/css" href="css/CreateQuiz.css">
+	<link rel="stylesheet" type="text/css" href="css/quizCreationProcess2.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
