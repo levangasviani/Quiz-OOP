@@ -64,7 +64,7 @@
 
 	<div id="generalInfo">
 		<div id="popularQuizzes" style="margin: 15px;">
-			popular quizzes
+			<h1>Popular Quizzes</h1>
 			<ul>
 			<%
 				for(String s : popularQuizzes){
@@ -76,7 +76,7 @@
 		</div>
 
 		<div id="recentQuizzes" style="margin: 15px;">
-			recently created quizzes
+			<h1>Recently Created Quizzes</h1>
 			<ul>
 			<%
 				for(String s : recentlyCreatedQuizzes){
@@ -90,7 +90,7 @@
 
 	<div id="myInfo">
 		<div id="myRecentTakenQuizzes" style="margin: 15px;">
-			my recently taken quizzes
+			<h1>My Recently Taken Quizzes</h1>
 			<ul>
 			<%
 				for(String s : recentlyTakenQuizzes){
@@ -102,7 +102,7 @@
 		</div>
 
 		<div id="myRecentCreatedQuizzes" style="margin: 15px;">
-			my recently created quizzes
+			<h1>My Recently Created Quizzes</h1>
 			<ul>
 			<%
 				for(String s : recentlyTakenQuizzesByUser){
@@ -114,7 +114,7 @@
 		</div>
 
 		<div id="friendsAchievements" style="margin: 15px;">
-			<p>FRIENDS' ACTIVITIES</p>
+			<h1>Friends Activities</h1>
 			<ul>
 				<li></li>
 				<li></li>
@@ -126,7 +126,7 @@
 	</div>
 
 	<div id="announcements">
-		<p id="announcement-title">Announcements</p>
+		<p id="announcement-title">Announcements  <i class="fa fa-bullhorn"></i></p>
 		<%
 			if(username!= null && anm != null){
    				ResultSet rs=anm.getAllAnnouncements();
@@ -134,8 +134,8 @@
    					int admin=rs.getInt(3);
    					String adminName=acm.getUserNameById(admin);
    					String text=rs.getString(2);
-   					out.print("<div name='announce' style='overflow-y: scroll; border: 1px green solid'>");
-   					out.print("<p>Author: <strong>"+adminName+"</strong></p>");
+   					out.print("<div id='announcementStyle' name='announce' style='overflow-y: scroll; border: 0px green solid'>");
+   					out.print("<h1>Author: <strong>"+adminName+"</strong></h1>");
    					out.print("<p>"+text+"</p>");
    					out.print("</div>");
    				}
