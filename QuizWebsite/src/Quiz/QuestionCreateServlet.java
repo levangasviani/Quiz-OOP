@@ -36,7 +36,13 @@ public class QuestionCreateServlet extends HttpServlet {
         super();
     }
 
-    
+    /**
+     * 
+     * @param questions - questions
+     * @param quizId - Id of a quiz these questions belond to
+     * @throws NumberFormatException
+     * @throws JSONException
+     */
     private void processQuestions(JSONObject[] questions, int quizId) throws NumberFormatException, JSONException{
     	for(int i=0; i<questions.length; i++){
     		int type=Integer.parseInt(questions[i].getString("type"));
@@ -45,7 +51,13 @@ public class QuestionCreateServlet extends HttpServlet {
     }
     
 
-
+    /**
+     * 
+     * @param jsonObject - jsonObject
+     * @param type - type of the question
+     * @param quizId - id of a quiz
+     * @throws JSONException
+     */
 	private void processQuestionResponse(JSONObject jsonObject, int type, int quizId) throws JSONException {
 		String questionText=getQuestionText(jsonObject);
 		String order=getQuestionOrder(jsonObject);
@@ -76,7 +88,12 @@ public class QuestionCreateServlet extends HttpServlet {
 	}
 	
 	
-	
+	/**
+	 * 
+	 * @param answers - hashmap of answers
+	 * @param type - type of the question
+	 * @return - integer maxscore based on answers and type
+	 */
 	private int getMaxScore(HashMap<String, String> answers, int type) {
 		if(type==DBInfo.QUESTION_TYPE_QUESTION_RESPONSE){
 			return 1;
@@ -105,21 +122,42 @@ public class QuestionCreateServlet extends HttpServlet {
 		}
 	}
 
-
+	/**
+	 * 
+	 * @param jsonObject - jsonobject 
+	 * @return - questiontext
+	 * @throws JSONException
+	 */
 	private String getQuestionText(JSONObject jsonObject) throws JSONException{
 		return jsonObject.getString("questionText");
 	}
 	
-	
+	/**
+	 * 
+	 * @param jsonObject - jsonobject
+	 * @return - string for answerorder
+	 * @throws JSONException
+	 */
 	private String getQuestionOrder(JSONObject jsonObject) throws JSONException{
 		return jsonObject.getString("answerOrder");
 	}
 	
-	
+	/**
+	 * 
+	 * @param jsonObject - jsonobject
+	 * @return - string for chekctype
+	 * @throws JSONException
+	 */
 	private String getCheckType(JSONObject jsonObject) throws JSONException{
 		return jsonObject.getString("checkType");
 	}
 	
+	/**
+	 * 
+	 * @param jsonObject - jsonobject
+	 * @return  - integer for time
+	 * @throws JSONException
+	 */
 	private int getTime(JSONObject jsonObject) throws JSONException{
 		int time=-1;
 		try{
@@ -131,7 +169,12 @@ public class QuestionCreateServlet extends HttpServlet {
 		return time;
 	}
 	
-	
+	/**
+	 * 
+	 * @param jsonObject - jsonobject
+	 * @return - hashmap of answers
+	 * @throws JSONException
+	 */
 	private HashMap<String, String> getAnswers(JSONObject jsonObject) throws JSONException{
 		JSONObject answers=new JSONObject(jsonObject.getString("answer"));
 		Iterator<String> it=answers.keys();
@@ -171,7 +214,9 @@ public class QuestionCreateServlet extends HttpServlet {
 			boolean practice=false;
 			if(order.equals("randomOrder"))orderr=true;
 			if(practicemode.equals("on"))practice=true;
+			
 			Quiz qq=new Quiz(quizName, quizDescription, orderr, practice);
+			System.out.print(qq.canPracticeMode());
 			qm.addQuiz(qq);
 			String username = (String) request.getSession().getAttribute("username");
 			processQuestions(questions, qm.getQuizID(qq));
