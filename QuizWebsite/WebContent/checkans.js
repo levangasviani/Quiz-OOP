@@ -88,10 +88,11 @@
 		
 
 function redirectToStats(){
-	var quizname=document.getElementById("quizName").value;
 	var elapsedtime=minutes*60+seconds;
+	document.getElementById("score").value=points;
+	document.getElementById("elapsedTime").value=elapsedtime;
 	checkedNumber=0;
-	window.location="ShowQuizStatistics.jsp?"+"quizName="+quizname+"&"+"score="+points+"&"+"elapsedTime="+elapsedtime;
+	document.getElementById("tostat").submit();
 }
 
 
