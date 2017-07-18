@@ -43,7 +43,7 @@ h1 {
 	text-aliogn: center;
 	float: right;
 	font-size: 20px;
-	background-color: #e3e2e1;
+	background-color: #13232f;
 	margin: auto;
 	margin-top: 14px;
 	margin-left: 20px;
@@ -83,13 +83,26 @@ h1 {
 }
 
 #resID {
-	height: 450px;
+	height: 450px; 
 	width: 60%;
 	text-aliogn: center;
 	float: left;
 	font-size: 20px;
-	background-color: #e3e2e1;
+	background-color: #13232f;
 	margin: auto;
 	margin-top: 14px;
 	margin-left: 20px;
+	color: white;
+}
+
+#resID a:link {
+	color: #bafff4;
+}
+
+#resID a:visited {
+	color: #00ce82;
+}
+
+#resID a:hover {
+	color: #00ce82;
 }
