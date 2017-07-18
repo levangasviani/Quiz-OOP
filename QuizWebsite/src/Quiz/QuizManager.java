@@ -114,7 +114,6 @@ public class QuizManager {
 			ArrayList<Question> quizQuestions = getQuestions(quiz);
 
 			for (Question q : quizQuestions) {
-				System.out.println(q.getId());
 				qm.deleteQuestion(q.getId());
 			}
 
