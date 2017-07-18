@@ -40,6 +40,7 @@
 <title>QuizWebsite</title>
 <link rel="stylesheet" type="text/css" href="css/MainDesign.css">
 <link rel="stylesheet" type="text/css" href="css/HomePage.css">
+<link rel="stylesheet" type="text/css" href="css/TableStat.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -83,7 +84,15 @@
 	%>
 
 	<%
-		out.print("<ul>");
+		out.print("<h1>Top Scorers</h1>");
+		out.println("<table id='table'>");
+		out.println("<tr>");
+		out.println("<th>Position</th>");
+		out.println("<th>Username</th>");
+		out.println("<th>Quiz</th>");
+		out.println("<th>Score</th>");
+		out.println("<th>Time</th>");
+		out.println("</tr>");
 		int position = 1;
 		String best = "I am the Greatest";
 		while (rs.next()) {
@@ -103,10 +112,10 @@
 			String urlForQuiz = "<a href=" + urlPatternForQuiz + " >" + quizName + "</a>";
 
 			out.print(
-					"<li>" + position + ") " + urlForUser + " " + urlForQuiz + " " + score + " " + time + "</li>");
+					"<tr><td>" + position + "</td><td>" + urlForUser + "</td><td>" + urlForQuiz + "</td><td>" + score + "</td><td>" + time + "</td></tr>");
 			position++;
 		}
-		out.print("</ul>");
+		out.print("</table>");
 	%>
 
 </body>
