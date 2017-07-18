@@ -30,9 +30,6 @@ h1 {
 	font-size: 17px;
 }
 
-#info {
-	
-}
 
 #addFriendID {
 	width: 15%;
@@ -59,7 +56,6 @@ h1 {
 #info{
 	text-align: center;
 	color: white;
-	background-color: #13232f;
 	margin: 20px;
 }
 
@@ -88,6 +84,13 @@ h1 {
 #info li{
 	list-style-type: none;
 }
+
+#info div{
+	background-color: #13232f;
+	border-radius: 12px;
+}
+
+
 
 
 
