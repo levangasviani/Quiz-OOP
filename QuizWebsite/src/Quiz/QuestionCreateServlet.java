@@ -230,7 +230,6 @@ public class QuestionCreateServlet extends HttpServlet {
 				practice = true;
 
 			Quiz qq = new Quiz(quizName, quizDescription, orderr, practice);
-			System.out.print(qq.canPracticeMode());
 			qm.addQuiz(qq);
 			String username = (String) request.getSession().getAttribute("username");
 			processQuestions(questions, qm.getQuizID(qq));
@@ -242,7 +241,6 @@ public class QuestionCreateServlet extends HttpServlet {
 
 			int created = statManager.getCreatedQuizzesCount(username);
 			ArrayList<String> achievementsNow = calc.getAchievements(created, 0);
-			System.out.println(achievementsNow.size());
 			ArrayList<String> achievementsBefore = achManager.getAchievements(username);
 
 			HashSet<String> achievementsNowSet = new HashSet<String>();
