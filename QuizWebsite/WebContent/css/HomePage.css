@@ -1,11 +1,13 @@
 h1 {
-    text-align: center;
-    color: green;
+	text-align: center;
+	color: green;
 }
-h2	 {
-    text-align: right;
-    color: #400040;
+
+h2 {
+	text-align: right;
+	color: #400040;
 }
+
 .user {
 	font-size: 30px;
 	float: right;
@@ -35,14 +37,15 @@ h2	 {
 #logout {
 	float: right;
 }
-#logoutbutton{
-    background-image : url("http://icons.veryicon.com/ico/System/100%20Flat%20Vol.%202/inside%20logout.ico");
-}
 
+#logoutbutton {
+	background-image:
+		url("http://icons.veryicon.com/ico/System/100%20Flat%20Vol.%202/inside%20logout.ico");
+}
 
 #searchID {
 	float: right;
-    margin: 8px 8px;
+	margin: 8px 8px;
 }
 
 #generalInfo {
@@ -55,33 +58,31 @@ h2	 {
 	float: left;
 }
 
-
-#generalInfo div{
+#generalInfo div {
 	color: white;
 	background-color: #13232f;
 	border-radius: 12px;
 }
 
-#generalInfo li{
+#generalInfo li {
 	list-style-type: upper-roman;
 }
 
-#myInfo li{
+#myInfo li {
 	list-style-type: upper-roman;
 }
 
 #generalInfo a:link {
-    color: #bafff4;
+	color: #bafff4;
 }
 
 #generalInfo a:visited {
-    color: #00ce82;
+	color: #00ce82;
 }
 
 #generalInfo a:hover {
-    color: #00ce82;
+	color: #00ce82;
 }
-
 
 #myInfo {
 	font-family: arial;
@@ -95,24 +96,22 @@ h2	 {
 	float: right;
 }
 
-
-#myInfo div{
+#myInfo div {
 	color: white;
 	background-color: #13232f;
 	border-radius: 12px;
 }
 
-
 #myInfo a:link {
-    color: #bafff4;
+	color: #bafff4;
 }
 
 #myInfo a:visited {
-    color: #00ce82;
+	color: #00ce82;
 }
 
 #myInfo a:hover {
-    color: #00ce82;
+	color: #00ce82;
 }
 
 #myInfo h1 {
@@ -145,29 +144,28 @@ h2	 {
 	font-size: 30px;
 }
 
-
 .icon-bar a {
-    display: block;
-    text-align: center;
-    padding: 16px;
-    transition: all 0.3s ease;
-    color: white;
-    font-size: 36px;
+	display: block;
+	text-align: center;
+	padding: 16px;
+	transition: all 0.3s ease;
+	color: white;
+	font-size: 36px;
 }
 
 #btn {
-    background-color: #4CAF50;
-    color: white;
-    border: 2px solid white;
-    font-size: 20px;
-    cursor: pointer;
+	background-color: #4CAF50;
+	color: white;
+	border: 2px solid white;
+	font-size: 20px;
+	cursor: pointer;
 }
 
 #announcementStyle {
 	color: white;
 }
 
-#announcementStyle p{
+#announcementStyle p {
 	color: #13232f;
 	text-indent: 50px;
 	font-size: 20px;
@@ -178,12 +176,10 @@ h2	 {
 	border-radius: 8px;
 }
 
-
-#announcementStyle h1{
+#announcementStyle h1 {
 	color: #6bf9c8;
 	text-indent: 50px;
 	font-size: 30px;
 	text-align: center;
 	font-family: verdana;
-
 }

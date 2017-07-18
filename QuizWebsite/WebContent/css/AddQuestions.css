@@ -1,26 +1,25 @@
-li{
-		display: inline-block;
+li {
+	display: inline-block;
 }
+
 h1 {
-    text-align: center;
-    color: green;
+	text-align: center;
+	color: green;
 }
 
-
-#navigationID{
-   text-align: center;
+#navigationID {
+	text-align: center;
 }
 
 .navigation {
 	background-color: green;
-    overflow: hidden;
+	overflow: hidden;
 	padding: 12px 20px;
-    margin: 8px 0;
-    list-style:none;
-    margin:0;
-    padding:0;
-    text-align:center;
-    
+	margin: 8px 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	text-align: center;
 }
 
 .navigation a {
@@ -39,64 +38,61 @@ h1 {
 
 #searchID {
 	float: right;
-    margin: 8px 8px;
+	margin: 8px 8px;
 }
 
 #summaryID {
-    width: 15%;
-    background-color: #13232f;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0px;
-    margin-right: 20px;
+	width: 15%;
+	background-color: #13232f;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0px;
+	margin-right: 20px;
 	float: right;
 }
 
 #title {
 	text-align: center;
-    padding: 14px 20px;
-    margin: 8px 8px;
+	padding: 14px 20px;
+	margin: 8px 8px;
 }
-
 
 #finishID {
 	text-align: center;
-    width: 15%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    cursor: pointer;
+	width: 15%;
+	background-color: #4CAF50;
+	color: white;
+	padding: 14px 20px;
+	cursor: pointer;
 	margin: auto;
 	float: right;
 	margin-right: 20px;
 	position: fixed;
-    bottom: 330px;
-    right: 20px;
+	bottom: 330px;
+	right: 20px;
 }
 
-
 #div1 {
- 	text-align: center;
- 	float: center;
- 	width: 50%;
- 	height: 400px;
-     background-color: #e3e2e1;
-     padding: 14px 20px;
-     margin: auto;
-     margin-top: 14px;
-     overflow-y: scroll;
- }
-
+	text-align: center;
+	float: center;
+	width: 50%;
+	height: 400px;
+	background-color: #e3e2e1;
+	padding: 14px 20px;
+	margin: auto;
+	margin-top: 14px;
+	overflow-y: scroll;
+}
 
 #questionsID {
 	background-color: #13232f;
-    width: 15%;
-    height: 80%;
-    text-align:center;
-    padding: 7px 20px;
-    margin: 4px 0px;
-    margin-left: 20px;
-    float: left;
+	width: 15%;
+	height: 80%;
+	text-align: center;
+	padding: 7px 20px;
+	margin: 4px 0px;
+	margin-left: 20px;
+	float: left;
 }
 
 .questionsClass a {
@@ -110,73 +106,65 @@ h1 {
 	width: 70%;
 }
 
-
 .questionsClass button {
-    background-color: #1ab188; /* Green */
-    border: none;
-    color: white;
-    padding: 14px 30px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    margin: 4px 2px;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    cursor: pointer;
+	background-color: #1ab188; /* Green */
+	border: none;
+	color: white;
+	padding: 14px 30px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 14px;
+	margin: 4px 2px;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	cursor: pointer;
 }
 
 .questionsClass button:hover {
-    background-color: white;
-    color: #1ab188;
+	background-color: white;
+	color: #1ab188;
 }
 
-
-
-
-input[type=text], select {
-   // width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #808080;
-    border-radius: 4px;
-    box-sizing: border-box;
+input[type=text], select { //
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #808080;
+	border-radius: 4px;
+	box-sizing: border-box;
 }
 
-
-#div1 textarea {
-   // width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #808080;
-    border-radius: 4px;
-    box-sizing: border-box;
+#div1 textarea { //
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #808080;
+	border-radius: 4px;
+	box-sizing: border-box;
 }
 
-#div1 text {
-   // width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #808080;
-    border-radius: 4px;
-    box-sizing: border-box;
+#div1 text { //
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #808080;
+	border-radius: 4px;
+	box-sizing: border-box;
 }
 
 #div1 {
 	background-color: #1ab188;
 }
 
-#div1 p{
+#div1 p {
 	color: white;
 	margin-top: 2.5px;
-    margin-bottom: 2.5px;
-    textalign: center;
+	margin-bottom: 2.5px;
+	textalign: center;
 	font-weight: bold;
 	font-size: 25px;
 }
-
-
-

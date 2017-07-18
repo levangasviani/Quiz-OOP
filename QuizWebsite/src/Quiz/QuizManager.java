@@ -7,11 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 import Database.DBConnection;
 import Database.DBInfo;
-import User.AccountManager;
 
 /**
  * @author levanAmateur(lkara15)
@@ -245,13 +243,11 @@ public class QuizManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(quiz.isRandom()){
+		if (quiz.isRandom()) {
 			Collections.shuffle(result);
 		}
 		return result;
 	}
-	
-	
 
 	/**
 	 * returns the number of existent quizzes
@@ -272,8 +268,6 @@ public class QuizManager {
 		return 0;
 	}
 
-	
-	
 	/**
 	 * Returns the user name of the passed quiz creator
 	 * 
@@ -283,36 +277,42 @@ public class QuizManager {
 	public String getQuizCreator(String quizName) {
 		Quiz quiz = getQuiz(quizName);
 		int quizId = getQuizID(quiz);
-		
+
 		String queryForUserId = "SELECT USER_ID FROM " + DBInfo.CREATED_QUIZZES + " WHERE QUIZ_ID = ?";
-		
+
 		String quizCreator = "";
-		
+
 		try {
 			PreparedStatement preparedStatement1 = connection.prepareStatement(queryForUserId);
 			preparedStatement1.setInt(1, quizId);
 			ResultSet rs = preparedStatement1.executeQuery();
 			rs.next();
-			
+
 			int userId = rs.getInt(1);
-			
+
 			String queryForUserName = "SELECT USERNAME FROM " + DBInfo.USERS + " WHERE ID = ?";
-			
+
 			PreparedStatement preparedStatement2 = connection.prepareStatement(queryForUserName);
 			preparedStatement2.setInt(1, userId);
 			rs = preparedStatement2.executeQuery();
 			rs.next();
-			
+
 			quizCreator = rs.getString(1);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return quizCreator;
 	}
 
-	public String getQuizName(int id){
+	/**
+	 * Returns Quiz name by passed ID
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public String getQuizName(int id) {
 		String sql = "SELECT NAME FROM " + DBInfo.QUIZZES + " WHERE ID = ?";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -321,7 +321,7 @@ public class QuizManager {
 			resultSet.next();
 			return resultSet.getString(1);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		return "";

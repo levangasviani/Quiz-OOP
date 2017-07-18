@@ -1,13 +1,12 @@
 package Quiz;
 
-/** 
+/**
  * @author levanAmateur(lkara15)
  *
- *	Quiz class, stores information about quiz;
+ *         Quiz class, stores information about quiz;
  */
 public class Quiz {
-	
-	
+
 	private String quizName;
 	private String description;
 	private boolean random;
@@ -26,9 +25,9 @@ public class Quiz {
 		this.description = description;
 		this.random = random;
 		this.practiceMode = practiceMode;
-		
+
 	}
-	
+
 	/**
 	 * Copy Constructor
 	 * 
@@ -40,7 +39,7 @@ public class Quiz {
 		this.random = quiz.isRandom();
 		this.practiceMode = quiz.canPracticeMode();
 	}
-	
+
 	/**
 	 * Returns name of a quiz.
 	 * 
@@ -49,7 +48,7 @@ public class Quiz {
 	public String getName() {
 		return quizName;
 	}
-	
+
 	/**
 	 * Returns description of a quiz.
 	 * 
@@ -58,7 +57,7 @@ public class Quiz {
 	public String getDescription() {
 		return description;
 	}
-	
+
 	/**
 	 * Returns true if Quiz questions ordered randomly.
 	 * 
@@ -67,28 +66,25 @@ public class Quiz {
 	public boolean isRandom() {
 		return random;
 	}
-	
-	
+
 	/**
-	 * Returns true if user can
-	 * write this quiz in practice mode.
+	 * Returns true if user can write this quiz in practice mode.
 	 * 
 	 * @return boolean canPracticeMode;
 	 */
 	public boolean canPracticeMode() {
 		return practiceMode;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		Quiz quiz = (Quiz) obj;
-		if(this.quizName.equals(quiz.getName()) &&
-				this.description.equals(quiz.getDescription()) &&
-				this.random == quiz.isRandom() &&
-				this.practiceMode == quiz.canPracticeMode()) return true;
+		if (this.quizName.equals(quiz.getName()) && this.description.equals(quiz.getDescription())
+				&& this.random == quiz.isRandom() && this.practiceMode == quiz.canPracticeMode())
+			return true;
 		return false;
 	}
-	
+
 	/**
 	 * toString()
 	 */

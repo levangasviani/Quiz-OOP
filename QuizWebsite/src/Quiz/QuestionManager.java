@@ -15,10 +15,9 @@ import Database.DBInfo;
  *
  */
 public class QuestionManager {
-	
+
 	private Connection connection;
 
-	
 	/**
 	 * constructs QuestionManager Object by connecting to the database
 	 * 
@@ -28,7 +27,6 @@ public class QuestionManager {
 		connection = DBConnection.getConnection();
 	}
 
-	
 	/**
 	 * adds a new question in the database using a Question Object
 	 * 
@@ -48,7 +46,6 @@ public class QuestionManager {
 		q.setId(getQuestionId());
 		addAnswers(answers, q.getId(), order);
 	}
-
 
 	/**
 	 * adds a new Question Object in the database using parameters of a Question
@@ -85,8 +82,7 @@ public class QuestionManager {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	/**
 	 * Deletes Question and Question answers from the database
 	 * 
@@ -94,23 +90,22 @@ public class QuestionManager {
 	 */
 	public void deleteQuestion(int questionId) {
 		Question q = getQuestion(questionId);
-		
-		if(q != null) {
+
+		if (q != null) {
 			deleteAnswers(questionId);
 			String query = "DELETE FROM " + DBInfo.QUESTIONS + " WHERE ID = ?;";
 			try {
 				PreparedStatement preparedStatement = connection.prepareStatement(query);
 				preparedStatement.setInt(1, questionId);
 				preparedStatement.executeUpdate();
-				
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
-	
-	
+
 	/**
 	 * Deletes answers of the passed question
 	 * 
@@ -128,7 +123,6 @@ public class QuestionManager {
 		}
 	}
 
-	
 	/**
 	 * returns a question id
 	 * 
@@ -147,7 +141,6 @@ public class QuestionManager {
 		return 0;
 	}
 
-	
 	/**
 	 * adds possible answers in the database
 	 * 
@@ -176,7 +169,6 @@ public class QuestionManager {
 		}
 	}
 
-	
 	/**
 	 * returns a question object
 	 * 
@@ -200,22 +192,22 @@ public class QuestionManager {
 			HashMap<String, String> answers = new HashMap<String, String>();
 			String order = getAnswersInformation(answers, questionId);
 			Question q;
-			if(typeId==DBInfo.QUESTION_TYPE_QUESTION_RESPONSE){
-				q=new Question_Response(questionText, answers, quizId, order, checkType, time, score);
-			}else if(typeId==DBInfo.QUESTION_TYPE_FILL_IN_THE_BLANK){
-				q=new Fill_In_The_Blank(questionText, answers, quizId, order, checkType, time, score);
-			}else if(typeId==DBInfo.QUESTION_TYPE_MULTIPLE_CHOICE){
-				q=new Multiple_Choice(questionText, answers, quizId, order, checkType, time, score);
-			}else if(typeId==DBInfo.QUESTION_TYPE_PICTURE_RESPONSE){
-				q=new Picture_Response(questionText, answers, quizId, order, checkType, time, score);
-			}else if(typeId==DBInfo.QUESTION_TYPE_MULTI_ANSWER){
-				q=new Multi_Answer(questionText, answers, quizId, order, checkType, time, score);
-			}else if(typeId==DBInfo.QUESTION_TYPE_MULTIPLE_CHOICE_WITH_MULTIPLE_ANSWERS){
-				q=new Multiple_Choice_Multiple_Answer(questionText, answers, quizId, order, checkType, time, score);
-			}else if(typeId==DBInfo.QUESTION_TYPE_MATCHING){
-				q=new Matching(questionText, answers, quizId, order, checkType, time, score);
-			}else{
-				q=new Graded_Question(questionText, answers, quizId, order, checkType, time, score);
+			if (typeId == DBInfo.QUESTION_TYPE_QUESTION_RESPONSE) {
+				q = new Question_Response(questionText, answers, quizId, order, checkType, time, score);
+			} else if (typeId == DBInfo.QUESTION_TYPE_FILL_IN_THE_BLANK) {
+				q = new Fill_In_The_Blank(questionText, answers, quizId, order, checkType, time, score);
+			} else if (typeId == DBInfo.QUESTION_TYPE_MULTIPLE_CHOICE) {
+				q = new Multiple_Choice(questionText, answers, quizId, order, checkType, time, score);
+			} else if (typeId == DBInfo.QUESTION_TYPE_PICTURE_RESPONSE) {
+				q = new Picture_Response(questionText, answers, quizId, order, checkType, time, score);
+			} else if (typeId == DBInfo.QUESTION_TYPE_MULTI_ANSWER) {
+				q = new Multi_Answer(questionText, answers, quizId, order, checkType, time, score);
+			} else if (typeId == DBInfo.QUESTION_TYPE_MULTIPLE_CHOICE_WITH_MULTIPLE_ANSWERS) {
+				q = new Multiple_Choice_Multiple_Answer(questionText, answers, quizId, order, checkType, time, score);
+			} else if (typeId == DBInfo.QUESTION_TYPE_MATCHING) {
+				q = new Matching(questionText, answers, quizId, order, checkType, time, score);
+			} else {
+				q = new Graded_Question(questionText, answers, quizId, order, checkType, time, score);
 			}
 			q.setId(questionId);
 			return q;
@@ -224,7 +216,6 @@ public class QuestionManager {
 		}
 		return null;
 	}
-
 
 	/**
 	 * gets the information about the answers of the question with a given

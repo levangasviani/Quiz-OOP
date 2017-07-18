@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.StringTokenizer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,7 +25,6 @@ public class NotificationServlet extends HttpServlet {
 	 */
 	public NotificationServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -35,7 +33,6 @@ public class NotificationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String sender = request.getParameter("sender");
 		String receiver = request.getParameter("receiver");
 		int type = Integer.parseInt(request.getParameter("type"));
@@ -69,7 +66,6 @@ public class NotificationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

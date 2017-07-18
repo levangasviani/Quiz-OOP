@@ -23,7 +23,6 @@ public class FriendServlet extends HttpServlet {
 	 */
 	public FriendServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -32,7 +31,6 @@ public class FriendServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String sender = (String) request.getAttribute("sender");
 		String receiver = (String) request.getAttribute("receiver");
 		String message = (String) request.getAttribute("message");
@@ -47,7 +45,6 @@ public class FriendServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

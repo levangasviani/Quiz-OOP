@@ -8,17 +8,30 @@ import java.sql.SQLException;
 import Database.DBConnection;
 import Database.DBInfo;
 
+/**
+ * 
+ * Class for Announcement management in the database
+ *
+ */
 public class AnnouncementManager {
-	
+
 	private Connection connection;
-	
-	public AnnouncementManager(){
-		connection=DBConnection.getConnection();
+
+	/**
+	 * Public Constructor
+	 */
+	public AnnouncementManager() {
+		connection = DBConnection.getConnection();
 	}
-	
-	
+
+	/**
+	 * Adds announcement into the database
+	 * 
+	 * @param adminId
+	 * @param text
+	 */
 	public void addAnnouncement(int adminId, String text) {
-		String query="INSERT INTO "+DBInfo.ANNOUNCEMENTS+"(TEXT, ADMIN_ID) VALUES "+"(?, ?)";
+		String query = "INSERT INTO " + DBInfo.ANNOUNCEMENTS + "(TEXT, ADMIN_ID) VALUES " + "(?, ?)";
 		PreparedStatement preparedStatement;
 		try {
 			preparedStatement = connection.prepareStatement(query);
@@ -26,27 +39,28 @@ public class AnnouncementManager {
 			preparedStatement.setInt(2, adminId);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	
-	
-	public ResultSet getAllAnnouncements(){
-		
+
+	/**
+	 * Gets all announcements from the database
+	 * 
+	 * @return ResultSet
+	 */
+	public ResultSet getAllAnnouncements() {
+
 		try {
-			String query="SELECT * FROM "+DBInfo.ANNOUNCEMENTS+" ORDER BY ID DESC";
+			String query = "SELECT * FROM " + DBInfo.ANNOUNCEMENTS + " ORDER BY ID DESC";
 			PreparedStatement preparedStatement;
 			preparedStatement = connection.prepareStatement(query);
-			ResultSet resultset=preparedStatement.executeQuery();
+			ResultSet resultset = preparedStatement.executeQuery();
 			return resultset;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
 }

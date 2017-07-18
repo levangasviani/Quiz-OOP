@@ -35,9 +35,9 @@
 	<div id=achievementsDivID>
 		<%
 			AchievementManager manager = new AchievementManager();
-		
+
 			ArrayList<String> achievements = manager.getAchievements(username);
-			
+
 			out.println("<div id = res>");
 			if (achievements.size() == 0) {
 				out.println("<br>Unfortunatelly you do not have achievements!");

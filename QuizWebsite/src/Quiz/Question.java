@@ -1,8 +1,6 @@
 package Quiz;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-
 
 /**
  * 
@@ -10,8 +8,7 @@ import java.util.HashMap;
  *
  */
 public abstract class Question {
-	
-	
+
 	private final String questionText;
 	private final HashMap<String, String> answers;
 	private final int quizId;
@@ -20,10 +17,9 @@ public abstract class Question {
 	private String answerOrder;
 	private int maxScore;
 	private int id;
-	
-	
+
 	/**
-	 *Public constructor for Question object 
+	 * Public constructor for Question object
 	 * 
 	 * @param questionText
 	 * @param answers
@@ -33,55 +29,52 @@ public abstract class Question {
 	 * @param time
 	 * @param maxScore
 	 */
-	public Question(String questionText, HashMap<String, String> answers, int quizId, String answerOrder, String checkType, int time, int maxScore){
-		this.questionText=questionText;
-		this.answers=answers;
-		this.quizId=quizId;
-		this.answerOrder=answerOrder;
-		this.checkType=checkType;
-		this.time=time;
-		this.maxScore=maxScore;
+	public Question(String questionText, HashMap<String, String> answers, int quizId, String answerOrder,
+			String checkType, int time, int maxScore) {
+		this.questionText = questionText;
+		this.answers = answers;
+		this.quizId = quizId;
+		this.answerOrder = answerOrder;
+		this.checkType = checkType;
+		this.time = time;
+		this.maxScore = maxScore;
 	}
-	
-	
+
 	/**
 	 * Sets id for Question
+	 * 
 	 * @param id
 	 */
-	public void setId(int id){
-		this.id=id;
+	public void setId(int id) {
+		this.id = id;
 	}
-	
-	
+
 	/**
 	 * Returns Question id
+	 * 
 	 * @return
 	 */
-	public int getId(){
+	public int getId() {
 		return id;
 	}
-	
-	
+
 	/**
 	 * Returns max score for the question
 	 * 
 	 * @return max score
 	 */
-	public int getMaxScore(){
+	public int getMaxScore() {
 		return maxScore;
 	}
-	
-	
-	
-	
+
 	/**
 	 * returns a question statement
+	 * 
 	 * @return - question statement
 	 */
 	public String getQuestionText() {
 		return questionText;
 	}
-	
 
 	/**
 	 *
@@ -91,8 +84,6 @@ public abstract class Question {
 		return time;
 	}
 
-
-
 	/**
 	 * 
 	 * @return - id of the quiz it belongs to
@@ -101,7 +92,6 @@ public abstract class Question {
 		return quizId;
 	}
 
-	
 	/**
 	 * 
 	 * @return - string of checking type
@@ -128,7 +118,6 @@ public abstract class Question {
 		return cloneAnswers;
 	}
 
-	
 	/**
 	 * 
 	 * @return - information whether the correct should be ordered or not
@@ -137,9 +126,6 @@ public abstract class Question {
 		return answerOrder;
 	}
 
-
 	public abstract int getPoints(String chosenAnswer);
-	
-}
 
-	
+}

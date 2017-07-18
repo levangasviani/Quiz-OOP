@@ -366,17 +366,24 @@ public class QuizStatsManager {
 		return res;
 	}
 
+	
+	/**
+	 * Updates Quiz score for receiver
+	 * 
+	 * @param receiver
+	 * @param quizName
+	 */
 	public void updateQuizScore(String receiver, String quizName) {
 		AccountManager accountManager = new AccountManager();
 		QuizManager quizManager = new QuizManager();
-		String sql = "UPDATE " + DBInfo.COMPLETED_QUIZZES + " SET SCORE = SCORE + 1 WHERE USER_ID = ? AND QUIZ_ID = ? ORDER BY ID DESC LIMIT 1";
+		String sql = "UPDATE " + DBInfo.COMPLETED_QUIZZES
+				+ " SET SCORE = SCORE + 1 WHERE USER_ID = ? AND QUIZ_ID = ? ORDER BY ID DESC LIMIT 1";
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, accountManager.getAccountId(receiver));
 			preparedStatement.setInt(2, quizManager.getQuizID(quizManager.getQuiz(quizName)));
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

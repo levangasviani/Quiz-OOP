@@ -122,7 +122,6 @@ public class AccountManager {
 			byte[] saltArray=Cracker.hexToArray(salt);
 			return saltArray;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -185,7 +184,7 @@ public class AccountManager {
 			preparedStatement.setString(1, username);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
 		
@@ -307,7 +306,6 @@ public class AccountManager {
 			rs.next();
 			return rs.getInt(1);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return 0;

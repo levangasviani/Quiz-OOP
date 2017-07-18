@@ -1,22 +1,21 @@
 h1 {
-    text-align: center;
-    color: green;
+	text-align: center;
+	color: green;
 }
 
-#navigationID{
-   text-align: center;
+#navigationID {
+	text-align: center;
 }
 
 .navigation {
 	background-color: green;
-    overflow: hidden;
+	overflow: hidden;
 	padding: 12px 20px;
-    margin: 8px 0;
-    list-style:none;
-    margin:0;
-    padding:0;
-    text-align:center;
-    
+	margin: 8px 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	text-align: center;
 }
 
 .navigation a {
@@ -36,26 +35,26 @@ h1 {
 #searchID {
 	float: center;
 	text-align: center;
-    margin: auto;  
+	margin: auto;
 }
 
 #searchInput {
 	width: 50%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 2px solid red;
-    border-radius: 4px;
-    box-sizing: border-box; 	
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 2px solid red;
+	border-radius: 4px;
+	box-sizing: border-box;
 }
 
 #searchButton {
-    width: 15%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    cursor: pointer;
+	width: 15%;
+	background-color: #4CAF50;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	cursor: pointer;
 }
 
 #res {
@@ -69,12 +68,11 @@ h1 {
 	/* background-image: url("images/47847.png"); */
 }
 
-
 #quizRes {
 	margin: auto;
 	margin-top: 2%;
 	background-color: #e3e2e1;
-	width: 60%;	
+	width: 60%;
 	font-size: 20px;
 	float: center;
 	text-align: center;
@@ -84,11 +82,8 @@ h1 {
 	margin: auto;
 	margin-top: 2%;
 	background-color: #e3e2e1;
-	width: 60%;	
+	width: 60%;
 	font-size: 20px;
 	float: center;
 	text-align: center;
 }
-
-
-

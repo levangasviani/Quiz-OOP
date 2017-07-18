@@ -1,21 +1,19 @@
 package User;
 
-
-/** 
+/**
  * @author levani
  *
- *	Account class, stores information about user account;
+ *         Account class, stores information about user account;
  */
 public class Account {
-	
+
 	private final String username;
 	private final String password;
 	private final String firstname;
 	private final String lastname;
 	private final String email;
 	private final int type;
-	
-	
+
 	/**
 	 * Account constructor
 	 * 
@@ -35,7 +33,6 @@ public class Account {
 		this.type = type;
 	}
 
-	
 	/**
 	 * Returns account user name
 	 * 
@@ -45,7 +42,6 @@ public class Account {
 		return username;
 	}
 
-	
 	/**
 	 * Returns account password
 	 * 
@@ -55,7 +51,6 @@ public class Account {
 		return password;
 	}
 
-	
 	/**
 	 * Returns user first name
 	 * 
@@ -65,7 +60,6 @@ public class Account {
 		return firstname;
 	}
 
-	
 	/**
 	 * Returns user last name
 	 * 
@@ -75,7 +69,6 @@ public class Account {
 		return lastname;
 	}
 
-	
 	/**
 	 * Returns account email
 	 * 
@@ -85,7 +78,6 @@ public class Account {
 		return email;
 	}
 
-	
 	/**
 	 * Returns account type
 	 * 
@@ -94,30 +86,28 @@ public class Account {
 	public int getType() {
 		return type;
 	}
-	
-	
+
 	/**
 	 * Compares to accounts and returns true if these accounts are similar
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if(obj == null) return false;
-		
-		Account curAcc = (Account)obj;
-		
+		if (obj == null)
+			return false;
+
+		Account curAcc = (Account) obj;
+
 		String curUsername = curAcc.getUserName();
 		String curPassword = curAcc.getPassword();
 		String curFirstname = curAcc.getFirstName();
 		String curLastname = curAcc.getLastName();
 		String curEmail = curAcc.getEmail();
 		int curType = curAcc.getType();
-		
 
-		return (username.equals(curUsername) && password.equals(curPassword) && firstname.equals(curFirstname) &&
-				lastname.equals(curLastname) && email.equals(curEmail) && type == curType);
+		return (username.equals(curUsername) && password.equals(curPassword) && firstname.equals(curFirstname)
+				&& lastname.equals(curLastname) && email.equals(curEmail) && type == curType);
 	}
-	
-	
+
 	/**
 	 * Returns String representation of an account
 	 */
@@ -130,7 +120,7 @@ public class Account {
 		sb.append("Lastname:  ").append(lastname).append("\n");
 		sb.append("Email:  ").append(email).append("\n");
 		sb.append("Type:  ").append(type).append("\n");
-		
-		return sb.toString();	
+
+		return sb.toString();
 	}
 }

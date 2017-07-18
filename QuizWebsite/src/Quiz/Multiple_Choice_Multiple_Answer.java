@@ -1,6 +1,5 @@
 package Quiz;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import Database.DBInfo;

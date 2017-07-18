@@ -31,7 +31,6 @@ public class RegistrationServlet extends HttpServlet {
 	 */
 	public RegistrationServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -77,14 +76,13 @@ public class RegistrationServlet extends HttpServlet {
 			return;
 		}
 
-		// TODO adding into account manager
 		Account acc = new Account(username, password, firstname, lastname, email, DBInfo.USER_TYPE_USER);
 		am.addAccount(acc);
 		if (WebSiteInfo.DEBUG_MODE) {
 			out.println("\n-------------------------------------");
 			out.println("Account was Created:\n" + acc);
 		}
-		
+
 		request.getSession().setAttribute("username", username);
 		RequestDispatcher rd = request.getRequestDispatcher("homepage.jsp");
 		rd.forward(request, response);
@@ -96,7 +94,7 @@ public class RegistrationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		doGet(request, response);
 	}
 

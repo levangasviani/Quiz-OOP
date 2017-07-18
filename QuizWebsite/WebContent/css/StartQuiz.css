@@ -1,8 +1,9 @@
 h1 {
-    text-align: center;
-    color: green;
+	text-align: center;
+	color: green;
 }
-input [type = radio], slecet {
+
+input [type=radio], slecet {
 	border: 2px solid red;
 }
 
@@ -10,17 +11,17 @@ input [type = radio], slecet {
 	width: 30%;
 	float: center;
 	text-align: center;
-    margin: auto;
-    border: 2px solid red;
-    border-radius: 4px;
-    box-sizing: border-box;
+	margin: auto;
+	border: 2px solid red;
+	border-radius: 4px;
+	box-sizing: border-box;
 }
 
 #start {
-    width: 30%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    cursor: pointer;
+	width: 30%;
+	background-color: #4CAF50;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	cursor: pointer;
 }

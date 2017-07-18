@@ -8,7 +8,7 @@ package Database;
 public class DBInfo {
 
 	public static final String MYSQL_USERNAME = "root";
-	public static final String MYSQL_PASSWORD = "";
+	public static final String MYSQL_PASSWORD = "sius25";
 	public static final String MYSQL_DATABASE_NAME = "QuizWebsiteDatabase";
 	public static final String MYSQL_DATABASE_SERVER = "localhost:3306/" + MYSQL_DATABASE_NAME
 			+ "?autoReconnect=true&useSSL=false";
@@ -70,7 +70,7 @@ public class DBInfo {
 	public static final int CREATED_QUIZZES_ID = 1;
 	public static final int CREATED_QUIZZES_USER_ID = 2;
 	public static final int CREATED_QUIZZES_QUIZ_ID = 3;
-	
+
 	// FRIENDS columns
 	public static final int FRIENDS_ID = 1;
 	public static final int FRIENDS_USER_ONE = 2;
@@ -153,7 +153,7 @@ public class DBInfo {
 
 	// MAX ID Value
 	public static final int MAX_ID_VALUE = 2147483647;
-	
+
 	// Default quantity for home page information
 	public static final int DEFAULT_NUMBER_OF_STATS = 5;
 	public static final int DEFAULT_NUMBER_OF_RESULTS = 10;

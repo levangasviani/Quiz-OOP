@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
 	 * Default constructor.
 	 */
 	public LoginServlet() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class LoginServlet extends HttpServlet {
 			out.println("wrong password!");
 			return;
 		}
-		// TODO show profile page
+
 		out.println("\n-------------------------------------");
 		out.println("you profile:");
 		out.println(acc);
@@ -89,7 +89,6 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

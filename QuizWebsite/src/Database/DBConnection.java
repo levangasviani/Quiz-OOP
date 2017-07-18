@@ -7,15 +7,14 @@ import java.sql.SQLException;
 /**
  * @author levani
  *
- * DBConnection class makes connection to the database
+ *         DBConnection class makes connection to the database
  */
 public class DBConnection {
-	
+
 	private static Connection connection;
-	
+
 	/**
-	 * Creates connection to the database
-	 * Otherwise throws exceptions
+	 * Creates connection to the database Otherwise throws exceptions
 	 * 
 	 */
 	static {
@@ -31,7 +30,7 @@ public class DBConnection {
 			System.err.println("Class Not Found!");
 		}
 	}
-	
+
 	/**
 	 * @return connection
 	 * 
@@ -39,8 +38,7 @@ public class DBConnection {
 	public static Connection getConnection() {
 		return connection;
 	}
-	
-	
+
 	/**
 	 * Closes connection
 	 */

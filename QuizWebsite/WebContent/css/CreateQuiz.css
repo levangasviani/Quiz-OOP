@@ -1,22 +1,21 @@
 h1 {
-    text-align: center;
-    color: green;
+	text-align: center;
+	color: green;
 }
 
-#navigationID{
-   text-align: center;
+#navigationID {
+	text-align: center;
 }
 
 .navigation {
 	background-color: green;
-    overflow: hidden;
+	overflow: hidden;
 	padding: 12px 20px;
-    margin: 8px 0;
-    list-style:none;
-    margin:0;
-    padding:0;
-    text-align:center;
-    
+	margin: 8px 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	text-align: center;
 }
 
 .navigation a {
@@ -35,45 +34,42 @@ h1 {
 
 #searchID {
 	float: right;
-    margin: 8px 8px;
+	margin: 8px 8px;
 }
 
 #quizCreationID {
-    text-align: center;   
+	text-align: center;
 }
 
 #mainForm1 {
-    width: 30%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 2px solid red;
-    border-radius: 4px;
-    box-sizing: border-box;
+	width: 30%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 2px solid red;
+	border-radius: 4px;
+	box-sizing: border-box;
 }
 
 #mainForm2 {
-    width: 40%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 2px solid red;
-    border-radius: 4px;
-    box-sizing: border-box;
-      
+	width: 40%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 2px solid red;
+	border-radius: 4px;
+	box-sizing: border-box;
 }
 
-input [type = radio], slecet {
+input [type=radio], slecet {
 	border: 2px solid red;
 }
 
-
 #start {
-    width: 15%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    cursor: pointer;
+	width: 15%;
+	background-color: #4CAF50;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	cursor: pointer;
 }
-

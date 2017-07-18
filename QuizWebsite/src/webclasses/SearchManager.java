@@ -49,16 +49,18 @@ public class SearchManager {
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				//
-				String quizName = rs.getString(DBInfo.QUIZZES_NAME);	
-				String description = rs.getString(DBInfo.QUIZZES_DESCRIPTION);	
+				String quizName = rs.getString(DBInfo.QUIZZES_NAME);
+				String description = rs.getString(DBInfo.QUIZZES_DESCRIPTION);
 				String random = rs.getString(DBInfo.QUIZZES_RANDOM);
 				boolean isRandom = false;
-				if(random.equals("TRUE")) isRandom = true;
+				if (random.equals("TRUE"))
+					isRandom = true;
 				String practiceMode = rs.getString(DBInfo.QUIZZES_PRACTICE_MODE);
 				boolean canPracticeMode = false;
-				if(practiceMode.equals("TRUE")) isRandom = true;
+				if (practiceMode.equals("TRUE"))
+					isRandom = true;
 				Quiz quiz = new Quiz(quizName, description, isRandom, canPracticeMode);
-				
+
 				quizzes.add(quiz);
 			}
 		} catch (SQLException e) {
@@ -189,7 +191,7 @@ public class SearchManager {
 	public static void main(String[] args) {
 		SearchManager sm = new SearchManager();
 		QuizManager qm = new QuizManager();
-		Quiz q1 = new Quiz("karanadze1", "abc" , true, false);
+		Quiz q1 = new Quiz("karanadze1", "abc", true, false);
 		qm.addQuiz(q1);
 		ArrayList<Quiz> qs = sm.getQuizzes(q1.getName());
 		for (int i = 0; i < qs.size(); i++) {

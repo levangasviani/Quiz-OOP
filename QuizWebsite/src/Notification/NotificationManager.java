@@ -155,7 +155,7 @@ public class NotificationManager {
 			if (resultSet.next())
 				return resultSet.getInt(1);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		return 0;
@@ -172,7 +172,7 @@ public class NotificationManager {
 			preparedStatement.setInt(3, questionId);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 	}
@@ -190,7 +190,6 @@ public class NotificationManager {
 				deleteNotification(resultSet.getInt(DBInfo.NOTIFICATIONS_ID));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

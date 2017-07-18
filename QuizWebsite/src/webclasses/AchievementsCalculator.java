@@ -8,17 +8,16 @@ import java.util.ArrayList;
  *
  */
 public class AchievementsCalculator {
-	
+
 	/**
 	 * Constructor
 	 */
 	public AchievementsCalculator() {
-		
+
 	}
-	
+
 	/**
-	 * Calculates achievements of user according
-	 * to given paramaters
+	 * Calculates achievements of user according to given paramaters
 	 * 
 	 * @param numOfCreatedQuizzes
 	 * @param numOfCompletedQuizzes
@@ -26,26 +25,23 @@ public class AchievementsCalculator {
 	 */
 	public ArrayList<String> getAchievements(int numOfCreatedQuizzes, int numOfCompletedQuizzes) {
 		ArrayList<String> result = new ArrayList<String>();
-		if(numOfCreatedQuizzes >= 1) {
+		if (numOfCreatedQuizzes >= 1) {
 			result.add("Amateur Author");
 		}
-		if(numOfCreatedQuizzes >= 5) {
+		if (numOfCreatedQuizzes >= 5) {
 			result.add("Prolific Author");
 		}
-		if(numOfCreatedQuizzes >= 10) {
+		if (numOfCreatedQuizzes >= 10) {
 			result.add("Prodigious Author");
 		}
-		
-		if(numOfCompletedQuizzes >= 10) {
+
+		if (numOfCompletedQuizzes >= 10) {
 			result.add("Quiz Machine");
 		}
-		if(numOfCreatedQuizzes >= 1) {
+		if (numOfCreatedQuizzes >= 1) {
 			result.add("New one");
 		}
 		return result;
 	}
-	
+
 }
-
-
-

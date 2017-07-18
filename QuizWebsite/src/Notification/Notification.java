@@ -59,7 +59,6 @@ public class Notification {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return sender + ": " + content;
 	}
 }

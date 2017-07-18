@@ -10,13 +10,29 @@ import Database.DBConnection;
 import Database.DBInfo;
 import User.AccountManager;
 
+/**
+ * 
+ * Class for friends management in the database
+ *
+ */
 public class FriendManager {
 	private Connection connection;
 
+	/**
+	 * Public Constructor
+	 * 
+	 */
 	public FriendManager() {
 		connection = DBConnection.getConnection();
 	}
 
+	/**
+	 * Checks if passed users are friends
+	 * 
+	 * @param username1
+	 * @param username2
+	 * @return boolean
+	 */
 	public boolean areFriends(String username1, String username2) {
 		AccountManager accountManager = new AccountManager();
 		String sql = "SELECT * FROM " + DBInfo.FRIENDS + " WHERE USER_ONE = ? AND USER_TWO = ? AND STATUS = 'ACCEPTED'";
@@ -28,12 +44,19 @@ public class FriendManager {
 			if (resultSet.next())
 				return true;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
 	}
 
+	/**
+	 * 
+	 * Returns true if receiver got request from sender
+	 * 
+	 * @param receiver
+	 * @param sender
+	 * @return boolean
+	 */
 	public boolean requestReceived(String receiver, String sender) {
 		AccountManager accountManager = new AccountManager();
 		String sql = "SELECT * FROM " + DBInfo.FRIENDS + " WHERE USER_TWO = ? AND USER_ONE = ? AND STATUS = 'SENT'";
@@ -45,12 +68,16 @@ public class FriendManager {
 			if (resultSet.next())
 				return true;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
 	}
 
+	/**
+	 * Defines friendshio status
+	 * 
+	 * @param friendship
+	 */
 	public void changeFriendship(Friendship friendship) {
 		String sender = friendship.getSender();
 		String receiver = friendship.getReceiver();
@@ -64,6 +91,12 @@ public class FriendManager {
 		}
 	}
 
+	/**
+	 * Sends friendship from sender to receiver
+	 * 
+	 * @param sender
+	 * @param receiver
+	 */
 	private void sendFriendship(String sender, String receiver) {
 		AccountManager accountManager = new AccountManager();
 		String sql = "INSERT INTO " + DBInfo.FRIENDS + " (USER_ONE, USER_TWO, STATUS) VALUES (?, ?, 'SENT')";
@@ -73,16 +106,28 @@ public class FriendManager {
 			preparedStatement.setInt(2, accountManager.getAccountId(receiver));
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * Receiver accepts friendship from sender Information is stored in the
+	 * database
+	 * 
+	 * @param sender
+	 * @param receiver
+	 */
 	private void acceptFriendship(String sender, String receiver) {
 		updateStatus(sender, receiver);
 		duplicateFriendship(sender, receiver);
 	}
 
+	/**
+	 * Updates friendship status
+	 * 
+	 * @param sender
+	 * @param receiver
+	 */
 	private void updateStatus(String sender, String receiver) {
 		AccountManager accountManager = new AccountManager();
 		String sql = "UPDATE " + DBInfo.FRIENDS + " SET STATUS = 'ACCEPTED' WHERE USER_TWO = ? AND USER_ONE = ?";
@@ -92,11 +137,17 @@ public class FriendManager {
 			preparedStatement.setInt(2, accountManager.getAccountId(receiver));
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * Writes friendship information for both receiver and sender in the
+	 * database
+	 * 
+	 * @param sender
+	 * @param receiver
+	 */
 	private void duplicateFriendship(String sender, String receiver) {
 		AccountManager accountManager = new AccountManager();
 		String sql = "INSERT INTO " + DBInfo.FRIENDS + " (USER_ONE, USER_TWO, STATUS) VALUES (?, ?, 'ACCEPTED')";
@@ -106,11 +157,16 @@ public class FriendManager {
 			preparedStatement.setInt(2, accountManager.getAccountId(receiver));
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * Receiver rejects sender's request
+	 * 
+	 * @param sender
+	 * @param receiver
+	 */
 	private void rejectFriendship(String sender, String receiver) {
 		AccountManager accountManager = new AccountManager();
 		String sql = "DELETE FROM " + DBInfo.FRIENDS + " WHERE USER_TWO = ? AND USER_ONE = ?";
@@ -120,33 +176,39 @@ public class FriendManager {
 			preparedStatement.setInt(2, accountManager.getAccountId(receiver));
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * 
+	 * Returns the array list of all friends for the passed user
+	 * 
+	 * @param username
+	 * @return array list of Strings
+	 */
 	public ArrayList<String> getAllFriends(String username) {
 		AccountManager accMan = new AccountManager();
 		int userId = accMan.getAccountId(username);
 
 		String query = "SELECT * FROM " + DBInfo.FRIENDS + " WHERE USER_ONE = ?;";
 		ArrayList<String> friends = new ArrayList<>();
-		
+
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, userId);
 			ResultSet rs = preparedStatement.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				int friendId = rs.getInt(DBInfo.FRIENDS_USER_TWO);
 				String friendName = accMan.getUserNameById(friendId);
 				friends.add(friendName);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
+		}
 		return friends;
 	}
-	
+
 }

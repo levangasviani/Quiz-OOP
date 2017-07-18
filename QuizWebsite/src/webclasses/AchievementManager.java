@@ -1,7 +1,5 @@
 package webclasses;
 
-
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,12 +13,11 @@ import User.AccountManager;
 /**
  * @author levanAmateur(lkara15)
  *
- * Controller AchievementManager
+ *         Controller AchievementManager
  *
  */
 public class AchievementManager {
-	
-	
+
 	private Connection con;
 
 	/**
@@ -29,8 +26,8 @@ public class AchievementManager {
 	public AchievementManager() {
 		con = DBConnection.getConnection();
 	}
-	
-	/*
+
+	/**
 	 * Returns acheivement ID according to a user ID.
 	 */
 	private ArrayList<Integer> getAchievementIDs(int userID) {
@@ -40,7 +37,7 @@ public class AchievementManager {
 			PreparedStatement preparedStatement = con.prepareStatement(query);
 			preparedStatement.setInt(1, userID);
 			ResultSet rs = preparedStatement.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				int id = rs.getInt(3);
 				result.add(id);
 			}
@@ -49,7 +46,7 @@ public class AchievementManager {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * 
 	 * @param username
@@ -60,24 +57,30 @@ public class AchievementManager {
 		AccountManager am = new AccountManager();
 		int userID = am.getAccountId(username);
 		ArrayList<Integer> achievementIDs = getAchievementIDs(userID);
-		for(int i = 0; i < achievementIDs.size(); i++) {
+		for (int i = 0; i < achievementIDs.size(); i++) {
 			int id = achievementIDs.get(i);
 			String query = "SELECT * FROM " + DBInfo.ACHIEVEMENT_TYPES + " WHERE ID = ?;";
 			try {
 				PreparedStatement preparedStatement = con.prepareStatement(query);
 				preparedStatement.setInt(1, id);
 				ResultSet rs = preparedStatement.executeQuery();
-				while(rs.next()) {
+				while (rs.next()) {
 					String achievement = rs.getString(DBInfo.ACHIEVEMENT_TYPES_NAME);
 					result.add(achievement);
-				}			
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 		return result;
 	}
-	
+
+	/**
+	 * Returns ID for achievement
+	 * 
+	 * @param achievement
+	 * @return
+	 */
 	private int getAchievementTypeID(String achievement) {
 		int result = 0;
 		String query = "SELECT * FROM " + DBInfo.ACHIEVEMENT_TYPES + " WHERE NAME = ?;";
@@ -85,7 +88,7 @@ public class AchievementManager {
 			PreparedStatement preparedStatement = con.prepareStatement(query);
 			preparedStatement.setString(1, achievement);
 			ResultSet rs = preparedStatement.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				int id = rs.getInt(DBInfo.ACHIEVEMENT_TYPES_ID);
 				return id;
 			}
@@ -94,7 +97,13 @@ public class AchievementManager {
 		}
 		return result;
 	}
-	
+
+	/**
+	 * Sets achievement to user
+	 * 
+	 * @param achievement
+	 * @param username
+	 */
 	public void setAchievement(String achievement, String username) {
 		int achievementTypeID = getAchievementTypeID(achievement);
 		AccountManager am = new AccountManager();
@@ -110,25 +119,4 @@ public class AchievementManager {
 		}
 	}
 
-	/*
-	 * main
-	 */
-	public static void main(String[] args) {
-		AchievementManager am = new AchievementManager();
-		am.setAchievement("New one", "levan");
-		ArrayList<String> arr = am.getAchievements("levan");
-		System.out.println(arr.size());
-		for(int i = 0; i < arr.size(); i++) {
-			System.out.println(arr.get(i));
-		}
-		am.setAchievement("Amateur Author", "levan");
-		/*System.out.println(am.getAchievementTypeID("Prolific Author"));
-		System.out.println(am.getAchievementTypeID("Prodigious Author"));
-		System.out.println(am.getAchievementTypeID("Quiz Machine"));
-		System.out.println(am.getAchievementTypeID("I am the Greatest"));
-		System.out.println(am.getAchievementTypeID("Practice Makes Perfect"));
-		System.out.println(am.getAchievementTypeID("New one"));*/
-		
-	}
-	
 }

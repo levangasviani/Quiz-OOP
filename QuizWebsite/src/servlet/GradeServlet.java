@@ -27,7 +27,6 @@ public class GradeServlet extends HttpServlet {
 	 */
 	public GradeServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -36,7 +35,6 @@ public class GradeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String sender = request.getParameter("sender");
 		String receiver = request.getParameter("receiver");
 		String message = request.getParameter("message");
@@ -67,7 +65,6 @@ public class GradeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

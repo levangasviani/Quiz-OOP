@@ -8,32 +8,35 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="css/ShowQuestions.css">
 
 <%
 	Integer questionId = Integer.parseInt(request.getParameter("questionId"));
-	QuestionManager questMan = (QuestionManager) this.getServletContext().getAttribute(WebSiteInfo.QUESTION_MANAGER_ATTR);
+	QuestionManager questMan = (QuestionManager) this.getServletContext()
+			.getAttribute(WebSiteInfo.QUESTION_MANAGER_ATTR);
 	Question q = questMan.getQuestion(questionId);
 %>
 
-<title><%=request.getParameter("quizName") %></title>
+<title><%=request.getParameter("quizName")%></title>
 </head>
 <body>
-<div id = showDIV>
-	<hr>
-	<i id = "icon" class="fa fa-question-circle " aria-hidden="true" style="font-size:60px; margin-left: 5px; color: white;"></i>
-	<div id = showQuestion>
-	<p class="ShowFillInTheBlank"><%=q.getQuestionText()%></p>
-	</div>
-	<ul>
-		<%
-			out.print("<p>Answer: ");
-			out.print("<input type='text' name='possible-answer'><br/>" + "</p>");
-		%>
+	<div id=showDIV>
+		<hr>
+		<i id="icon" class="fa fa-question-circle " aria-hidden="true"
+			style="font-size: 60px; margin-left: 5px; color: white;"></i>
+		<div id=showQuestion>
+			<p class="ShowFillInTheBlank"><%=q.getQuestionText()%></p>
+		</div>
+		<ul>
+			<%
+				out.print("<p>Answer: ");
+				out.print("<input type='text' name='possible-answer'><br/>" + "</p>");
+			%>
 
-	</ul>
-	<hr>
+		</ul>
+		<hr>
 	</div>
 </body>
 </html>
