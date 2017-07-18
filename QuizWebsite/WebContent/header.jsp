@@ -23,6 +23,7 @@
 		type = acm.getAccount(username).getType();
 		notnum = notificationManager.getNotificationCount(username);
 	}
+	
 %>
 <%
 	if (username == null) {
@@ -31,6 +32,9 @@
 <%
 	}
 %>
+
+
+
 
 <div class="navigation" id="navigationID">
 	<a class="active" id="home" href="homepage.jsp"><i
@@ -79,13 +83,21 @@
 					"<a  id = 'logout' href = 'homepage.jsp?status=logout'> <img src = 'http://icons.veryicon.com/ico/System/100%20Flat%20Vol.%202/inside%20logout.ico' width = 30 height = 30/></a>");
 		}
 	%>
-
+	<% 
+	if(username!=null){
+		%>
 	<div class="search" id=searchID>
 		<div class="search" id=searchID>
-			<form action="SearchPage.jsp">
+			<form action="SearchPage.jsp" onclick='return searchblock()'>
 				<input type="text" name="search" placeholder="enter value here...">
 				<button id="btn" type="submit" value="searchValue">search</button>
 			</form>
 		</div>
 	</div>
+	<% 
+	}
+	%>
+	
+	
+	
 </div>

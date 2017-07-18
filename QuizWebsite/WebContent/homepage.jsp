@@ -113,16 +113,7 @@
 			</ul>
 		</div>
 
-		<div id="friendsAchievements" style="margin: 15px;">
-			<h1>Friends Activities</h1>
-			<ul>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-			</ul>
-		</div>
+		
 	</div>
 
 	<div id="announcements">

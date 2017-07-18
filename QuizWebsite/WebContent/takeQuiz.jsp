@@ -1,3 +1,4 @@
+<%@page import="User.AccountManager"%>
 <%@page import="Database.DBInfo"%>
 <%@page import="WebSite.WebSiteInfo"%>
 <%@page import="Quiz.Question"%>
