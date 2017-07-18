@@ -23,3 +23,6 @@ INSERT INTO `QuizWebsiteDatabase`.`NOTIFICATION_TYPES` (`ID`, `NAME`) VALUES ('1
 INSERT INTO `QuizWebsiteDatabase`.`NOTIFICATION_TYPES` (`ID`, `NAME`) VALUES ('2', 'FRIEND_REQUEST');
 INSERT INTO `QuizWebsiteDatabase`.`NOTIFICATION_TYPES` (`ID`, `NAME`) VALUES ('3', 'GRADE_REQUEST');
 INSERT INTO `QuizWebsiteDatabase`.`NOTIFICATION_TYPES` (`ID`, `NAME`) VALUES ('4', 'MESSAGE');
+
+INSERT INTO `QuizWebsiteDatabase`.`USERS` (`USERNAME`, `PASSWORD`, `FIRSTNAME`, `LASTNAME`, `EMAIL`, `TYPE_ID`, `SALT`) VALUES ('admin', '91aa0a926db5424cdf13266d94b44e2e', 'Administrator', 'Admin', 'Admin@freeuni.edu.ge', '2', '9239e1cc0a7c226faff81dbda903f5d5440cde55995ea8d9c6ec3a355cb963b8');
+

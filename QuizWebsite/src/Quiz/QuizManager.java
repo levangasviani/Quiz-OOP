@@ -286,18 +286,21 @@ public class QuizManager {
 			PreparedStatement preparedStatement1 = connection.prepareStatement(queryForUserId);
 			preparedStatement1.setInt(1, quizId);
 			ResultSet rs = preparedStatement1.executeQuery();
-			rs.next();
+			if (rs.next()) {
 
-			int userId = rs.getInt(1);
+				int userId = rs.getInt(1);
 
-			String queryForUserName = "SELECT USERNAME FROM " + DBInfo.USERS + " WHERE ID = ?";
+				String queryForUserName = "SELECT USERNAME FROM " + DBInfo.USERS + " WHERE ID = ?";
 
-			PreparedStatement preparedStatement2 = connection.prepareStatement(queryForUserName);
-			preparedStatement2.setInt(1, userId);
-			rs = preparedStatement2.executeQuery();
-			rs.next();
-
-			quizCreator = rs.getString(1);
+				PreparedStatement preparedStatement2 = connection.prepareStatement(queryForUserName);
+				preparedStatement2.setInt(1, userId);
+				rs = preparedStatement2.executeQuery();
+				rs.next();
+				quizCreator = rs.getString(1);
+				return quizCreator;
+			} else{
+				return DBInfo.ADMIN;
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();

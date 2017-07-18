@@ -29,6 +29,9 @@ public class DBInfo {
 	public static final String QUIZZES = "QUIZZES";
 	public static final String USER_TYPES = "USER_TYPES";
 	public static final String USERS = "USERS";
+	
+	// default Admin of the webpage
+	public static final String ADMIN = "admin";
 
 	// Question check type constants
 	public static final String CHECK_TYPE_USER = "USER";
@@ -157,4 +160,5 @@ public class DBInfo {
 	// Default quantity for home page information
 	public static final int DEFAULT_NUMBER_OF_STATS = 5;
 	public static final int DEFAULT_NUMBER_OF_RESULTS = 10;
+	
 }

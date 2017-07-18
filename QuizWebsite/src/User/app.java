@@ -11,7 +11,9 @@ public class app {
 		AccountManager am = new AccountManager();
 		FriendManager fm = new FriendManager();
 
-		System.out.println(fm.getAllFriends("SIUS25").toString());
+		am.addAccount("admin", "admin", "Administrator", "Admin", "Admin@freeuni.edu.ge", 2);
+		
+/*		System.out.println(fm.getAllFriends("SIUS25").toString());
 
 		am.addAccount("levangasviani", "qwerty", "Levani", "Gasviani", "lgasv15@freeuni.edu.ge", 2);
 		am.addAccount("shotakobaxidze", "123456", "Shota", "Kobaxidze", "skoba15@freeuni.edu.ge", 1);
@@ -38,7 +40,7 @@ public class app {
 		for (Account a : al) {
 			System.out.println(a.toString());
 			System.out.println(am.getAccountId(a.getUserName()) + " ");
-		}
+		}*/
 
 	}
 

@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Database.DBInfo;
 import Notification.Notification;
 import Notification.NotificationManager;
+import User.AccountManager;
 import WebSite.WebSiteInfo;
 
 /**
@@ -33,6 +35,7 @@ public class NotificationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		AccountManager accMan = new AccountManager();
 		String sender = request.getParameter("sender");
 		String receiver = request.getParameter("receiver");
 		int type = Integer.parseInt(request.getParameter("type"));
