@@ -1,0 +1,35 @@
+@CHARSET "ISO-8859-1";
+
+
+h1{
+	font-size: 24px;
+	color: #13232f;
+}
+
+
+#table{
+	 margin: auto;
+	 border-collapse: collapse;
+	 background-color: #13232f;
+	 color: white;
+}
+
+
+#table a:link {
+	color: #bafff4;
+}
+
+#table a:visited {
+	color: #00ce82;
+}
+
+#table a:hover {
+	color: #00ce82;
+}
+
+
+#table td, th{
+	 text-align: left;
+	  padding: 6px;
+	   border: 1px solid white;
+}
