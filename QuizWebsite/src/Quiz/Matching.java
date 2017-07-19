@@ -27,7 +27,7 @@ public class Matching extends Question {
 		HashMap<String, String> chosenAnswers = new HashMap<String, String>();
 		String[] parts = chosenAnswer.split(":");
 		for (int i = 0; i < parts.length; i += 2) {
-			chosenAnswers.put(parts[i], parts[i + 1]);
+			chosenAnswers.put(parts[i].substring(0, parts[i].length()-1), parts[i + 1]);
 		}
 		return chosenAnswers;
 	}
